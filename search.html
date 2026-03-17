@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results | The Indian Property Show</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- HIGH-CONTRAST DARK GLASS VARIABLES --- */
+        :root {
+            --hz-primary: #0a84ff; 
+            --hz-primary-hover: #0066d6;
+            --hz-text-main: #ffffff; 
+            --hz-text-muted: #a1a1a6; 
+            --glass-bg: rgba(30, 30, 35, 0.6); 
+            --glass-bg-hover: rgba(45, 45, 50, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.15); 
+            --glass-border-hover: rgba(255, 255, 255, 0.4);
+            --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --glass-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.7);
+            --dark-fallback: #0f172a; 
+        }
+
+        body, html {
+            margin: 0; padding: 0; font-family: 'Poppins', sans-serif;
+            color: var(--hz-text-main); scroll-behavior: smooth; overflow-x: hidden;
+            background-color: var(--dark-fallback);
+        }
+
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1920&q=80') center/cover;
+            z-index: -2;
+        }
+        body::after {
+            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(10, 15, 25, 0.85); 
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            z-index: -1;
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--hz-primary); }
+
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* --- HEADER --- */
+        header {
+            background-color: rgba(20, 20, 25, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
+            position: fixed; width: 100%; top: 0; z-index: 1000; box-sizing: border-box;
+            border-bottom: 1px solid var(--glass-border); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        .logo img { height: 50px; transition: transform 0.3s ease; }
+        .logo img:hover { transform: scale(1.05); }
+        nav { display: flex; gap: 30px; align-items: center; }
+        nav a { color: var(--hz-text-main); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.3s; }
+        nav a:hover { color: var(--hz-primary); }
+        .btn-create {
+            background-color: var(--hz-primary); color: #ffffff !important;
+            padding: 10px 24px; border-radius: 50px; font-weight: 600;
+            display: flex; align-items: center; gap: 8px; transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .btn-create:hover { background-color: var(--hz-primary-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(10, 132, 255, 0.4); border-color: #fff;}
+
+        /* --- COMPACT SEARCH BAR --- */
+        .top-search-area { margin-top: 100px; padding: 0 5%; max-width: 1300px; margin-left: auto; margin-right: auto; }
+        .search-bar {
+            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 15px 25px; border-radius: 16px; display: flex; gap: 15px; width: 100%;
+            box-shadow: var(--glass-shadow); align-items: center; border: 1px solid var(--glass-border); 
+            transition: all 0.3s ease; box-sizing: border-box;
+        }
+        .search-bar:hover { border-color: var(--glass-border-hover); }
+        
+        .search-input {
+            flex: 1; padding: 12px 18px; border: 1px solid rgba(255,255,255,0.2); border-radius: 10px;
+            font-family: 'Poppins', sans-serif; font-size: 0.9rem; color: #ffffff;
+            background-color: rgba(0,0,0,0.3); transition: all 0.3s ease; cursor: pointer;
+        }
+        .search-input option { background-color: #1e1e23; color: #fff; }
+        .search-input:hover { border-color: rgba(255,255,255,0.4); }
+        .search-input:focus { outline: none; background-color: rgba(0,0,0,0.5); border-color: var(--hz-primary); box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.25); }
+        
+        .search-btn {
+            background: var(--hz-primary); color: #ffffff; border: 1px solid rgba(255,255,255,0.2); padding: 12px 30px; border-radius: 50px;
+            font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: 'Poppins';
+        }
+        .search-btn:hover { background: var(--hz-primary-hover); box-shadow: 0 5px 15px rgba(10, 132, 255, 0.4); border-color: #fff;}
+
+        /* --- RESULTS HEADER --- */
+        .results-header {
+            max-width: 1300px; margin: 40px auto 30px; padding: 0 5%;
+            display: flex; justify-content: space-between; align-items: flex-end;
+        }
+        .results-header h1 { font-size: 2rem; margin: 0 0 5px; font-weight: 600; }
+        .results-header p { color: var(--hz-text-muted); margin: 0; font-size: 1rem; }
+        .sort-by { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--hz-text-muted); }
+        .sort-by select { background: transparent; border: none; color: var(--hz-primary); font-weight: 600; font-family: 'Poppins'; cursor: pointer; outline: none; font-size: 0.9rem;}
+        .sort-by select option { background: #1e1e23; color: #fff; }
+
+        /* --- PROPERTY GRID --- */
+        .main-content { padding: 0 5% 80px; max-width: 1300px; margin: 0 auto; position: relative; z-index: 2; min-height: 400px;}
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        
+        /* NO RESULTS MESSAGE */
+        .no-results { display: none; width: 100%; grid-column: 1 / -1; text-align: center; padding: 50px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; }
+        .no-results i { font-size: 3rem; color: var(--hz-text-muted); margin-bottom: 20px; }
+        
+        .prop-card { 
+            border-radius: 20px; overflow: hidden; position: relative; display: flex; flex-direction: column;
+            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow);
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .prop-card:hover { transform: translateY(-8px); border-color: var(--hz-primary); box-shadow: var(--glass-shadow-hover); background: rgba(30, 30, 35, 0.8); }
+
+        .card-img-wrap { position: relative; height: 240px; overflow: hidden; background-color: #111; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; opacity: 0.9; }
+        .prop-card:hover .card-img-wrap img { transform: scale(1.05); opacity: 1; }
+        
+        .badge { position: absolute; top: 15px; left: 15px; padding: 6px 12px; border-radius: 8px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; z-index: 2; letter-spacing: 1px; color: #fff; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3);}
+        .badge-status { left: auto; right: 15px; background: rgba(0,0,0,0.8); } 
+        .badge-featured { background: rgba(243, 156, 18, 0.9); }
+        
+        .price-tag { position: absolute; bottom: 15px; left: 15px; font-size: 1.4rem; font-weight: 700; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); z-index: 2; }
+
+        .card-body { padding: 25px; flex-grow: 1; position: relative; z-index: 2; }
+        .card-title { font-size: 1.15rem; font-weight: 700; margin: 0 0 10px; color: var(--hz-text-main); line-height: 1.4; transition: color 0.3s;}
+        .prop-card:hover .card-title { color: var(--hz-primary); }
+        
+        .card-address { font-size: 0.85rem; color: var(--hz-text-muted); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; margin-bottom: 5px;}
+        .card-address i { color: var(--hz-primary); margin-top: 3px; }
+        
+        .card-footer { border-top: 1px solid rgba(255,255,255,0.1); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); }
+        .footer-item { font-size: 0.85rem; color: var(--hz-text-muted); display: flex; align-items: center; gap: 8px; font-weight: 600; }
+        .footer-item i { color: var(--hz-primary); font-size: 1rem; }
+        
+        .btn-inquire { 
+            background: rgba(255,255,255,0.1); border: 1px solid var(--hz-primary); color: var(--hz-primary); 
+            padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; 
+            cursor: pointer; transition: all 0.3s ease; 
+        }
+        .btn-inquire:hover { background: var(--hz-primary); color: #fff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(10,132,255,0.3); border-color: var(--hz-primary);}
+
+       /* --- PREMIUM PROFESSIONAL FOOTER --- */
+        footer { margin-top: 80px; background: rgba(10, 10, 12, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); color: #a1a1a6; padding: 80px 5% 30px; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 2; }
+        .footer-wrap { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
+        
+        .footer-logo { height: 45px; margin-bottom: 20px; background: rgba(255,255,255,0.9); padding: 8px 12px; border-radius: 8px; }
+        .brand-widget p { line-height: 1.7; margin-bottom: 25px; font-size: 0.95rem;}
+        
+        .social-links { display: flex; gap: 15px; }
+        .social-links a { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; justify-content: center; align-items: center; color: #fff; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); text-decoration: none;}
+        .social-links a:hover { background: var(--hz-primary); border-color: var(--hz-primary); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(10, 132, 255, 0.4); }
+        
+        .footer-widget h3 { color: #ffffff; font-size: 1.1rem; margin-bottom: 25px; font-weight: 600; letter-spacing: 0.5px; }
+        .footer-widget ul { list-style: none; padding: 0; margin: 0; }
+        .footer-widget li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 12px; transition: transform 0.3s; line-height: 1.5;}
+        .footer-widget li i { margin-top: 4px; font-size: 0.9rem; }
+        .footer-widget ul:not(.contact-info) li:hover { transform: translateX(5px); }
+        .footer-widget a { color: #a1a1a6; text-decoration: none; transition: color 0.3s; }
+        .footer-widget a:hover { color: var(--hz-primary); }
+        
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 60px; padding-top: 25px; text-align: center; color: #666; }
+        .legal-disclaimer { font-size: 0.8rem; opacity: 0.6; margin-top: 8px; display: block; }
+
+        @media (max-width: 1024px) { .footer-wrap { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 768px) { .footer-wrap { grid-template-columns: 1fr; gap: 40px;} }
+
+        @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } .footer-wrap { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 768px) {
+            header { flex-direction: column; padding: 15px; gap: 15px; } nav { flex-wrap: wrap; justify-content: center; }
+            .top-search-area { margin-top: 160px; } .search-bar { flex-direction: column; } .search-input { width: 100%; } .search-btn { width: 100%; }
+            .results-header { flex-direction: column; align-items: flex-start; gap: 15px; } .grid { grid-template-columns: 1fr; } .footer-wrap { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="logo.png" alt="The Indian Property Show" style="background: rgba(255,255,255,0.9); padding: 5px; border-radius: 8px;"></a>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="index.html#events">Global Exhibitions</a>
+            <a href="index.html#events" class="btn-create">Request VIP Pass</a>
+        </nav>
+    </header>
+
+    <div class="top-search-area">
+        <div class="search-bar animate-on-scroll is-visible">
+            <select class="search-input" id="filterLocation">
+                <option value="">All Cities</option>
+                <option value="mumbai">Mumbai</option>
+                <option value="delhi">Delhi NCR</option>
+                <option value="hyderabad">Hyderabad</option>
+                <option value="bangalore">Bangalore</option>
+                <option value="pune">Pune</option>
+            </select>
+            <select class="search-input" id="filterType">
+                <option value="">All Property Types</option>
+                <option value="apartment">Residential Apartment</option>
+                <option value="villa">Villa / Independent House</option>
+                <option value="commercial">Commercial Space</option>
+            </select>
+            <button class="search-btn" id="searchBtn"><i class="fa-solid fa-magnifying-glass" style="margin-right: 8px;"></i> Search</button>
+        </div>
+    </div>
+
+    <div class="results-header animate-on-scroll is-visible">
+        <div>
+            <h1 id="resultsTitle">All Properties</h1>
+            <p id="resultsCount">Showing 6 exclusive properties from top-tier developers.</p>
+        </div>
+        <div class="sort-by">
+            <span>Sort by:</span>
+            <select id="sortFilter">
+                <option value="featured">Featured First</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="price-low">Price: Low to High</option>
+            </select>
+        </div>
+    </div>
+
+    <section class="main-content">
+        <div class="grid" id="propertyGrid">
+            
+            <div class="no-results" id="noResultsMsg">
+                <i class="fa-solid fa-house-circle-xmark"></i>
+                <h2>No Properties Found</h2>
+                <p style="color: var(--hz-text-muted);">Try adjusting your search filters to see more results.</p>
+            </div>
+
+            <div class="prop-card animate-on-scroll is-visible" data-location="mumbai" data-type="apartment" data-price="7.5" data-featured="true">
+                <div class="card-img-wrap">
+                    <span class="badge badge-featured">Featured</span>
+                    <span class="badge badge-status">Pre-Launch</span>
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80" alt="Property">
+                    <div class="price-tag">₹ 7.5 Cr*</div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Lodha World Towers - Sky Mansions</h3>
+                    <div class="card-address"><i class="fa-solid fa-location-dot"></i> <span>Lower Parel, South Mumbai</span></div>
+                </div>
+                <div class="card-footer">
+                    <div class="footer-item"><i class="fa-regular fa-building"></i> LODHA Group</div>
+                    <button class="btn-inquire" onclick="location.href='project-detail.html?id=lodha-world'">Inquire</button>
+                </div>
+            </div>
+
+            <div class="prop-card animate-on-scroll is-visible" data-location="delhi" data-type="apartment" data-price="3.2" data-featured="false">
+                <div class="card-img-wrap">
+                    <span class="badge badge-status">Ready to Move</span>
+                    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=600&q=80" alt="Property">
+                    <div class="price-tag">₹ 3.2 Cr*</div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Godrej Aristocrat - Park Facing</h3>
+                    <div class="card-address"><i class="fa-solid fa-location-dot"></i> <span>Sector 49, Gurugram, Delhi NCR</span></div>
+                </div>
+                <div class="card-footer">
+                    <div class="footer-item"><i class="fa-regular fa-building"></i> Godrej Properties</div>
+                    <button class="btn-inquire" onclick="location.href='project-detail.html?id=godrej-aristocrat'">Inquire</button>
+                </div>
+            </div>
+
+            <div class="prop-card animate-on-scroll is-visible" data-location="pune" data-type="villa" data-price="5.1" data-featured="true">
+                <div class="card-img-wrap">
+                    <span class="badge badge-featured" style="background: #27ae60;">New Release</span>
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" alt="Property">
+                    <div class="price-tag">₹ 5.1 Cr*</div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Kalpataru Jade - Signature Villas</h3>
+                    <div class="card-address"><i class="fa-solid fa-location-dot"></i> <span>Baner, Pune</span></div>
+                </div>
+                <div class="card-footer">
+                    <div class="footer-item"><i class="fa-regular fa-building"></i> Kalpataru</div>
+                    <button class="btn-inquire" onclick="location.href='project-detail.html?id=kalpataru-jade'">Inquire</button>
+                </div>
+            </div>
+
+            <div class="prop-card animate-on-scroll is-visible" data-location="mumbai" data-type="commercial" data-price="2.5" data-featured="false">
+                <div class="card-img-wrap">
+                    <span class="badge badge-status">Under Construction</span>
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80" alt="Property">
+                    <div class="price-tag">₹ 2.5 Cr*</div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Lodha Excelus - Corporate Towers</h3>
+                    <div class="card-address"><i class="fa-solid fa-location-dot"></i> <span>Mahalaxmi, Mumbai</span></div>
+                </div>
+                <div class="card-footer">
+                    <div class="footer-item"><i class="fa-regular fa-building"></i> LODHA Group</div>
+                    <button class="btn-inquire" onclick="location.href='project-detail.html?id=lodha-excelus'">Inquire</button>
+                </div>
+            </div>
+
+            <div class="prop-card animate-on-scroll is-visible" data-location="bangalore" data-type="villa" data-price="8.9" data-featured="true">
+                <div class="card-img-wrap">
+                    <span class="badge badge-featured">Featured</span>
+                    <span class="badge badge-status">Pre-Launch</span>
+                    <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=600&q=80" alt="Property">
+                    <div class="price-tag">₹ 8.9 Cr*</div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Rubrick Oasis - Ultra Luxury Villas</h3>
+                    <div class="card-address"><i class="fa-solid fa-location-dot"></i> <span>Whitefield, Bangalore</span></div>
+                </div>
+                <div class="card-footer">
+                    <div class="footer-item"><i class="fa-regular fa-building"></i> Rubrick Constructions</div>
+                    <button class="btn-inquire" onclick="location.href='project-detail.html?id=rubrick-oasis'">Inquire</button>
+                </div>
+            </div>
+
+            <div class="prop-card animate-on-scroll is-visible" data-location="hyderabad" data-type="apartment" data-price="4.1" data-featured="false">
+                <div class="card-img-wrap">
+                    <span class="badge badge-status">Ready to Move</span>
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80" alt="Property">
+                    <div class="price-tag">₹ 4.1 Cr*</div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Tulip by Rubrick Constructions</h3>
+                    <div class="card-address"><i class="fa-solid fa-location-dot"></i> <span>Jubilee Hills, Hyderabad</span></div>
+                </div>
+                <div class="card-footer">
+                    <div class="footer-item"><i class="fa-regular fa-building"></i> Rubrick Constructions</div>
+                    <button class="btn-inquire" onclick="location.href='project-detail.html?id=tulip-hyderabad'">Inquire</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-wrap">
+            <div class="footer-widget brand-widget">
+                <img src="logo.png" alt="NIKSGLOBAL Logo" class="footer-logo">
+                <p>NIKSGLOBAL CAPITAL LLC is a premier cross-border real estate advisory, dedicated to connecting the Indian diaspora with exclusive, high-yield luxury assets across India.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-widget">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="index.html">Home</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="about.html">About Us</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="search.html">Property Portfolio</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="index.html#events">Global Exhibitions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-widget">
+                <h3>Global Headquarters</h3>
+                <ul class="contact-info">
+                    <li>
+                        <i class="fa-solid fa-location-dot" style="color: var(--hz-primary);"></i> 
+                        <span>30 N GOULD ST Ste R<br>Sheridan, WY 82801, USA</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-phone" style="color: var(--hz-primary);"></i> 
+                        <span>+91 91525 65195</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-envelope" style="color: var(--hz-primary);"></i> 
+                        <span>contact@niksglobalcapital.com</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-widget">
+                <h3>Support & Legal</h3>
+                <ul>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="terms-of-service.html">Terms of Service</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="partner-with-us.html">For Developers</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="faq.html">Help & FAQs</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 NIKSGLOBAL CAPITAL LLC. All Rights Reserved. 
+               <span class="legal-disclaimer">Disclaimer: The Indian Property Show is an independent advisory and marketing platform. Property details and pricing are subject to developer terms and market fluctuations.</span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. THE MAIN FILTERING ENGINE
+        function runSearchFilters() {
+            const locFilter = document.getElementById('filterLocation').value.toLowerCase();
+            const typeFilter = document.getElementById('filterType').value.toLowerCase();
+            const sortFilter = document.getElementById('sortFilter').value;
+
+            const cards = Array.from(document.querySelectorAll('.prop-card'));
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const loc = card.getAttribute('data-location').toLowerCase();
+                const type = card.getAttribute('data-type').toLowerCase();
+                
+                const locMatch = (locFilter === "" || loc === locFilter);
+                const typeMatch = (typeFilter === "" || type === typeFilter);
+
+                if (locMatch && typeMatch) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Update Text Labels
+            const titleElem = document.getElementById('resultsTitle');
+            const countElem = document.getElementById('resultsCount');
+            const locationText = document.getElementById('filterLocation').options[document.getElementById('filterLocation').selectedIndex].text;
+            const typeText = document.getElementById('filterType').options[document.getElementById('filterType').selectedIndex].text;
+            
+            if (locFilter === "" && typeFilter === "") {
+                titleElem.innerText = "All Properties";
+            } else {
+                titleElem.innerText = `${typeText}s in ${locationText}`;
+            }
+
+            countElem.innerText = `Showing ${visibleCount} exclusive properties from top-tier developers.`;
+            document.getElementById('noResultsMsg').style.display = (visibleCount === 0) ? 'block' : 'none';
+
+            // Sorting Logic
+            const grid = document.getElementById('propertyGrid');
+            const visibleCards = cards.filter(card => card.style.display !== 'none');
+            
+            visibleCards.sort((a, b) => {
+                const priceA = parseFloat(a.getAttribute('data-price'));
+                const priceB = parseFloat(b.getAttribute('data-price'));
+                if (sortFilter === 'price-high') return priceB - priceA;
+                if (sortFilter === 'price-low') return priceA - priceB;
+                return (b.getAttribute('data-featured') === 'true') - (a.getAttribute('data-featured') === 'true');
+            });
+
+            visibleCards.forEach(card => grid.appendChild(card));
+        }
+
+        // 2. THE "BRAIN" THAT READS THE HOME PAGE SELECTION
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const locParam = urlParams.get('location');
+            const typeParam = urlParams.get('type');
+
+            // Apply the values from the home page to the search page dropdowns
+            if (locParam !== null) document.getElementById('filterLocation').value = locParam;
+            if (typeParam !== null) document.getElementById('filterType').value = typeParam;
+
+            // Run the filters immediately
+            runSearchFilters();
+        });
+
+        // 3. LISTENERS FOR CHANGES ON THE SEARCH PAGE
+        document.getElementById('filterLocation').addEventListener('change', runSearchFilters);
+        document.getElementById('filterType').addEventListener('change', runSearchFilters);
+        document.getElementById('sortFilter').addEventListener('change', runSearchFilters);
+        document.getElementById('searchBtn').addEventListener('click', runSearchFilters);
+    </script>
+</body>
+</html>

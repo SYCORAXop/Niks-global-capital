@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & FAQs | NIKSGLOBAL CAPITAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- HIGH-CONTRAST DARK GLASS VARIABLES --- */
+        :root {
+            --hz-accent: #0a84ff; 
+            --hz-primary: #0a84ff;
+            --hz-primary-hover: #0066d6;
+            --hz-text-main: #ffffff; 
+            --hz-text-muted: #a1a1a6; 
+            --glass-bg: rgba(30, 30, 35, 0.6); 
+            --glass-border: rgba(255, 255, 255, 0.15); 
+            --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        body, html {
+            margin: 0; padding: 0; font-family: var(--font-sans);
+            color: var(--hz-text-main); scroll-behavior: smooth; overflow-x: hidden;
+        }
+
+        /* --- FIXED AMBIENT BACKGROUND --- */
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80') center/cover;
+            z-index: -2;
+        }
+        body::after {
+            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(10, 15, 25, 0.92); 
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            z-index: -1;
+        }
+
+        /* --- CUSTOM SCROLLBAR --- */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--hz-primary); }
+
+        /* --- ANIMATIONS --- */
+        .animate-on-scroll {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* --- HEADER --- */
+        header {
+            background-color: rgba(20, 20, 25, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
+            position: fixed; width: 100%; top: 0; z-index: 1000; box-sizing: border-box;
+            border-bottom: 1px solid var(--glass-border); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        .logo img { height: 50px; transition: transform 0.3s ease; }
+        .logo img:hover { transform: scale(1.05); }
+        nav { display: flex; gap: 30px; align-items: center; }
+        nav a { color: var(--hz-text-main); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.3s; }
+        nav a:hover { color: var(--hz-primary); }
+        .btn-create {
+            background-color: var(--hz-primary); color: #ffffff !important;
+            padding: 10px 24px; border-radius: 50px; font-weight: 600;
+            display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);
+        }
+        .btn-create:hover { background-color: var(--hz-primary-hover); transform: translateY(-2px); border-color: #fff; }
+
+        /* --- HERO SECTION --- */
+        .hero-faq {
+            padding: 180px 5% 80px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .hero-faq h1 { font-size: 3.5rem; font-weight: 700; margin: 0 0 15px; letter-spacing: -1px; }
+        .hero-faq p { font-size: 1.1rem; color: var(--hz-text-muted); margin: 0 auto; max-width: 600px; line-height: 1.6;}
+
+        /* --- FAQ ACCORDION --- */
+        .faq-container {
+            max-width: 900px; margin: 60px auto 100px; padding: 0 5%;
+        }
+        .faq-category {
+            font-size: 1.5rem; font-weight: 600; color: #fff; margin: 50px 0 20px; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;
+        }
+        .faq-category:first-child { margin-top: 0; }
+
+        .faq-item {
+            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 16px; margin-bottom: 15px;
+            overflow: hidden; transition: all 0.3s ease;
+        }
+        .faq-item:hover { border-color: rgba(255,255,255,0.3); }
+        .faq-item.active { border-color: var(--hz-primary); box-shadow: 0 5px 20px rgba(10, 132, 255, 0.15); }
+
+        .faq-question {
+            width: 100%; text-align: left; padding: 22px 25px; background: transparent; border: none;
+            color: #fff; font-size: 1.05rem; font-weight: 600; font-family: var(--font-sans);
+            display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+        }
+        .faq-question i { color: var(--hz-primary); transition: transform 0.3s ease; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); }
+
+        .faq-answer {
+            max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+            padding: 0 25px; background: rgba(0,0,0,0.2);
+        }
+        .faq-answer p { color: var(--hz-text-muted); line-height: 1.7; margin: 0 0 22px; font-size: 0.95rem; }
+
+        /* --- SUPPORT CTA --- */
+        .support-cta {
+            background: linear-gradient(135deg, rgba(10, 132, 255, 0.1), rgba(0,0,0,0.5));
+            border: 1px solid var(--hz-primary); border-radius: 20px; padding: 50px;
+            text-align: center; max-width: 900px; margin: 0 auto 100px; box-shadow: 0 10px 40px rgba(10, 132, 255, 0.1);
+        }
+        .support-cta h2 { font-size: 2rem; margin: 0 0 15px; }
+        .support-cta p { color: var(--hz-text-muted); margin-bottom: 30px; font-size: 1.05rem;}
+        .support-btn {
+            background: var(--hz-primary); color: #fff; padding: 15px 35px; border-radius: 50px;
+            text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s;
+        }
+        .support-btn:hover { background: #fff; color: #000; transform: translateY(-3px); }
+
+        /* --- PREMIUM FOOTER --- */
+        footer { background: rgba(10, 10, 12, 0.95); backdrop-filter: blur(20px); color: #a1a1a6; padding: 80px 5% 30px; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 2; }
+        .footer-wrap { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
+        .footer-logo { height: 45px; margin-bottom: 20px; background: rgba(255,255,255,0.9); padding: 8px 12px; border-radius: 8px; }
+        .brand-widget p { line-height: 1.7; margin-bottom: 25px; font-size: 0.95rem;}
+        .social-links { display: flex; gap: 15px; }
+        .social-links a { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; justify-content: center; align-items: center; color: #fff; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); text-decoration: none;}
+        .social-links a:hover { background: var(--hz-primary); border-color: var(--hz-primary); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(10, 132, 255, 0.4); }
+        .footer-widget h3 { color: #ffffff; font-size: 1.1rem; margin-bottom: 25px; font-weight: 600; letter-spacing: 0.5px; }
+        .footer-widget ul { list-style: none; padding: 0; margin: 0; }
+        .footer-widget li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 12px; transition: transform 0.3s; line-height: 1.5;}
+        .footer-widget li i { margin-top: 4px; font-size: 0.9rem; }
+        .footer-widget ul:not(.contact-info) li:hover { transform: translateX(5px); }
+        .footer-widget a { color: #a1a1a6; text-decoration: none; transition: color 0.3s; }
+        .footer-widget a:hover { color: var(--hz-primary); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 60px; padding-top: 25px; text-align: center; color: #666; }
+        .legal-disclaimer { font-size: 0.8rem; opacity: 0.6; margin-top: 8px; display: block; }
+
+        /* --- FLOATING ACTION BAR --- */
+        .floating-contact-bar {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: rgba(20, 20, 25, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 12px 25px; border-radius: 100px; border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex; gap: 25px; z-index: 1000; box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            align-items: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .floating-contact-bar:hover { transform: translateX(-50%) translateY(-5px); border-color: var(--hz-primary); }
+        .float-btn { text-decoration: none; color: #fff; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
+        .float-wa i { color: #25D366; font-size: 1.2rem; }
+        .float-call i { color: var(--hz-primary); font-size: 1.1rem; }
+
+        @media (max-width: 1024px) { 
+            .footer-wrap { grid-template-columns: 1fr 1fr; } 
+        }
+        @media (max-width: 768px) {
+            header { flex-direction: column; padding: 15px; gap: 15px; } nav { flex-wrap: wrap; justify-content: center; }
+            .hero-faq { padding-top: 140px; }
+            .hero-faq h1 { font-size: 2.5rem; }
+            .footer-wrap { grid-template-columns: 1fr; gap: 40px;}
+            .support-cta { padding: 30px 20px; border-radius: 16px;}
+            .floating-contact-bar { bottom: 20px; width: 85%; justify-content: space-around; padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="logo.png" alt="The Indian Property Show" style="background: rgba(255,255,255,0.9); padding: 5px; border-radius: 8px;"></a>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="index.html#events">Global Exhibitions</a>
+            <a href="search.html">Properties</a>
+        </nav>
+    </header>
+
+    <div class="hero-faq animate-on-scroll is-visible">
+        <h1>Help & FAQs</h1>
+        <p>Everything you need to know about investing in premium Indian real estate, attending our exhibitions, and our zero-brokerage advisory.</p>
+    </div>
+
+    <div class="faq-container">
+        
+        <h2 class="faq-category animate-on-scroll">Global Exhibitions & VIP Access</h2>
+        
+        <div class="faq-item animate-on-scroll">
+            <button class="faq-question">How do I attend a NIKSGLOBAL property exhibition? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <p>Our global exhibitions are strictly by invitation to ensure a high-quality environment. You can request a VIP Pass through our website by navigating to the 'Global Exhibitions' section, selecting your city, and filling out the registration form. A portfolio manager will contact you to confirm your slot.</p>
+            </div>
+        </div>
+
+        <div class="faq-item animate-on-scroll">
+            <button class="faq-question">Is there a registration fee to attend? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <p>No, attendance at our global showcases is completely complimentary for approved NRI investors. We host these events as an exclusive marketing arm for our Tier-1 developer partners.</p>
+            </div>
+        </div>
+
+        <div class="faq-item animate-on-scroll">
+            <button class="faq-question">Will I meet the developers directly? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <p>Yes. We bypass standard broker networks. At our events, you will have the opportunity to sit face-to-face with the Directors, VPs, and official representatives of India's leading builders like Lodha, Godrej, and Kalpataru.</p>
+            </div>
+        </div>
+
+        <h2 class="faq-category animate-on-scroll">Investment & Purchasing</h2>
+
+        <div class="faq-item animate-on-scroll">
+            <button class="faq-question">Do you charge brokerage or advisory fees? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <p>We operate on a strict <strong>Zero Brokerage Policy</strong> for all primary market acquisitions. Because we act as the authorized international marketing partners for the developers, you do not pay us any fees. You secure the property at the exact builder price (often with exclusive event discounts).</p>
+            </div>
+        </div>
+
+        <div class="faq-item animate-on-scroll">
+            <button class="faq-question">Can Non-Resident Indians (NRIs) get home loans in India? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <p>Absolutely. Major Indian banks (HDFC, SBI, ICICI) offer highly competitive home loan rates specifically for NRIs. Our in-house financial desk will assist you with the entire loan pre-approval and documentation process directly from your current country of residence.</p>
+            </div>
+        </div>
+
+        <div class="faq-item animate-on-scroll">
+            <button class="faq-question">What is the booking process at an event? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <p>If you identify a property you like, you can secure your preferred unit immediately by paying a fully refundable Expression of Interest (EOI) token amount. This locks in your event-exclusive pricing while you finalize your decision and paperwork.</p>
+            </div>
+        </div>
+
+        <h2 class="faq-category animate-on-scroll">Legal, Tax & Management</h2>
+
+        <div class="faq-item animate-on-scroll">
+            <button class="faq-question">Do you assist with FEMA and RBI compliance? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <p>Yes. Repatriation of funds and compliance with the Foreign Exchange Management Act (FEMA) is a major concern for NRIs. Our dedicated NRI Tax & Legal desk provides comprehensive guidance to ensure your capital flows smoothly and legally.</p>
+            </div>
+        </div>
+
+        <div class="faq-item animate-on-scroll">
+            <button class="faq-question">Who manages the property after purchase? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <p>We provide end-to-end asset management. Once you take possession, our post-sales concierge team can assist with interior fit-outs, finding premium corporate tenants, executing lease agreements, and managing monthly rent collection so you can earn passive income without the hassle.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="support-cta animate-on-scroll">
+        <h2>Still need assistance?</h2>
+        <p>Our global portfolio managers are available 24/7 to answer your questions and guide your investment journey.</p>
+        <a href="https://wa.me/919152565195?text=Hi%20NIKSGLOBAL%2C%20I%20have%20a%20few%20questions%20regarding%20property%20investment." target="_blank" class="support-btn">
+            <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> Chat with our Desk
+        </a>
+    </div>
+
+    <footer id="contact">
+        <div class="footer-wrap">
+            <div class="footer-widget brand-widget">
+                <img src="logo.png" alt="NIKSGLOBAL Logo" class="footer-logo">
+                <p>NIKSGLOBAL CAPITAL LLC is a premier cross-border real estate advisory, dedicated to connecting the Indian diaspora with exclusive, high-yield luxury assets across India.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-widget">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="index.html">Home</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="about.html">About Us</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="search.html">Property Portfolio</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="index.html#events">Global Exhibitions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-widget">
+                <h3>Global Headquarters</h3>
+                <ul class="contact-info">
+                    <li>
+                        <i class="fa-solid fa-location-dot" style="color: var(--hz-primary);"></i> 
+                        <span>30 N GOULD ST Ste R<br>Sheridan, WY 82801, USA</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-phone" style="color: var(--hz-primary);"></i> 
+                        <span>+91 91525 65195</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-envelope" style="color: var(--hz-primary);"></i> 
+                        <span>contact@niksglobalcapital.com</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-widget">
+                <h3>Support & Legal</h3>
+                <ul>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="terms-of-service.html">Terms of Service</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="partner-with-us.html">For Developers</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="faq.html">Help & FAQs</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 NIKSGLOBAL CAPITAL LLC. All Rights Reserved. 
+               <span class="legal-disclaimer">Disclaimer: The Indian Property Show is an independent advisory and marketing platform. Property details and pricing are subject to developer terms and market fluctuations.</span>
+            </p>
+        </div>
+    </footer>
+
+    <div class="floating-contact-bar">
+        <a href="https://wa.me/919152565195?text=Hi%20NIKSGLOBAL%2C%20I%20have%20a%20question%20from%20the%20FAQ%20page." target="_blank" class="float-btn float-wa">
+            <i class="fa-brands fa-whatsapp"></i> <span>WhatsApp</span>
+        </a>
+        <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.1);"></div>
+        <a href="tel:+919152565195" class="float-btn float-call">
+            <i class="fa-solid fa-phone"></i> <span>Global Desk</span>
+        </a>
+    </div>
+
+    <script>
+        // --- ACCORDION LOGIC ---
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentNode;
+                const answer = question.nextElementSibling;
+                const isActive = item.classList.contains('active');
+
+                // Close all other open items
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                });
+
+                // Toggle current item
+                if (!isActive) {
+                    item.classList.add('active');
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                }
+            });
+        });
+
+        // --- SCROLL ANIMATIONS ---
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | NIKSGLOBAL CAPITAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- HIGH-CONTRAST DARK GLASS VARIABLES --- */
+        :root {
+            --hz-primary: #0a84ff; 
+            --hz-primary-hover: #0066d6;
+            --hz-text-main: #ffffff; 
+            --hz-text-muted: #a1a1a6; 
+            --glass-bg: rgba(30, 30, 35, 0.6); 
+            --glass-bg-hover: rgba(45, 45, 50, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.15); 
+            --glass-border-hover: rgba(255, 255, 255, 0.4);
+            --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        body, html {
+            margin: 0; padding: 0; font-family: var(--font-sans);
+            color: var(--hz-text-main); scroll-behavior: smooth; overflow-x: hidden;
+        }
+
+        /* --- FIXED AMBIENT BACKGROUND --- */
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80') center/cover;
+            z-index: -2;
+        }
+        body::after {
+            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(10, 15, 25, 0.88); 
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            z-index: -1;
+        }
+
+        /* --- CUSTOM SCROLLBAR --- */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--hz-primary); }
+
+        /* --- ANIMATIONS --- */
+        .animate-on-scroll {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* --- HEADER --- */
+        header {
+            background-color: rgba(20, 20, 25, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
+            position: fixed; width: 100%; top: 0; z-index: 1000; box-sizing: border-box;
+            border-bottom: 1px solid var(--glass-border); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        .logo img { height: 50px; transition: transform 0.3s ease; }
+        .logo img:hover { transform: scale(1.05); }
+        nav { display: flex; gap: 30px; align-items: center; }
+        nav a { color: var(--hz-text-main); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.3s; }
+        nav a:hover { color: var(--hz-primary); }
+        .btn-create {
+            background-color: var(--hz-primary); color: #ffffff !important;
+            padding: 10px 24px; border-radius: 50px; font-weight: 600;
+            display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);
+        }
+        .btn-create:hover { background-color: var(--hz-primary-hover); transform: translateY(-2px); border-color: #fff; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 180px 5% 100px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; position: relative; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .hero-tag { color: var(--hz-primary); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 20px; display: block; }
+        .hero h1 { font-size: 4.5rem; font-weight: 700; margin: 0 0 20px; letter-spacing: -1.5px; line-height: 1.1; max-width: 900px; }
+        .hero p { font-size: 1.25rem; color: var(--hz-text-muted); max-width: 700px; line-height: 1.6; margin-bottom: 0; }
+
+        /* --- STATS STRIP --- */
+        .stats-container {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 0 5%; max-width: 1200px; margin: -50px auto 80px; position: relative; z-index: 10;
+        }
+        .stat-box {
+            background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border);
+            padding: 35px 20px; border-radius: 20px; text-align: center; box-shadow: var(--glass-shadow); transition: 0.3s;
+        }
+        .stat-box:hover { transform: translateY(-5px); border-color: var(--hz-primary); }
+        .stat-number { font-size: 3rem; font-weight: 700; color: #fff; margin-bottom: 5px; line-height: 1; }
+        .stat-label { font-size: 0.85rem; color: var(--hz-text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+
+        /* --- CONTENT SECTIONS --- */
+        .section { padding: 80px 5%; max-width: 1200px; margin: 0 auto; }
+        
+        .split-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 100px; }
+        .split-layout.reverse { grid-template-columns: 1.2fr 0.8fr; }
+        
+        .text-content h2 { font-size: 2.8rem; font-weight: 700; margin: 0 0 25px; line-height: 1.2; letter-spacing: -1px; }
+        .text-content p { font-size: 1.1rem; color: var(--hz-text-muted); line-height: 1.8; margin-bottom: 25px; }
+        
+        .image-content { position: relative; border-radius: 24px; overflow: hidden; box-shadow: var(--glass-shadow); border: 1px solid var(--glass-border); }
+        .image-content img { width: 100%; height: auto; display: block; transition: 0.5s; opacity: 0.9; }
+        .image-content:hover img { transform: scale(1.05); opacity: 1; }
+
+        /* --- VALUES GRID --- */
+        .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
+        .value-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; transition: 0.3s; }
+        .value-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
+        .value-icon { width: 60px; height: 60px; background: rgba(10, 132, 255, 0.1); color: var(--hz-primary); border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 25px; }
+        .value-card h3 { font-size: 1.4rem; margin: 0 0 15px; font-weight: 600; }
+        .value-card p { color: var(--hz-text-muted); line-height: 1.6; font-size: 0.95rem; margin: 0; }
+
+        /* --- GLOBAL PRESENCE --- */
+        .map-section { text-align: center; padding: 100px 5%; background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .map-section h2 { font-size: 3rem; margin-bottom: 20px; }
+        .map-section p { color: var(--hz-text-muted); max-width: 600px; margin: 0 auto 60px; font-size: 1.1rem; }
+        
+        .locations-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .loc-box { background: var(--glass-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--glass-border); transition: 0.3s; }
+        .loc-box:hover { border-color: var(--hz-primary); transform: translateY(-5px); }
+        .loc-box i { font-size: 2rem; color: var(--hz-primary); margin-bottom: 15px; }
+        .loc-box h4 { margin: 0 0 5px; font-size: 1.2rem; }
+        .loc-box p { margin: 0; color: var(--hz-text-muted); font-size: 0.85rem; }
+
+        /* --- PREMIUM PROFESSIONAL FOOTER --- */
+        footer { margin-top: 80px; background: rgba(10, 10, 12, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); color: #a1a1a6; padding: 80px 5% 30px; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 2; }
+        .footer-wrap { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
+        
+        .footer-logo { height: 45px; margin-bottom: 20px; background: rgba(255,255,255,0.9); padding: 8px 12px; border-radius: 8px; }
+        .brand-widget p { line-height: 1.7; margin-bottom: 25px; font-size: 0.95rem;}
+        
+        .social-links { display: flex; gap: 15px; }
+        .social-links a { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; justify-content: center; align-items: center; color: #fff; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); text-decoration: none;}
+        .social-links a:hover { background: var(--hz-primary); border-color: var(--hz-primary); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(10, 132, 255, 0.4); }
+        
+        .footer-widget h3 { color: #ffffff; font-size: 1.1rem; margin-bottom: 25px; font-weight: 600; letter-spacing: 0.5px; }
+        .footer-widget ul { list-style: none; padding: 0; margin: 0; }
+        .footer-widget li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 12px; transition: transform 0.3s; line-height: 1.5;}
+        .footer-widget li i { margin-top: 4px; font-size: 0.9rem; }
+        .footer-widget ul:not(.contact-info) li:hover { transform: translateX(5px); }
+        .footer-widget a { color: #a1a1a6; text-decoration: none; transition: color 0.3s; }
+        .footer-widget a:hover { color: var(--hz-primary); }
+        
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 60px; padding-top: 25px; text-align: center; color: #666; }
+        .legal-disclaimer { font-size: 0.8rem; opacity: 0.6; margin-top: 8px; display: block; }
+
+        @media (max-width: 1024px) { .footer-wrap { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 768px) { .footer-wrap { grid-template-columns: 1fr; gap: 40px;} }
+
+        /* --- FLOATING ACTION BAR --- */
+        .floating-contact-bar {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: rgba(20, 20, 25, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 12px 25px; border-radius: 100px; border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex; gap: 25px; z-index: 1000; box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            align-items: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .floating-contact-bar:hover { transform: translateX(-50%) translateY(-5px); border-color: var(--hz-primary); }
+        .float-btn { text-decoration: none; color: #fff; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
+        .float-wa i { color: #25D366; font-size: 1.2rem; }
+        .float-call i { color: var(--hz-primary); font-size: 1.1rem; }
+
+        @media (max-width: 1024px) { 
+            .split-layout { grid-template-columns: 1fr; gap: 40px; }
+            .split-layout.reverse { grid-template-columns: 1fr; }
+            .split-layout.reverse .text-content { order: -1; }
+            .stats-container { grid-template-columns: repeat(2, 1fr); margin-top: 40px; }
+            .values-grid { grid-template-columns: 1fr; }
+            .locations-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-wrap { grid-template-columns: 1fr 1fr; } 
+        }
+        @media (max-width: 768px) {
+            header { flex-direction: column; padding: 15px; gap: 15px; } nav { flex-wrap: wrap; justify-content: center; }
+            .hero { padding-top: 160px; } .hero h1 { font-size: 2.8rem; }
+            .stats-container { grid-template-columns: 1fr; }
+            .locations-grid { grid-template-columns: 1fr; }
+            .footer-wrap { grid-template-columns: 1fr; }
+            .floating-contact-bar { bottom: 20px; width: 85%; justify-content: space-around; padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="logo.png" alt="The Indian Property Show" style="background: rgba(255,255,255,0.9); padding: 5px; border-radius: 8px;"></a>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html" style="color: var(--hz-primary);">About Us</a>
+            <a href="index.html#events">Global Exhibitions</a>
+            <a href="search.html">Properties</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <span class="hero-tag animate-on-scroll">Our Legacy</span>
+        <h1 class="animate-on-scroll" style="transition-delay: 0.1s;">Building Wealth Across Borders for Two Decades.</h1>
+        <p class="animate-on-scroll" style="transition-delay: 0.2s;">NIKSGLOBAL CAPITAL is the definitive bridge connecting the Indian diaspora to India's most prestigious Tier-1 real estate developers.</p>
+    </div>
+
+    <div class="stats-container animate-on-scroll" style="transition-delay: 0.3s;">
+        <div class="stat-box">
+            <div class="stat-number">20+</div>
+            <div class="stat-label">Years of Trust</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">$2B+</div>
+            <div class="stat-label">Portfolio Managed</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">15+</div>
+            <div class="stat-label">Global Cities</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">10k+</div>
+            <div class="stat-label">NRI Investors</div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="split-layout">
+            <div class="text-content animate-on-scroll">
+                <h2>A specialized desk for the global Indian.</h2>
+                <p>Investing in Indian real estate from thousands of miles away requires more than just capital—it requires profound trust, meticulous legal grounding, and absolute transparency.</p>
+                <p>Since our inception, we have removed the friction of cross-border investments. We bypass traditional broker networks to bring India's absolute best—Lodha, Godrej, Kalpataru—directly to your doorstep in the US, Europe, and the Middle East.</p>
+            </div>
+            <div class="image-content animate-on-scroll">
+                <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32b7?auto=format&fit=crop&w=1000&q=80" alt="Executive Meeting">
+            </div>
+        </div>
+
+        <div class="split-layout reverse">
+            <div class="image-content animate-on-scroll">
+                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=80" alt="Luxury Real Estate">
+            </div>
+            <div class="text-content animate-on-scroll">
+                <h2>Curated Assets. Direct Access.</h2>
+                <p>We do not list every property on the market. Our investment committee rigorously vets and selects only Grade-A residential and commercial assets that promise high capital appreciation and secure rental yields.</p>
+                <p>By hosting our signature "Indian Property Shows" across the globe, we provide NRIs the exclusive opportunity to sit face-to-face with developer directors, securing pre-launch pricing and custom payment structures not available to the general public.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;" class="animate-on-scroll">
+            <h2 style="font-size: 2.5rem; margin-bottom: 10px;">The NIKSGLOBAL Difference</h2>
+            <p style="color: var(--hz-text-muted); font-size: 1.1rem;">Why the world's most successful NRIs trust us to manage their Indian portfolios.</p>
+        </div>
+
+        <div class="values-grid">
+            <div class="value-card animate-on-scroll">
+                <div class="value-icon"><i class="fa-solid fa-file-contract"></i></div>
+                <h3>Zero Brokerage Policy</h3>
+                <p>We act as the official international extension of the developers. Our clients pay absolutely zero brokerage or hidden advisory fees on primary market acquisitions.</p>
+            </div>
+            <div class="value-card animate-on-scroll" style="transition-delay: 0.1s;">
+                <div class="value-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                <h3>NRI Tax & Legal Desk</h3>
+                <p>Cross-border taxation can be complex. We provide in-house legal and chartered accounting support to structure your investments efficiently regarding FEMA and RBI guidelines.</p>
+            </div>
+            <div class="value-card animate-on-scroll" style="transition-delay: 0.2s;">
+                <div class="value-icon"><i class="fa-solid fa-key"></i></div>
+                <h3>End-to-End Management</h3>
+                <p>From the initial virtual walkthrough to final handover and subsequent tenant management, our concierge desk handles your asset as if it were our own.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section">
+        <div class="animate-on-scroll">
+            <h2>Our Global Footprint</h2>
+            <p>With corporate headquarters in the US and regional desks across the globe, we are always in your time zone.</p>
+        </div>
+        
+        <div class="locations-grid">
+            <div class="loc-box animate-on-scroll">
+                <i class="fa-solid fa-location-dot"></i>
+                <h4>United States</h4>
+                <p>Sheridan, Wyoming (HQ)</p>
+            </div>
+            <div class="loc-box animate-on-scroll" style="transition-delay: 0.1s;">
+                <i class="fa-solid fa-location-dot"></i>
+                <h4>United Kingdom</h4>
+                <p>Mayfair, London</p>
+            </div>
+            <div class="loc-box animate-on-scroll" style="transition-delay: 0.2s;">
+                <i class="fa-solid fa-location-dot"></i>
+                <h4>Middle East</h4>
+                <p>Business Bay, Dubai</p>
+            </div>
+            <div class="loc-box animate-on-scroll" style="transition-delay: 0.3s;">
+                <i class="fa-solid fa-location-dot"></i>
+                <h4>India</h4>
+                <p>Mumbai & Pune</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-wrap">
+            <div class="footer-widget brand-widget">
+                <img src="logo.png" alt="NIKSGLOBAL Logo" class="footer-logo">
+                <p>NIKSGLOBAL CAPITAL LLC is a premier cross-border real estate advisory, dedicated to connecting the Indian diaspora with exclusive, high-yield luxury assets across India.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-widget">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="index.html">Home</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="about.html">About Us</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="search.html">Property Portfolio</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="index.html#events">Global Exhibitions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-widget">
+                <h3>Global Headquarters</h3>
+                <ul class="contact-info">
+                    <li>
+                        <i class="fa-solid fa-location-dot" style="color: var(--hz-primary);"></i> 
+                        <span>30 N GOULD ST Ste R<br>Sheridan, WY 82801, USA</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-phone" style="color: var(--hz-primary);"></i> 
+                        <span>+91 91525 65195</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-envelope" style="color: var(--hz-primary);"></i> 
+                        <span>contact@niksglobalcapital.com</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-widget">
+                <h3>Support & Legal</h3>
+                <ul>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="terms-of-service.html">Terms of Service</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="partner-with-us.html">For Developers</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="faq.html">Help & FAQs</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 NIKSGLOBAL CAPITAL LLC. All Rights Reserved. 
+               <span class="legal-disclaimer">Disclaimer: The Indian Property Show is an independent advisory and marketing platform. Property details and pricing are subject to developer terms and market fluctuations.</span>
+            </p>
+        </div>
+    </footer>
+
+    <div class="floating-contact-bar">
+        <a href="https://wa.me/919152565195?text=Hi%20NIKSGLOBAL%2C%20I%20would%20like%20to%20learn%20more%20about%20your%20services." target="_blank" class="float-btn float-wa">
+            <i class="fa-brands fa-whatsapp"></i> <span>WhatsApp</span>
+        </a>
+        <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.1);"></div>
+        <a href="tel:+919152565195" class="float-btn float-call">
+            <i class="fa-solid fa-phone"></i> <span>Global Desk</span>
+        </a>
+    </div>
+
+    <script>
+        // Smooth Staggered Scroll Animations
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

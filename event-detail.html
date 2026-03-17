@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Exhibition | NIKSGLOBAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --hz-accent: #0a84ff; 
+            --hz-text: #ffffff;
+            --hz-bg: #050505;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body, html { 
+            margin: 0; padding: 0; font-family: var(--font-sans); 
+            background: var(--hz-bg); color: var(--hz-text); 
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- NAVIGATION --- */
+        header { 
+            position: absolute; top: 0; width: 100%; padding: 30px 8%; 
+            display: flex; justify-content: space-between; align-items: center; 
+            box-sizing: border-box; z-index: 100;
+        }
+        .back-link { 
+            color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 700; 
+            text-transform: uppercase; letter-spacing: 1px;
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); 
+            padding: 12px 24px; border-radius: 8px; border: 1px solid var(--glass-border);
+            display: flex; align-items: center; gap: 10px; transition: 0.3s;
+        }
+        .back-link:hover { background: var(--hz-accent); color: #fff; border-color: var(--hz-accent); }
+
+        /* --- CINEMATIC HERO SLIDER --- */
+        .hero { 
+            position: relative; height: 60vh; width: 100%; 
+            display: flex; align-items: flex-end; padding: 60px 8%; box-sizing: border-box;
+            overflow: hidden; background: #111;
+        }
+        
+        .slider-container {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+        }
+        .slide { min-width: 100%; height: 100%; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(5,5,5,1) 0%, rgba(5,5,5,0.3) 50%, rgba(0,0,0,0.6) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        /* SLIDER CONTROLS */
+        .slider-nav { 
+            position: absolute; top: 50%; width: 100%; left: 0; 
+            display: flex; justify-content: space-between; transform: translateY(-50%); 
+            padding: 0 4%; box-sizing: border-box; z-index: 10; pointer-events: none; 
+        }
+        .nav-btn { 
+            background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); 
+            color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; 
+            display: flex; justify-content: center; align-items: center; transition: 0.3s; pointer-events: auto; 
+        }
+        .nav-btn:hover { background: #fff; color: #000; transform: scale(1.1); }
+
+        .slider-dots { position: absolute; bottom: 40px; right: 8%; display: flex; gap: 8px; z-index: 10; }
+        .dot { width: 8px; height: 8px; background: rgba(255,255,255,0.3); border-radius: 50%; transition: 0.3s; }
+        .dot.active { background: #fff; width: 24px; border-radius: 10px; }
+
+        /* HERO CONTENT */
+        .hero-content { max-width: 800px; position: relative; z-index: 5; width: 100%; }
+        .hero-tag { color: var(--hz-accent); font-size: 0.8rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; display: block; }
+        .hero h1 { font-family: var(--font-serif); font-size: 4.5rem; margin: 0 0 10px; font-weight: 400; line-height: 1; text-shadow: 0 4px 20px rgba(0,0,0,0.8); }
+        .hero-meta { display: flex; flex-wrap: wrap; gap: 30px; opacity: 0.9; font-size: 1.1rem; margin-top: 20px; font-weight: 500; }
+        .hero-meta div { display: flex; align-items: center; gap: 10px; }
+
+        /* --- LAYOUT GRID --- */
+        .layout { 
+            display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; 
+            padding: 60px 8% 100px; max-width: 1400px; margin: 0 auto;
+        }
+
+        /* LEFT: EVENT DETAILS */
+        .details-section h2 { font-size: 1.8rem; font-weight: 600; margin: 0 0 20px; border-bottom: 1px solid var(--glass-border); padding-bottom: 15px; }
+        .description { line-height: 1.8; opacity: 0.7; font-size: 1.1rem; margin-bottom: 50px; }
+
+        .developer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 50px; }
+        .dev-card { 
+            background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); 
+            padding: 25px; border-radius: 12px; display: flex; align-items: center; gap: 15px;
+        }
+        .dev-icon { width: 40px; height: 40px; background: rgba(10, 132, 255, 0.1); color: var(--hz-accent); border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; }
+        
+        .agenda-list { list-style: none; padding: 0; margin: 0; }
+        .agenda-item { display: flex; gap: 20px; margin-bottom: 25px; }
+        .agenda-time { font-family: var(--font-serif); color: var(--hz-accent); font-size: 1.2rem; min-width: 100px; }
+        .agenda-info h4 { margin: 0 0 5px; font-size: 1.1rem; }
+        .agenda-info p { margin: 0; opacity: 0.5; font-size: 0.9rem; }
+
+        /* RIGHT: STICKY VIP DESK */
+        .sidebar { position: relative; }
+        .vip-desk { 
+            position: sticky; top: 40px; background: #0a0a0a; 
+            border: 1px solid rgba(255,255,255,0.15); padding: 40px; 
+            border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .vip-desk h3 { font-family: var(--font-serif); font-size: 2.2rem; margin: 0 0 10px; font-weight: 400; }
+        .vip-desk p { opacity: 0.5; font-size: 0.9rem; margin-bottom: 30px; line-height: 1.6; }
+
+        .vip-form { display: flex; flex-direction: column; gap: 15px; }
+        .vip-form input, .vip-form select { 
+            padding: 16px 20px; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; 
+            font-family: var(--font-sans); font-size: 0.95rem; background: rgba(0,0,0,0.5); 
+            color: #fff; outline: none; transition: 0.3s; 
+        }
+        .vip-form input:focus, .vip-form select:focus { border-color: var(--hz-accent); }
+        .vip-form select option { background: #111; }
+        
+        .submit-btn { 
+            width: 100%; padding: 20px; border-radius: 8px; background: #fff; 
+            color: #000; border: none; font-weight: 700; cursor: pointer; 
+            margin-top: 15px; transition: 0.3s; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;
+        }
+        .submit-btn:hover { background: var(--hz-accent); color: #fff; transform: translateY(-2px); }
+
+        /* --- SMART MODAL SYSTEM --- */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); z-index: 2000; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
+        .modal-content { background: #111; border: 1px solid var(--glass-border); padding: 50px; border-radius: 20px; max-width: 450px; width: 90%; text-align: center; position: relative; transform: scale(0.95) translateY(20px); transition: all 0.3s; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+        .close-btn { position: absolute; top: 15px; right: 15px; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1); color: #fff; cursor: pointer; border: none; transition: 0.3s; display: flex; justify-content: center; align-items: center; }
+        .close-btn:hover { background: #fff; color: #000; }
+        
+        .success-icon { font-size: 4rem; color: #2ecc71; margin-bottom: 20px; }
+        .modal-title { font-size: 1.8rem; font-weight: 700; margin: 0 0 10px; }
+        .modal-desc { font-size: 1rem; opacity: 0.7; margin-bottom: 30px; line-height: 1.6; }
+
+        /* --- MOBILE OPTIMIZATION --- */
+        @media (max-width: 1024px) { 
+            .layout { grid-template-columns: 1fr; } 
+            .hero h1 { font-size: 3.5rem; } 
+            .developer-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .hero { height: 50vh; padding: 40px 5% 60px; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-meta { flex-direction: column; gap: 10px; font-size: 0.95rem; }
+            .slider-nav { padding: 0 10px; }
+            .nav-btn { width: 35px; height: 35px; font-size: 0.8rem; }
+            .slider-dots { right: 50%; transform: translateX(50%); bottom: 20px; }
+            header { padding: 20px 5%; }
+            .layout { padding: 40px 5% 80px; }
+            .vip-desk { padding: 25px; }
+            .modal-content { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Home</a>
+    </header>
+
+    <div class="hero">
+        <div class="slider-container" id="heroSlider"></div>
+        <div class="hero-overlay"></div>
+        
+        <div class="slider-nav">
+            <button class="nav-btn" onclick="moveEventSlider(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="nav-btn" onclick="moveEventSlider(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="slider-dots" id="heroDots"></div>
+
+        <div class="hero-content">
+            <span class="hero-tag" id="eventRegion">Region Tour</span>
+            <h1 id="eventTitle">Loading Showcase...</h1>
+            <div class="hero-meta">
+                <div><i class="fa-regular fa-calendar-check" style="color: var(--hz-accent);"></i> <span id="eventDate">TBA</span></div>
+                <div><i class="fa-solid fa-location-dot" style="color: var(--hz-accent);"></i> <span id="eventVenue">TBA</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layout">
+        <div class="details-section">
+            <h2>About the Showcase</h2>
+            <p class="description" id="eventDesc">Loading details...</p>
+
+            <h2>Participating Developers</h2>
+            <div class="developer-grid" id="devGrid"></div>
+
+            <h2>Event Agenda</h2>
+            <ul class="agenda-list">
+                <li class="agenda-item">
+                    <div class="agenda-time">10:00 AM</div>
+                    <div class="agenda-info">
+                        <h4>Doors Open & VIP Registration</h4>
+                        <p>Welcome coffee and personalized portfolio matching.</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">11:30 AM</div>
+                    <div class="agenda-info">
+                        <h4>Keynote: Indian Real Estate Outlook 2026</h4>
+                        <p>Insights from our Director of Investments on market trends and high-yield zones.</p>
+                    </div>
+                </li>
+                <li class="agenda-item">
+                    <div class="agenda-time">01:00 PM</div>
+                    <div class="agenda-info">
+                        <h4>Private Developer Meetings</h4>
+                        <p>One-on-one sessions with representatives from Tier-1 builders to secure exclusive pricing.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="sidebar">
+            <div class="vip-desk">
+                <h3>Request VIP Pass</h3>
+                <p>Access is strictly by invitation. Register below to secure your meeting slots with top developers.</p>
+                <form class="vip-form" id="vipLeadForm" onsubmit="submitVipLead(event)">
+                    <input type="text" id="vipName" name="name" placeholder="Full Name" required>
+                    <input type="email" id="vipEmail" name="email" placeholder="Corporate/Personal Email" required>
+                    <input type="tel" id="vipPhone" name="phone" placeholder="Phone Number" required>
+                    <select id="vipInterest" name="interest" required>
+                        <option value="">Primary Investment Interest</option>
+                        <option value="mumbai">Mumbai Luxury Real Estate</option>
+                        <option value="delhi">Delhi NCR Projects</option>
+                        <option value="pune">Pune Villas</option>
+                        <option value="bangalore">Bangalore Tech Corridor</option>
+                        <option value="commercial">Commercial/Yield Assets</option>
+                    </select>
+                    <button type="submit" class="submit-btn">REQUEST YOUR INVITE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="inquiryModal" class="modal-overlay">
+        <div class="modal-content" id="modalBox">
+            <button class="close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h2 class="modal-title">Request Sent</h2>
+            <p class="modal-desc">Your VIP pass request has been successfully submitted. Our concierge team will contact you shortly to confirm your attendance.</p>
+            <button class="submit-btn" style="width: auto; padding: 12px 35px; display: inline-block;" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const eventData = {
+            "munich": {
+                title: "Munich Real Estate Showcase", region: "Europe Tour", date: "April 25-26, 2026", venue: "Hotel NH Collection Arnulfstraße 2, Munich",
+                images: [
+                    "https://res.cloudinary.com/dozcviag7/image/upload/v1773765891/Alemania_est%C3%A1_de_vuelta__el_hist%C3%B3rico_plan_de_est%C3%ADmulos_multiplicar%C3%A1_por_cuatro_su_crecimiento_xvadiy.jpg",
+                    "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1920&q=80",
+                    "https://res.cloudinary.com/dozcviag7/image/upload/v1773765988/Die_10_sch%C3%B6nsten_Kirchen_Deutschlands_ceddq2.jpg"
+                ],
+                desc: "Join NIKSGLOBAL in Munich for an exclusive, invite-only showcase of India's finest real estate. Tailored for the European NRI diaspora seeking high-yield assets.",
+                developers: ["Lodha Group", "Godrej Properties", "Kalpataru", "Rubrick Constructions"]
+            },
+            "frankfurt": {
+                title: "Frankfurt Investment Expo", region: "Europe Tour", date: "April 26, 2026", venue: "Hotel NH Collection Güterplatz 1, Frankfurt",
+                images: ["https://images.unsplash.com/photo-1587330979470-3595ac045ab0?auto=format&fit=crop&w=1920&q=80", "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=1920&q=80"],
+                desc: "Explore premium commercial and residential opportunities in India. The Frankfurt Expo brings the best of Indian real estate to Germany's financial hub.",
+                developers: ["Lodha Group", "Godrej Properties", "Kalpataru"]
+            },
+            "usa-spring": {
+                title: "USA Spring Exhibitions", region: "United States", date: "May 09-17, 2026", venue: "Multiple Premium Venues (TBA)",
+                images: ["https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=1920&q=80", "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=1920&q=80"],
+                desc: "Our expansive USA Spring Tour covers major tech and financial hubs. Connect directly with India's top developers.",
+                developers: ["Lodha Group", "Godrej Properties", "Rubrick Constructions"]
+            },
+            "tokyo": {
+                title: "Tokyo NRI Investment Summit", region: "Asia Tour", date: "May 23-24, 2026", venue: "Hotel New Otani Tokyo",
+                images: ["https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1920&q=80", "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1920&q=80"],
+                desc: "A premier summit connecting the thriving Indian diaspora in Japan with Grade-A developers.",
+                developers: ["Lodha Group", "Rubrick Constructions"]
+            },
+            "saudi": {
+                title: "Saudi Arabia Expo", region: "Middle East", date: "June 06-07, 2026", venue: "Premium Venue (TBA)",
+                images: ["https://images.unsplash.com/photo-1580418827493-f2b22c0a76cb?auto=format&fit=crop&w=1920&q=80", "https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&w=1920&q=80"],
+                desc: "Connecting the Gulf's top NRI investors with India's most luxurious real estate developments.",
+                developers: ["Lodha Group", "Kalpataru"]
+            },
+            "africa": {
+                title: "Africa Investor Summit", region: "Africa Tour", date: "August, 2026", venue: "Premium Venue (TBA)",
+                images: ["https://images.unsplash.com/photo-1580060839134-75a5edca2e99?auto=format&fit=crop&w=1920&q=80", "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=1920&q=80"],
+                desc: "An exclusive gateway for NRI investors based in Africa to explore high-yield portfolios.",
+                developers: ["Godrej Properties", "Rubrick Constructions"]
+            },
+            "usa-fall": {
+                title: "USA Fall Exhibitions", region: "United States", date: "September, 2026", venue: "Multiple Venues (TBA)",
+                images: ["https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=1920&q=80", "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1920&q=80"],
+                desc: "The second leg of our USA tour, bringing new inventory and exclusive pre-launch access.",
+                developers: ["Lodha Group", "Kalpataru", "Godrej Properties"]
+            },
+            "europe": {
+                title: "Europe NRI Showcase", region: "Europe Tour", date: "October, 2026", venue: "Premium Venue (TBA)",
+                images: ["https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1920&q=80", "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=1920&q=80"],
+                desc: "Continuing our European expansion, this showcase highlights prime Indian assets tailored for Euro-based investors.",
+                developers: ["Rubrick Constructions", "Kalpataru"]
+            },
+            "london": {
+                title: "London Investment Expo", region: "United Kingdom", date: "November, 2026", venue: "Premium Venue (TBA)",
+                images: ["https://images.unsplash.com/photo-1513635269975-59693e0cd1ce?auto=format&fit=crop&w=1920&q=80", "https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&w=1920&q=80"],
+                desc: "Our flagship European event featuring over a dozen Tier-1 Indian developers.",
+                developers: ["Lodha Group", "Godrej Properties", "Kalpataru", "Rubrick Constructions"]
+            },
+            "dubai": {
+                title: "Dubai Real Estate Summit", region: "United Arab Emirates", date: "December, 2026", venue: "Premium Venue (TBA)",
+                images: ["https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1920&q=80", "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1920&q=80"],
+                desc: "Our grand finale for the year. The Dubai Summit is the largest gathering of elite developers in the Middle East.",
+                developers: ["Lodha Group", "Godrej Properties", "Kalpataru", "Rubrick Constructions"]
+            }
+        };
+
+        let currentEventImgIndex = 0;
+        let totalEventImages = 0;
+
+        function moveEventSlider(direction) {
+            currentEventImgIndex += direction;
+            if (currentEventImgIndex < 0) currentEventImgIndex = totalEventImages - 1;
+            if (currentEventImgIndex >= totalEventImages) currentEventImgIndex = 0;
+            document.getElementById('heroSlider').style.transform = `translateX(-${currentEventImgIndex * 100}%)`;
+            updateEventDots();
+        }
+
+        function updateEventDots() {
+            const dots = document.querySelectorAll('#heroDots .dot');
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === currentEventImgIndex));
+        }
+
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id') || "munich";
+            const data = eventData[id];
+
+            if (data) {
+                document.getElementById('eventTitle').innerText = data.title;
+                document.getElementById('eventRegion').innerText = data.region;
+                document.getElementById('eventDate').innerText = data.date;
+                document.getElementById('eventVenue').innerText = data.venue;
+                document.getElementById('eventDesc').innerText = data.desc;
+
+                totalEventImages = data.images.length;
+                let sliderHTML = "", dotsHTML = "";
+                data.images.forEach((imgUrl, i) => {
+                    sliderHTML += `<div class="slide"><img src="${imgUrl}" alt="Event Visual"></div>`;
+                    dotsHTML += `<div class="dot ${i === 0 ? 'active' : ''}"></div>`;
+                });
+                document.getElementById('heroSlider').innerHTML = sliderHTML;
+                document.getElementById('heroDots').innerHTML = dotsHTML;
+
+                let devHTML = "";
+                data.developers.forEach(dev => {
+                    devHTML += `<div class="dev-card"><div class="dev-icon"><i class="fa-regular fa-building"></i></div><div style="font-weight: 600;">${dev}</div></div>`;
+                });
+                document.getElementById('devGrid').innerHTML = devHTML;
+            }
+        };
+
+        function submitVipLead(event) {
+            event.preventDefault();
+
+            // --- WEB3FORMS API INTEGRATION ---
+            const formData = {
+                name: document.getElementById('vipName').value,
+                email: document.getElementById('vipEmail').value,
+                phone: document.getElementById('vipPhone').value,
+                interest: document.getElementById('vipInterest').value,
+                eventTitle: document.getElementById('eventTitle').innerText
+            };
+
+            // Sends the data silently to your email
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    access_key: "YOUR_WEB3FORMS_ACCESS_KEY_HERE", // IMPORTANT: Paste your Web3Forms Access Key inside these quotes
+                    subject: "New VIP Lead: " + formData.eventTitle,
+                    from_name: "NIKSGLOBAL Exhibitions",
+                    message: `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nInterest: ${formData.interest}\nEvent: ${formData.eventTitle}`
+                })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Lead successfully forwarded via Web3Forms!'))
+            .catch(error => console.error('Error forwarding lead:', error));
+
+            // Instantly show the Success Modal for good User Experience
+            const modal = document.getElementById('inquiryModal');
+            modal.style.display = 'flex';
+            setTimeout(() => { modal.style.opacity = '1'; }, 10);
+            document.body.style.overflow = 'hidden';
+
+            // Clear the form fields after submission
+            document.getElementById('vipLeadForm').reset();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('inquiryModal');
+            modal.style.opacity = '0';
+            setTimeout(() => { 
+                modal.style.display = 'none'; 
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+    </script>
+</body>
+</html>
