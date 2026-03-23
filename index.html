@@ -3,619 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Indian Property Show | Elite Real Estate Directory</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>NIKSGLOBAL CAPITAL | Select Your Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-       
-       /* --- DEDICATED DEVELOPER CTA SECTION --- */
-        .developer-cta { padding: 60px 5%; margin-bottom: 40px; }
-        .glass-banner {
-            background: linear-gradient(135deg, rgba(10, 132, 255, 0.2), rgba(0, 0, 0, 0.6)),
-                        url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&q=80') center/cover;
-            border: 1px solid var(--hz-primary);
-            border-radius: 30px;
-            padding: 100px 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-        .banner-content { position: relative; z-index: 2; max-width: 850px; margin: 0 auto; }
-        .banner-tag { 
-            background: var(--hz-primary); color: #fff; padding: 6px 15px; 
-            border-radius: 50px; font-size: 0.75rem; font-weight: 700; 
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; display: inline-block;
-        }
-        .glass-banner h2 { font-size: 3.5rem; font-weight: 700; margin: 0 0 20px; line-height: 1.1; letter-spacing: -1px; }
-        .glass-banner p { font-size: 1.3rem; color: #ccc; margin-bottom: 45px; line-height: 1.6; }
-        
-        .partner-btn {
-            background: #fff; color: #000; padding: 18px 45px; border-radius: 50px;
-            font-size: 1.1rem; font-weight: 700; text-decoration: none; display: inline-block;
-            transition: 0.3s; border: 2px solid transparent;
-        }
-        .partner-btn:hover { background: var(--hz-primary); color: #fff; transform: scale(1.05); box-shadow: 0 10px 30px rgba(10, 132, 255, 0.4); }
-
-        @media (max-width: 768px) {
-            .glass-banner { padding: 60px 20px; }
-            .glass-banner h2 { font-size: 2.2rem; }
-            .glass-banner p { font-size: 1.1rem; }
-        }
-       
-       
-       
-       /* --- HIGH-CONTRAST DARK GLASS VARIABLES --- */
         :root {
-            --hz-primary: #0a84ff; 
-            --hz-primary-hover: #0066d6;
-            --hz-text-main: #ffffff; 
-            --hz-text-muted: #a1a1a6; 
-            --glass-bg: rgba(30, 30, 35, 0.6); 
-            --glass-bg-hover: rgba(45, 45, 50, 0.8);
-            --glass-border: rgba(255, 255, 255, 0.15); 
-            --glass-border-hover: rgba(255, 255, 255, 0.4);
-            --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            --glass-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.7);
-            --dark-fallback: #0f172a; 
-            --font-sans: 'Inter', sans-serif;
+            /* The True Light vs Dark Blue Vibe */
+            --light-blue: #00d2ff; 
+            --dark-blue: #002277;  
+            --font-main: 'Inter', sans-serif;
+            /* Enhanced cinematic easing curve */
+            --easing: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        body, html {
-            margin: 0; padding: 0; font-family: var(--font-sans);
-            color: var(--hz-text-main); scroll-behavior: smooth; overflow-x: hidden;
-        }
+        body, html { margin: 0; padding: 0; width: 100vw; height: 100vh; overflow: hidden; font-family: var(--font-main); background: #020203; color: #fff; }
 
-        /* --- FIXED, BLURRED AMBIENT BACKGROUND --- */
-        body::before {
-            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80') center/cover;
-            z-index: -2;
-        }
-        body::after {
-            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(10, 15, 25, 0.85); 
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            z-index: -1;
-        }
-
-        /* --- CUSTOM SCROLLBAR --- */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
-        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--hz-primary); }
-
-        /* --- SCROLL REVEAL ANIMATIONS (Plays Once) --- */
-        .animate-on-scroll {
-            opacity: 0; transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
-
-        /* --- GLASS HEADER --- */
-        header {
-            background-color: rgba(20, 20, 25, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
-            position: fixed; width: 100%; top: 0; z-index: 1000; box-sizing: border-box;
-            border-bottom: 1px solid var(--glass-border); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-        }
-        .logo img { height: 50px; transition: transform 0.3s ease; }
-        .logo img:hover { transform: scale(1.05); }
-        
-        nav { display: flex; gap: 30px; align-items: center; }
-        nav a { color: var(--hz-text-main); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.3s; }
-        nav a:hover { color: var(--hz-primary); }
-
-        .btn-create {
-            background-color: var(--hz-primary); color: #ffffff !important;
-            padding: 10px 24px; border-radius: 50px; font-weight: 600;
-            display: flex; align-items: center; gap: 8px; transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        .btn-create:hover { background-color: var(--hz-primary-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(10, 132, 255, 0.4); border-color: #fff;}
-
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 70vh; margin-top: 80px; padding: 0 5%;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; position: relative;
-        }
-        .hero h1 { font-size: 4rem; font-weight: 700; margin-bottom: 15px; letter-spacing: -1px; color: var(--hz-text-main); text-shadow: 0 4px 20px rgba(0,0,0,0.8); }
-        .hero p { font-size: 1.25rem; margin-bottom: 50px; font-weight: 400; max-width: 800px; color: var(--hz-text-muted); }
-
-        /* --- GLASS SEARCH BAR --- */
-        .search-bar {
-            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            padding: 20px 25px; border-radius: 20px; display: flex; gap: 15px; width: 100%; max-width: 950px;
-            box-shadow: var(--glass-shadow); flex-wrap: wrap; align-items: center;
-            border: 1px solid var(--glass-border); 
-            transition: all 0.3s ease;
-        }
-        .search-bar:hover { border-color: var(--glass-border-hover); box-shadow: var(--glass-shadow-hover); }
-        
-        .search-input-group { flex: 1; min-width: 220px; display: flex; flex-direction: column; gap: 8px; text-align: left; }
-        .search-input-group label { font-size: 0.75rem; font-weight: 700; color: var(--hz-text-muted); text-transform: uppercase; letter-spacing: 1px; padding-left: 5px; }
-        
-        .search-input {
-            width: 100%; padding: 14px 18px; border: 1px solid rgba(255,255,255,0.2); border-radius: 12px;
-            font-family: var(--font-sans); font-size: 0.95rem; color: #ffffff;
-            background-color: rgba(0,0,0,0.3); transition: all 0.3s ease; box-sizing: border-box;
-        }
-        .search-input option { background-color: #1e1e23; color: #fff; }
-        .search-input:hover { border-color: rgba(255,255,255,0.4); }
-        .search-input:focus { outline: none; background-color: rgba(0,0,0,0.5); border-color: var(--hz-primary); box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.25); }
-        
-        .search-btn {
-            background: var(--hz-primary); color: #ffffff; border: 1px solid rgba(255,255,255,0.2); padding: 15px 35px; border-radius: 50px;
-            font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: var(--font-sans); margin-top: 24px;
-        }
-        .search-btn:hover { background: var(--hz-primary-hover); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(10, 132, 255, 0.4); border-color: #fff;}
-
-        /* --- GLOBAL SECTIONS --- */
-        .section { padding: 80px 5%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 2; }
-        .section-header { margin-bottom: 50px; text-align: center; }
-        .section-header h2 { font-size: 2.5rem; margin: 0 0 10px; color: var(--hz-text-main); font-weight: 700; letter-spacing: -0.5px; }
-        .section-header p { color: var(--hz-text-muted); margin: 0; font-size: 1.1rem; }
-
-        /* --- GLASS FEATURES GRID --- */
-        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 60px; }
-        .feature-box {
-            text-align: center; padding: 40px 25px; border-radius: 20px; transition: all 0.3s ease;
-            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow);
-        }
-        .feature-box:hover { transform: translateY(-8px); border-color: var(--hz-primary); box-shadow: var(--glass-shadow-hover); background: rgba(30, 30, 35, 0.8); }
-        .feature-icon { width: 70px; height: 70px; background: rgba(10, 132, 255, 0.15); color: var(--hz-primary); border-radius: 20px; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; margin: 0 auto 20px; transition: all 0.3s; border: 1px solid rgba(10, 132, 255, 0.3); }
-        .feature-box:hover .feature-icon { background: var(--hz-primary); color: #fff; transform: scale(1.1); }
-        .feature-box h3 { margin: 0 0 12px; font-size: 1.2rem; font-weight: 600; color: #fff; }
-        .feature-box p { color: var(--hz-text-muted); font-size: 0.9rem; line-height: 1.6; }
-
-        /* --- 3-COLUMN GLASS DIRECTORY GRID --- */
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; }
-        
-        .hz-card { 
-            border-radius: 20px; overflow: hidden; position: relative; display: flex; flex-direction: column;
-            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border); 
-            box-shadow: var(--glass-shadow);
-            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        /* --- GLOBAL BRANDING HEADER --- */
+        .brand-header {
+            position: absolute; top: 40px; left: 50%; transform: translateX(-50%);
+            z-index: 100; display: flex; flex-direction: column; align-items: center; gap: 12px;
+            pointer-events: none; animation: fadeInDown 1s var(--easing) forwards;
         }
         
-        .hz-card:hover { 
-            transform: translateY(-8px); 
-            border-color: var(--hz-primary); 
-            box-shadow: var(--glass-shadow-hover); 
-            background: rgba(30, 30, 35, 0.8);
+        /* --- PREMIUM TRUE GLASS LOGO WITH GLOW --- */
+        .premium-logo {
+            background: rgb(249, 249, 249); 
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            padding: 8px 20px; 
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(10, 132, 255, 0.25), 0 10px 40px rgba(0, 0, 0, 0.7);
+        }
+        .premium-logo img {
+            height: 45px; 
+            display: block;
+            background: transparent !important; 
+            padding: 0 !important;
+            filter: drop-shadow(0 0 4px rgba(255,255,255,0.2));
         }
 
-        .card-img-wrap { position: relative; height: 220px; overflow: hidden; background-color: #111; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; opacity: 0.9; }
-        .hz-card:hover .card-img-wrap img { transform: scale(1.05); opacity: 1; }
-        
-        .badge { position: absolute; top: 15px; left: 15px; padding: 6px 12px; border-radius: 8px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; z-index: 2; letter-spacing: 1px; color: #fff; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3);}
-        .badge-status { left: auto; right: 15px; background: rgba(0,0,0,0.8); } 
-        .badge-africa { background: rgba(243, 156, 18, 0.9); }
-        .badge-asia { background: rgba(231, 76, 60, 0.9); }
-        .badge-middle-east { background: rgba(39, 174, 96, 0.9); }
-        .badge-americas { background: rgba(142, 68, 173, 0.9); }
-        .badge-europe { background: rgba(10, 132, 255, 0.9); }
-
-        .card-body { padding: 25px; flex-grow: 1; position: relative; z-index: 2; background: transparent; }
-        
-        .country-label { font-size: 0.7rem; color: var(--hz-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 8px; }
-        .card-title { font-size: 1.25rem; font-weight: 700; margin: 0 0 10px; color: var(--hz-text-main); line-height: 1.3; transition: color 0.3s;}
-        .hz-card:hover .card-title { color: var(--hz-primary); }
-        
-        .card-address { font-size: 0.85rem; color: var(--hz-text-muted); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
-        .card-address i { color: var(--hz-primary); margin-top: 3px; }
-        
-        .card-footer { border-top: 1px solid rgba(255,255,255,0.1); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); }
-        .footer-item { font-size: 0.85rem; color: var(--hz-text-muted); display: flex; align-items: center; gap: 8px; font-weight: 600; }
-        .footer-item i { color: var(--hz-primary); font-size: 1.1rem; }
-        
-        .btn-inquire { 
-            background: rgba(255,255,255,0.1); border: 1px solid var(--hz-primary); color: var(--hz-primary); 
-            padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; 
-            cursor: pointer; transition: all 0.3s ease; 
+        .brand-header span { 
+            font-size: 0.85rem; font-weight: 700; letter-spacing: 6px; 
+            text-transform: uppercase; color: #fff; opacity: 0.9; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.9);
         }
-        .btn-inquire:hover { background: var(--hz-primary); color: #fff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(10,132,255,0.3); }
 
-        /* --- PREMIUM PROFESSIONAL FOOTER --- */
-        footer { margin-top: 80px; background: rgba(10, 10, 12, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); color: #a1a1a6; padding: 80px 5% 30px; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 2; }
-        .footer-wrap { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
-        
-        .footer-logo { height: 45px; margin-bottom: 20px; background: rgba(255,255,255,0.9); padding: 8px 12px; border-radius: 8px; }
-        .brand-widget p { line-height: 1.7; margin-bottom: 25px; font-size: 0.95rem;}
-        
-        .social-links { display: flex; gap: 15px; }
-        .social-links a { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; justify-content: center; align-items: center; color: #fff; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); text-decoration: none;}
-        .social-links a:hover { background: var(--hz-primary); border-color: var(--hz-primary); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(10, 132, 255, 0.4); }
-        
-        .footer-widget h3 { color: #ffffff; font-size: 1.1rem; margin-bottom: 25px; font-weight: 600; letter-spacing: 0.5px; }
-        .footer-widget ul { list-style: none; padding: 0; margin: 0; }
-        .footer-widget li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 12px; transition: transform 0.3s; line-height: 1.5;}
-        .footer-widget li i { margin-top: 4px; font-size: 0.9rem; }
-        .footer-widget ul:not(.contact-info) li:hover { transform: translateX(5px); }
-        .footer-widget a { color: #a1a1a6; text-decoration: none; transition: color 0.3s; }
-        .footer-widget a:hover { color: var(--hz-primary); }
-        
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 60px; padding-top: 25px; text-align: center; color: #666; }
-        .legal-disclaimer { font-size: 0.8rem; opacity: 0.6; margin-top: 8px; display: block; }
-
-        @media (max-width: 1024px) { .footer-wrap { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 768px) { .footer-wrap { grid-template-columns: 1fr; gap: 40px;} }
-
-        /* --- PREMIUM FLOATING ACTION BAR --- */
-        .floating-contact-bar {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            background: rgba(20, 20, 25, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            padding: 12px 25px; border-radius: 100px; border: 1px solid rgba(255, 255, 255, 0.15);
-            display: flex; gap: 25px; z-index: 1000; box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-            align-items: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translate(-50%, -30px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
         }
-        .floating-contact-bar:hover { transform: translateX(-50%) translateY(-5px); border-color: var(--hz-primary); }
 
-        .float-btn {
-            text-decoration: none; color: #fff; font-size: 0.85rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 10px;
+        /* --- CUSTOM WORLD MAP BACKGROUND --- */
+        .map-bg {
+            position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
+            /* Updated to your custom Cloudinary Map */
+            background: url('https://res.cloudinary.com/dozcviag7/image/upload/v1774257415/World_Map_1_uofv9v.png') center/cover no-repeat;
+            /* INCREASED OPACITY so the map is clearly visible */
+            opacity: 0.3; 
+            z-index: 0; pointer-events: none;
+            /* Removed the invert filter so your image colors remain true */
+            animation: slowPan 40s linear infinite alternate;
         }
-        .float-wa i { color: #25D366; font-size: 1.2rem; }
-        .float-call i { color: var(--hz-primary); font-size: 1.1rem; }
+        @keyframes slowPan {
+            0% { transform: scale(1.05) translate(0, 0); }
+            100% { transform: scale(1.15) translate(-30px, -15px); }
+        }
 
-        @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } .footer-wrap { grid-template-columns: 1fr 1fr; } .features-grid { grid-template-columns: 1fr; } }
+        .split-container { display: flex; width: 100vw; height: 100vh; position: relative; z-index: 1; }
+
+        /* --- SIDES --- */
+        .side {
+            flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            cursor: pointer; 
+            transition: flex 1s var(--easing), filter 1s var(--easing), opacity 1s ease;
+            position: relative; overflow: hidden;
+            background: transparent;
+        }
+        
+        /* The Interactive Spotlight Layer */
+        .side::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            z-index: -1; 
+            transition: transform 1s var(--easing), opacity 0.8s var(--easing);
+            opacity: 0; 
+            transform: scale(1);
+        }
+
+        /* Left Side: Investor (Light Blue) */
+        /* Lightened the dark gradient slightly so the map shows through better */
+        .investor-side { background: linear-gradient(135deg, rgba(0, 210, 255, 0.08) 0%, rgba(0,0,0,0.4) 100%); border-right: 1px solid rgba(255,255,255,0.05); }
+        .investor-side::before { 
+            background: radial-gradient(circle 800px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 210, 255, 0.4), transparent 80%); 
+        }
+
+        /* Right Side: Developer (Dark Blue) */
+        .developer-side { background: linear-gradient(225deg, rgba(0, 34, 119, 0.2) 0%, rgba(0,0,0,0.4) 100%); }
+        .developer-side::before { 
+            background: radial-gradient(circle 800px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 68, 255, 0.5), transparent 80%); 
+        }
+
+        /* --- SPOTLIGHT HOVER EFFECT --- */
+        .split-container:hover .side { filter: brightness(0.4) grayscale(40%); }
+        .split-container .side:hover { filter: brightness(1.2) grayscale(0%); flex: 1.4; }
+        .investor-side:hover::before, .developer-side:hover::before { opacity: 1; transform: scale(1.1); }
+
+        /* --- TEXT CONTENT --- */
+        .content { 
+            text-align: center; 
+            z-index: 20; 
+            position: relative;
+            pointer-events: none; 
+            transition: transform 0.8s var(--easing), opacity 0.4s ease; 
+        }
+
+        /* Push text away from the center */
+        .investor-side .content { transform: translateX(-60px); }
+        .developer-side .content { transform: translateX(60px); }
+
+        /* Hover states */
+        .investor-side:hover .content { transform: scale(1.05) translateX(-80px); }
+        .developer-side:hover .content { transform: scale(1.05) translateX(80px); }
+
+        h2 { 
+            font-size: 4.5rem; font-weight: 700; margin: 0 0 5px; text-transform: uppercase; 
+            letter-spacing: -1px; transition: all 0.6s var(--easing); color: rgba(255,255,255,0.8); 
+            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+        }
+        .investor-side h2 { text-shadow: 0 0 30px rgba(0, 210, 255, 0.3); }
+        .developer-side h2 { text-shadow: 0 0 30px rgba(0, 34, 119, 0.5); }
+
+        .investor-side:hover h2 { color: #fff; letter-spacing: 3px; text-shadow: 0 0 50px var(--light-blue); }
+        .developer-side:hover h2 { color: #fff; letter-spacing: 3px; text-shadow: 0 0 50px #4d88ff; }
+
+        p { 
+            font-size: 1.2rem; opacity: 0; font-weight: 600; margin: 0; 
+            text-transform: uppercase; letter-spacing: 5px; transform: translateY(20px);
+            transition: all 0.6s var(--easing) 0.1s; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+        .investor-side p { color: #ccf5ff; }
+        .developer-side p { color: #b3ccff; }
+        .side:hover p { opacity: 1; transform: translateY(0); }
+
+        /* --- EMERGING TAKEOVER ANIMATIONS --- */
+        .side.takeover { flex: 100 !important; z-index: 10; filter: brightness(1.2) grayscale(0%) !important; border: none; }
+        .side.shrink { flex: 0.0001 !important; opacity: 0; }
+
+        .side.takeover::before { transform: scale(3.5) !important; opacity: 1 !important; }
+        .side.takeover .content { transform: scale(1.6) !important; opacity: 0 !important; }
+        .side.shrink .content { transform: scale(0.6) !important; opacity: 0 !important; }
+
+        /* --- THE MASSIVE REACTIVE PORTAL IMAGE --- */
+        .yin-yang-wrapper {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 220px; height: 220px; z-index: 5; pointer-events: none; 
+            animation: floatYY 6s ease-in-out infinite; 
+        }
+        
+        @keyframes floatYY {
+            0%, 100% { transform: translate(-50%, -50%); }
+            50% { transform: translate(-50%, -54%); }
+        }
+
+        /* Container is completely clean now. NO border, NO background, NO shadow. */
+        .portal-circle {
+            width: 100%; height: 100%;
+            position: relative; 
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        /* The glow is perfectly wrapped around the shape of the PNG image */
+        .yin-yang-image {
+            width: 130%; 
+            height: 130%;
+            object-fit: contain; 
+            transform: rotate(180deg); /* Keeps light side on the left */
+            /* This directly targets the graphic, completely ignoring the invisible padding! */
+            filter: drop-shadow(-15px 0 25px rgba(0, 210, 255, 0.6)) 
+                    drop-shadow(15px 0 25px rgba(0, 34, 119, 0.8));
+        }
+
+        .spin-action { animation: spinAndShrink 0.9s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards; }
+        @keyframes spinAndShrink { 
+            0% { transform: rotate(0deg) scale(1); opacity: 1; }
+            100% { transform: rotate(1080deg) scale(0); opacity: 0; }
+        }
+
         @media (max-width: 768px) {
-            header { flex-direction: column; padding: 15px; gap: 15px; } 
-            nav { flex-wrap: wrap; justify-content: center; }
-            .hero { height: auto; padding-top: 150px; padding-bottom: 50px; }
-            .hero h1 { font-size: 2.8rem; } .grid { grid-template-columns: 1fr; }
-            .footer-wrap { grid-template-columns: 1fr; }
-            .floating-contact-bar { bottom: 20px; width: 85%; justify-content: space-around; padding: 15px; }
+            .split-container { flex-direction: column; }
+            .investor-side { background: transparent; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+            .investor-side::before { background: radial-gradient(circle at 50% 100%, rgba(0, 210, 255, 0.5), transparent 80%); }
+            .developer-side { background: transparent; }
+            .developer-side::before { background: radial-gradient(circle at 50% 0%, rgba(0, 68, 255, 0.6), transparent 80%); }
+            
+            .brand-header { top: 25px; } 
+            .premium-logo img { height: 35px; }
+            
+            .investor-side .content { transform: translateY(-40px) translateX(0); }
+            .developer-side .content { transform: translateY(40px) translateX(0); }
+            .investor-side:hover .content { transform: scale(1.05) translateY(-50px) translateX(0); }
+            .developer-side:hover .content { transform: scale(1.05) translateY(50px) translateX(0); }
+
+            h2 { font-size: 3rem; } p { font-size: 1rem; opacity: 0.8; transform: translateY(0); }
+            .yin-yang-wrapper { width: 140px; height: 140px; transform: translate(-50%, -50%) rotate(90deg); animation: none; }
+            .side.takeover { flex: 100 !important; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">
-            <img src="logo.png" alt="The Indian Property Show" style="background: rgba(255,255,255,0.9); padding: 5px; border-radius: 8px;">
+    <div class="brand-header">
+        <div class="premium-logo">
+            <img src="https://res.cloudinary.com/dozcviag7/image/upload/v1774248121/NiksGlobal_Capital-01_dzbqx3.png" alt="NIKSGLOBAL CAPITAL">
         </div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a> <a href="index.html#events">Global Exhibitions</a>
-            <a href="search.html">Properties</a>
-            <a href="index.html#events" class="btn-create">Request VIP Pass</a>
-        </nav>
-    </header>
+        <span>Niksglobal Capital</span>
+    </div>
 
-    <section class="hero">
-        <h1 class="animate-on-scroll">Discover India's Finest Real Estate</h1>
-        <p class="animate-on-scroll" style="transition-delay: 0.1s;">The ultimate property showcase connecting NRIs with India's most prestigious developers.</p>
+    <div class="map-bg"></div>
+
+    <div class="split-container">
         
-        <div class="search-bar animate-on-scroll" style="transition-delay: 0.2s;">
-            <div class="search-input-group">
-                <label>Location</label>
-                <select class="search-input" id="homeLocation">
-                    <option value="">All Cities</option>
-                    <option value="mumbai">Mumbai</option>
-                    <option value="delhi">Delhi NCR</option>
-                    <option value="hyderabad">Hyderabad</option>
-                    <option value="bangalore">Bangalore</option>
-                    <option value="pune">Pune</option>
-                </select>
-            </div>
-            <div class="search-input-group">
-                <label>Property Type</label>
-                <select class="search-input" id="homeType">
-                    <option value="">All Types</option>
-                    <option value="apartment">Residential Apartment</option>
-                    <option value="villa">Villa / Independent House</option>
-                    <option value="commercial">Commercial Space</option>
-                </select>
-            </div>
-            
-            <button type="button" class="search-btn" onclick="goToSearch()">
-                <i class="fa-solid fa-magnifying-glass" style="margin-right: 8px;"></i> Search Properties
-            </button>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="section-header animate-on-scroll">
-            <h2>Why Invest Through Us</h2>
-            <p>Your trusted bridge to premium Indian real estate investments.</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-box animate-on-scroll">
-                <div class="feature-icon"><i class="fa-regular fa-gem"></i></div>
-                <h3>Curated Premium Portfolios</h3>
-                <p>We handpick exclusive, high-yield luxury properties from India's most reputed developers, tailored specifically for discerning NRI investors.</p>
-            </div>
-            <div class="feature-box animate-on-scroll" style="transition-delay: 0.1s;">
-                <div class="feature-icon"><i class="fa-solid fa-handshake-simple"></i></div>
-                <h3>Direct Face-to-Face Access</h3>
-                <p>Bypass brokers and middlemen. Meet directly with builders at our global showcases to discuss projects, negotiate terms, and secure special pricing.</p>
-            </div>
-            <div class="feature-box animate-on-scroll" style="transition-delay: 0.2s;">
-                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <h3>Secure & Transparent</h3>
-                <p>With over two decades of expertise, we provide a credible platform that ensures transparent transactions and secure investments.</p>
+        <div class="side investor-side" id="leftSide" onclick="takeOver('left', 'investor.html')">
+            <div class="content">
+                <h2>Investor</h2>
+                <p>Discover Premium Assets</p>
             </div>
         </div>
-    </section>
 
-    <section id="events" class="section">
-        <div class="section-header animate-on-scroll">
-            <h2>2026 Global Exhibitions Roadmap</h2>
-            <p>Select your region to view event details and request a VIP invitation.</p>
-        </div>
-        
-        <div class="grid">
-            <div class="hz-card animate-on-scroll">
-                <div class="card-img-wrap">
-                    <span class="badge badge-europe">Europe Tour</span>
-                    <span class="badge badge-status">Registering</span>
-                    <img src="https://res.cloudinary.com/dozcviag7/image/upload/v1773765891/Munich_yp3rnk.jpg" alt="Munich" onerror="this.src='https://via.placeholder.com/800x600/1e1e23/ffffff?text=Munich'">
-                </div>
-                <div class="card-body">
-                    <span class="country-label">Germany</span>
-                    <h3 class="card-title">Munich Showcase</h3>
-                    <div class="card-address"><i class="fa-solid fa-map-pin"></i> <span>Hotel NH Collection Arnulfstraße 2, Munich </span></div>
-                </div>
-                <div class="card-footer">
-                    <div class="footer-item"><i class="fa-regular fa-calendar-check"></i> April 25-26, 2026 </div>
-                    <button class="btn-inquire" onclick="window.location.href='event-detail.html?id=munich'">Know More</button>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll" style="transition-delay: 0.1s;">
-                <div class="card-img-wrap">
-                    <span class="badge badge-europe">Europe Tour</span>
-                    <span class="badge badge-status">Registering</span>
-                    <img src="https://images.unsplash.com/photo-1587330979470-3595ac045ab0?auto=format&fit=crop&w=800&q=80" alt="Frankfurt" onerror="this.src='https://via.placeholder.com/800x600/1e1e23/ffffff?text=Frankfurt'">
-                </div>
-                <div class="card-body">
-                    <span class="country-label">Germany</span>
-                    <h3 class="card-title">Frankfurt Real Estate Expo</h3>
-                    <div class="card-address"><i class="fa-solid fa-map-pin"></i> <span>Hotel NH Collection Güterplatz 1, Frankfurt</span></div>
-                </div>
-                <div class="card-footer">
-                    <div class="footer-item"><i class="fa-regular fa-calendar-check"></i> April 26, 2026 </div>
-                    <button class="btn-inquire" onclick="window.location.href='event-detail.html?id=frankfurt'">Know More</button>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll" style="transition-delay: 0.2s;">
-                <div class="card-img-wrap">
-                    <span class="badge badge-americas">USA Tour</span>
-                    <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=800&q=80" alt="USA">
-                </div>
-                <div class="card-body">
-                    <span class="country-label">United States</span>
-                    <h3 class="card-title">USA Spring Exhibitions</h3>
-                    <div class="card-address"><i class="fa-solid fa-map-pin"></i> <span>Multiple Premium Venues (TBA)</span></div>
-                </div>
-                <div class="card-footer">
-                    <div class="footer-item"><i class="fa-regular fa-calendar-check"></i> May 09-17, 2026 </div>
-                    <button class="btn-inquire" onclick="window.location.href='event-detail.html?id=usa-spring'">Know More</button>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll">
-                <div class="card-img-wrap">
-                    <span class="badge badge-asia">Asia Tour</span>
-                    <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" alt="Tokyo">
-                </div>
-                <div class="card-body">
-                    <span class="country-label">Japan</span>
-                    <h3 class="card-title">Tokyo NRI Investment Summit</h3>
-                    <div class="card-address"><i class="fa-solid fa-map-pin"></i> <span>Hotel New Otani Tokyo </span></div>
-                </div>
-                <div class="card-footer">
-                    <div class="footer-item"><i class="fa-regular fa-calendar-check"></i> May 23-24, 2026 </div>
-                    <button class="btn-inquire" onclick="window.location.href='event-detail.html?id=tokyo'">Know More</button>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll" style="transition-delay: 0.1s;">
-                <div class="card-img-wrap">
-                    <span class="badge badge-middle-east">Middle East</span>
-                    <img src="https://images.unsplash.com/photo-1580418827493-f2b22c0a76cb?auto=format&fit=crop&w=800&q=80" alt="Saudi Arabia">
-                </div>
-                <div class="card-body">
-                    <span class="country-label">Saudi Arabia</span>
-                    <h3 class="card-title">Saudi Arabia Expo</h3>
-                    <div class="card-address"><i class="fa-solid fa-map-pin"></i> <span>Premium Venue (TBA)</span></div>
-                </div>
-                <div class="card-footer">
-                    <div class="footer-item"><i class="fa-regular fa-calendar-check"></i> June 06-07, 2026 </div>
-                    <button class="btn-inquire" onclick="window.location.href='event-detail.html?id=saudi'">Know More</button>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll" style="transition-delay: 0.2s;">
-                <div class="card-img-wrap">
-                    <span class="badge badge-africa">Africa Tour</span>
-                    <img src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?auto=format&fit=crop&w=800&q=80" alt="Africa">
-                </div>
-                <div class="card-body">
-                    <span class="country-label">Africa</span>
-                    <h3 class="card-title">Africa Investor Summit</h3>
-                    <div class="card-address"><i class="fa-solid fa-map-pin"></i> <span>Premium Venue (TBA)</span></div>
-                </div>
-                <div class="card-footer">
-                    <div class="footer-item"><i class="fa-regular fa-calendar-check"></i> August, 2026 </div>
-                    <button class="btn-inquire" onclick="window.location.href='event-detail.html?id=africa'">Know More</button>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll">
-                <div class="card-img-wrap">
-                    <span class="badge badge-americas">USA Tour</span>
-                    <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=800&q=80" alt="USA">
-                </div>
-                <div class="card-body">
-                    <span class="country-label">United States</span>
-                    <h3 class="card-title">USA Fall Exhibitions</h3>
-                    <div class="card-address"><i class="fa-solid fa-map-pin"></i> <span>Multiple Venues (TBA)</span></div>
-                </div>
-                <div class="card-footer">
-                    <div class="footer-item"><i class="fa-regular fa-calendar-check"></i> September, 2026 </div>
-                    <button class="btn-inquire" onclick="window.location.href='event-detail.html?id=usa-fall'">Know More</button>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll" style="transition-delay: 0.1s;">
-                <div class="card-img-wrap">
-                    <span class="badge badge-europe">Europe Tour</span>
-                    <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80" alt="Europe">
-                </div>
-                <div class="card-body">
-                    <span class="country-label">Europe</span>
-                    <h3 class="card-title">Europe NRI Showcase</h3>
-                    <div class="card-address"><i class="fa-solid fa-map-pin"></i> <span>Premium Venue (TBA)</span></div>
-                </div>
-                <div class="card-footer">
-                    <div class="footer-item"><i class="fa-regular fa-calendar-check"></i> October, 2026 </div>
-                    <button class="btn-inquire" onclick="window.location.href='event-detail.html?id=europe'">Know More</button>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll" style="transition-delay: 0.2s;">
-                <div class="card-img-wrap">
-                    <span class="badge badge-europe">Europe Tour</span>
-                    <img src="https://images.unsplash.com/photo-1513635269975-59693e0cd1ce?auto=format&fit=crop&w=800&q=80" alt="London">
-                </div>
-                <div class="card-body">
-                    <span class="country-label">United Kingdom</span>
-                    <h3 class="card-title">London Investment Expo</h3>
-                    <div class="card-address"><i class="fa-solid fa-map-pin"></i> <span>Premium Venue (TBA)</span></div>
-                </div>
-                <div class="card-footer">
-                    <div class="footer-item"><i class="fa-regular fa-calendar-check"></i> November, 2026 </div>
-                   <button class="btn-inquire" onclick="window.location.href='event-detail.html?id=london'">Know More</button>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll">
-                <div class="card-img-wrap">
-                    <span class="badge badge-middle-east">Middle East</span>
-                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80" alt="Dubai">
-                </div>
-                <div class="card-body">
-                    <span class="country-label">United Arab Emirates</span>
-                    <h3 class="card-title">Dubai Real Estate Summit</h3>
-                    <div class="card-address"><i class="fa-solid fa-map-pin"></i> <span>Premium Venue (TBA)</span></div>
-                </div>
-                <div class="card-footer">
-                    <div class="footer-item"><i class="fa-regular fa-calendar-check"></i> December, 2026 </div>
-                    <button class="btn-inquire" onclick="window.location.href='event-detail.html?id=dubai'">Know More</button>
-                </div>
+        <div class="side developer-side" id="rightSide" onclick="takeOver('right', 'developer.html')">
+            <div class="content">
+                <h2>Developer</h2>
+                <p>Global Partnerships</p>
             </div>
         </div>
-    </section>
 
-<section class="developer-cta">
-        <div class="glass-banner animate-on-scroll">
-            <div class="banner-content">
-                <span class="banner-tag">Developer Relations</span>
-                <h2>Expand Your Global Sales Footprint</h2>
-                <p>Present your projects directly to the world's most affluent NRI investors. Partner with NIKSGLOBAL to secure exclusive slots at our upcoming international exhibitions.</p>
-                <a href="partner-with-us.html" class="partner-btn">APPLY FOR PARTNERSHIP</a>
+        <div class="yin-yang-wrapper">
+            <div class="portal-circle" id="yyElement">
+                <img src="https://res.cloudinary.com/dozcviag7/image/upload/v1774254405/Yin-Yaang_1_wxgds4.png" alt="Yin Yang Portal" class="yin-yang-image">
             </div>
         </div>
-    </section>
 
-   <footer id="contact">
-        <div class="footer-wrap">
-            <div class="footer-widget brand-widget">
-                <img src="logo.png" alt="NIKSGLOBAL Logo" class="footer-logo">
-                <p>NIKSGLOBAL CAPITAL LLC is a premier cross-border real estate advisory, dedicated to connecting the Indian diaspora with exclusive, high-yield luxury assets across India.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-x"></i></a>
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-widget">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="index.html">Home</a></li>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="about.html">About Us</a></li>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="search.html">Property Portfolio</a></li>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="index.html#events">Global Exhibitions</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-widget">
-                <h3>Global Headquarters</h3>
-                <ul class="contact-info">
-                    <li>
-                        <i class="fa-solid fa-location-dot" style="color: var(--hz-primary);"></i> 
-                        <span>30 N GOULD ST Ste R<br>Sheridan, WY 82801, USA</span>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-phone" style="color: var(--hz-primary);"></i> 
-                        <span>+91 91525 65195</span>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-envelope" style="color: var(--hz-primary);"></i> 
-                        <span>contact@niksglobalcapital.com</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="footer-widget">
-                <h3>Support & Legal</h3>
-                <ul>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="privacy-policy.html">Privacy Policy</a></li>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="terms-of-service.html">Terms of Service</a></li>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="partner-with-us.html">For Developers</a></li>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="faq.html">Help & FAQs</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2026 NIKSGLOBAL CAPITAL LLC. All Rights Reserved. 
-               <span class="legal-disclaimer">Disclaimer: The Indian Property Show is an independent advisory and marketing platform. Property details and pricing are subject to developer terms and market fluctuations.</span>
-            </p>
-        </div>
-    </footer>
-
-    <div class="floating-contact-bar">
-        <a href="https://wa.me/919152565195?text=Hi%20NIKSGLOBAL%2C%20I%20am%20interested%20in%20Indian%20Real%20Estate%20opportunities." target="_blank" class="float-btn float-wa">
-            <i class="fa-brands fa-whatsapp"></i> <span>WhatsApp</span>
-        </a>
-        <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.1);"></div>
-        <a href="tel:+919152565195" class="float-btn float-call">
-            <i class="fa-solid fa-phone"></i> <span>Global Desk</span>
-        </a>
     </div>
 
     <script>
-        // Redirect Logic: From Home to Search
-        function goToSearch() {
-            const loc = document.getElementById('homeLocation').value;
-            const type = document.getElementById('homeType').value;
-            window.location.href = `search.html?location=${loc}&type=${type}`;
+        const leftSide = document.getElementById('leftSide');
+        const rightSide = document.getElementById('rightSide');
+        const yyElement = document.getElementById('yyElement');
+        const brandHeader = document.querySelector('.brand-header');
+
+        function updateMousePosition(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            this.style.setProperty('--mouse-x', `${x}px`);
+            this.style.setProperty('--mouse-y', `${y}px`);
         }
 
-        // Smooth Staggered Scroll Animations (Plays once)
-        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
+        leftSide.addEventListener('mousemove', updateMousePosition);
+        rightSide.addEventListener('mousemove', updateMousePosition);
 
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
+        leftSide.addEventListener('mouseenter', () => {
+            if(!yyElement.classList.contains('spin-action')) {
+                yyElement.style.transform = 'rotate(-25deg) scale(1.15)';
+            }
         });
+        leftSide.addEventListener('mouseleave', () => {
+            if(!yyElement.classList.contains('spin-action')) {
+                yyElement.style.transform = 'rotate(0deg) scale(1)';
+            }
+        });
+
+        rightSide.addEventListener('mouseenter', () => {
+            if(!yyElement.classList.contains('spin-action')) {
+                yyElement.style.transform = 'rotate(25deg) scale(1.15)';
+            }
+        });
+        rightSide.addEventListener('mouseleave', () => {
+            if(!yyElement.classList.contains('spin-action')) {
+                yyElement.style.transform = 'rotate(0deg) scale(1)';
+            }
+        });
+
+        function takeOver(side, url) {
+            // Spin and shrink the center element
+            yyElement.classList.add('spin-action');
+            
+            // Fade out the logo cleanly
+            brandHeader.style.transition = "opacity 0.4s ease";
+            brandHeader.style.opacity = "0";
+
+            // Trigger the expansion dive animation
+            if(side === 'left') {
+                leftSide.classList.add('takeover');
+                rightSide.classList.add('shrink');
+            } else {
+                rightSide.classList.add('takeover');
+                leftSide.classList.add('shrink');
+            }
+
+            // Route to the exact portal after animation peak
+            setTimeout(() => {
+                window.location.href = url;
+            }, 900); // perfectly synced with 1s CSS ease
+        }
     </script>
+
 </body>
 </html>

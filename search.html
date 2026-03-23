@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results | The Indian Property Show</title>
+    <title>Search Results | NIKSGLOBAL CAPITAL</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -40,6 +40,7 @@
             z-index: -1;
         }
 
+        /* --- CUSTOM SCROLLBAR --- */
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
@@ -55,8 +56,35 @@
             position: fixed; width: 100%; top: 0; z-index: 1000; box-sizing: border-box;
             border-bottom: 1px solid var(--glass-border); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
-        .logo img { height: 50px; transition: transform 0.3s ease; }
-        .logo img:hover { transform: scale(1.05); }
+
+        /* --- PREMIUM TRUE GLASS LOGO WITH GLOW --- */
+        .premium-logo {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15); 
+            padding: 8px 20px; 
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(10, 132, 255, 0.15), 0 10px 30px rgba(0, 0, 0, 0.4);
+            text-decoration: none;
+        }
+        .premium-logo img {
+            height: 40px; 
+            display: block;
+            background: transparent !important; 
+            padding: 0 !important;
+        }
+        .premium-logo:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.1); 
+            border-color: var(--hz-primary); 
+            box-shadow: 0 0 25px rgba(10, 132, 255, 0.6), 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+
         nav { display: flex; gap: 30px; align-items: center; }
         nav a { color: var(--hz-text-main); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.3s; }
         nav a:hover { color: var(--hz-primary); }
@@ -84,7 +112,6 @@
             background-color: rgba(0,0,0,0.3); transition: all 0.3s ease; cursor: pointer;
         }
         .search-input option { background-color: #1e1e23; color: #fff; }
-        .search-input:hover { border-color: rgba(255,255,255,0.4); }
         .search-input:focus { outline: none; background-color: rgba(0,0,0,0.5); border-color: var(--hz-primary); box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.25); }
         
         .search-btn {
@@ -108,7 +135,6 @@
         .main-content { padding: 0 5% 80px; max-width: 1300px; margin: 0 auto; position: relative; z-index: 2; min-height: 400px;}
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         
-        /* NO RESULTS MESSAGE */
         .no-results { display: none; width: 100%; grid-column: 1 / -1; text-align: center; padding: 50px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; }
         .no-results i { font-size: 3rem; color: var(--hz-text-muted); margin-bottom: 20px; }
         
@@ -148,17 +174,13 @@
         }
         .btn-inquire:hover { background: var(--hz-primary); color: #fff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(10,132,255,0.3); border-color: var(--hz-primary);}
 
-       /* --- PREMIUM PROFESSIONAL FOOTER --- */
+        /* --- PREMIUM PROFESSIONAL FOOTER --- */
         footer { margin-top: 80px; background: rgba(10, 10, 12, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); color: #a1a1a6; padding: 80px 5% 30px; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 2; }
         .footer-wrap { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
-        
-        .footer-logo { height: 45px; margin-bottom: 20px; background: rgba(255,255,255,0.9); padding: 8px 12px; border-radius: 8px; }
         .brand-widget p { line-height: 1.7; margin-bottom: 25px; font-size: 0.95rem;}
-        
         .social-links { display: flex; gap: 15px; }
         .social-links a { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; justify-content: center; align-items: center; color: #fff; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); text-decoration: none;}
         .social-links a:hover { background: var(--hz-primary); border-color: var(--hz-primary); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(10, 132, 255, 0.4); }
-        
         .footer-widget h3 { color: #ffffff; font-size: 1.1rem; margin-bottom: 25px; font-weight: 600; letter-spacing: 0.5px; }
         .footer-widget ul { list-style: none; padding: 0; margin: 0; }
         .footer-widget li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 12px; transition: transform 0.3s; line-height: 1.5;}
@@ -166,12 +188,8 @@
         .footer-widget ul:not(.contact-info) li:hover { transform: translateX(5px); }
         .footer-widget a { color: #a1a1a6; text-decoration: none; transition: color 0.3s; }
         .footer-widget a:hover { color: var(--hz-primary); }
-        
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 60px; padding-top: 25px; text-align: center; color: #666; }
         .legal-disclaimer { font-size: 0.8rem; opacity: 0.6; margin-top: 8px; display: block; }
-
-        @media (max-width: 1024px) { .footer-wrap { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 768px) { .footer-wrap { grid-template-columns: 1fr; gap: 40px;} }
 
         @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } .footer-wrap { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 768px) {
@@ -185,12 +203,14 @@
 
     <header>
         <div class="logo">
-            <a href="index.html"><img src="logo.png" alt="The Indian Property Show" style="background: rgba(255,255,255,0.9); padding: 5px; border-radius: 8px;"></a>
+            <a href="index.html" class="premium-logo">
+                <img src="https://res.cloudinary.com/dozcviag7/image/upload/v1774248121/NiksGlobal_Capital-01_dzbqx3.png" alt="NIKSGLOBAL CAPITAL">
+            </a>
         </div>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="index.html#events">Global Exhibitions</a>
-            <a href="index.html#events" class="btn-create">Request VIP Pass</a>
+            <a href="investor.html">Home</a>
+            <a href="investor.html#events">Global Exhibitions</a>
+            <a href="investor.html#events" class="btn-create">Request VIP Pass</a>
         </nav>
     </header>
 
@@ -342,7 +362,9 @@
     <footer id="contact">
         <div class="footer-wrap">
             <div class="footer-widget brand-widget">
-                <img src="logo.png" alt="NIKSGLOBAL Logo" class="footer-logo">
+                <a href="index.html" class="premium-logo" style="margin-bottom: 20px;">
+                    <img src="https://res.cloudinary.com/dozcviag7/image/upload/v1774248121/NiksGlobal_Capital-01_dzbqx3.png" alt="NIKSGLOBAL CAPITAL">
+                </a>
                 <p>NIKSGLOBAL CAPITAL LLC is a premier cross-border real estate advisory, dedicated to connecting the Indian diaspora with exclusive, high-yield luxury assets across India.</p>
                 <div class="social-links">
                     <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -355,10 +377,10 @@
             <div class="footer-widget">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="index.html">Home</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="investor.html">Home</a></li>
                     <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="about.html">About Us</a></li>
                     <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="search.html">Property Portfolio</a></li>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="index.html#events">Global Exhibitions</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="investor.html#events">Global Exhibitions</a></li>
                 </ul>
             </div>
 
@@ -423,7 +445,6 @@
                 }
             });
 
-            // Update Text Labels
             const titleElem = document.getElementById('resultsTitle');
             const countElem = document.getElementById('resultsCount');
             const locationText = document.getElementById('filterLocation').options[document.getElementById('filterLocation').selectedIndex].text;
@@ -438,7 +459,6 @@
             countElem.innerText = `Showing ${visibleCount} exclusive properties from top-tier developers.`;
             document.getElementById('noResultsMsg').style.display = (visibleCount === 0) ? 'block' : 'none';
 
-            // Sorting Logic
             const grid = document.getElementById('propertyGrid');
             const visibleCards = cards.filter(card => card.style.display !== 'none');
             
@@ -453,21 +473,17 @@
             visibleCards.forEach(card => grid.appendChild(card));
         }
 
-        // 2. THE "BRAIN" THAT READS THE HOME PAGE SELECTION
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const locParam = urlParams.get('location');
             const typeParam = urlParams.get('type');
 
-            // Apply the values from the home page to the search page dropdowns
             if (locParam !== null) document.getElementById('filterLocation').value = locParam;
             if (typeParam !== null) document.getElementById('filterType').value = typeParam;
 
-            // Run the filters immediately
             runSearchFilters();
         });
 
-        // 3. LISTENERS FOR CHANGES ON THE SEARCH PAGE
         document.getElementById('filterLocation').addEventListener('change', runSearchFilters);
         document.getElementById('filterType').addEventListener('change', runSearchFilters);
         document.getElementById('sortFilter').addEventListener('change', runSearchFilters);

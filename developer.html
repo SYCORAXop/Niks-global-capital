@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Partnerships | NIKSGLOBAL CAPITAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- DEVELOPER THEME VARIABLES (DEEP ROYAL BLUE) --- */
+        :root {
+            --hz-primary: #0055ff; 
+            --hz-primary-hover: #0044cc;
+            --hz-text-main: #ffffff; 
+            --hz-text-muted: #a1a1a6; 
+            --glass-bg: rgba(20, 25, 40, 0.65); 
+            --glass-bg-hover: rgba(25, 35, 60, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.15); 
+            --glass-border-hover: rgba(0, 85, 255, 0.5);
+            --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --glass-shadow-hover: 0 20px 40px rgba(0, 85, 255, 0.2);
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        body, html { margin: 0; padding: 0; font-family: var(--font-sans); color: var(--hz-text-main); scroll-behavior: smooth; overflow-x: hidden; }
+
+        /* --- CORPORATE AMBIENT BACKGROUND --- */
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80') center/cover;
+            z-index: -2;
+        }
+        body::after {
+            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(135deg, rgba(5, 10, 20, 0.96), rgba(0, 20, 50, 0.88)); 
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: -1;
+        }
+
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* --- HEADER --- */
+        header {
+            background-color: rgba(15, 20, 30, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border);
+            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
+            position: fixed; width: 100%; top: 0; z-index: 1000; box-sizing: border-box;
+        }
+
+        .premium-logo {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.15); 
+            padding: 8px 20px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease; box-shadow: 0 0 15px rgba(0, 85, 255, 0.15), 0 10px 30px rgba(0, 0, 0, 0.4); text-decoration: none;
+        }
+        .premium-logo img { height: 40px; display: block; background: transparent !important; }
+
+        nav { display: flex; gap: 30px; align-items: center; }
+        nav a { color: var(--hz-text-main); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.3s; }
+        nav a:hover { color: var(--hz-primary); }
+        .btn-create { background-color: var(--hz-primary); color: #ffffff !important; padding: 10px 24px; border-radius: 50px; font-weight: 600; border: 1px solid rgba(255,255,255,0.2); transition: 0.3s; }
+
+        /* --- B2B HERO SECTION --- */
+        .hero { height: 85vh; padding: 0 5%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .hero-tag { color: var(--hz-primary); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 20px; display: block; }
+        .hero h1 { font-size: 4.5rem; font-weight: 700; margin-bottom: 20px; letter-spacing: -1.5px; line-height: 1.1; max-width: 1000px; }
+        .hero p { font-size: 1.3rem; margin-bottom: 40px; font-weight: 400; max-width: 800px; color: var(--hz-text-muted); line-height: 1.6; }
+        
+        .hero-btns { display: flex; gap: 20px; }
+        .btn-primary { background: var(--hz-primary); color: white; padding: 18px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: 0.3s; box-shadow: 0 10px 30px rgba(0, 85, 255, 0.3); }
+        .btn-primary:hover { background: var(--hz-primary-hover); transform: translateY(-3px); }
+        .btn-secondary { background: rgba(255,255,255,0.05); color: white; padding: 18px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; border: 1px solid var(--glass-border); transition: 0.3s; }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+        /* --- THE VALUE PROPOSITION SECTION --- */
+        .value-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 80px; }
+        .value-item { background: var(--glass-bg); padding: 30px; border-radius: 20px; border: 1px solid var(--glass-border); text-align: left; }
+        .value-item i { color: var(--hz-primary); font-size: 2rem; margin-bottom: 15px; display: block;}
+        .value-item h4 { font-size: 1.2rem; margin: 0 0 10px; }
+        .value-item p { color: var(--hz-text-muted); font-size: 0.9rem; margin: 0; line-height: 1.5; }
+
+        /* --- SECTIONS --- */
+        .section { padding: 100px 5%; max-width: 1300px; margin: 0 auto; }
+        .section-header { margin-bottom: 60px; text-align: center; }
+        .section-header h2 { font-size: 3rem; margin: 0 0 15px; font-weight: 700; letter-spacing: -1px; }
+
+        /* --- EVENT GRID --- */
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; }
+        .hz-card { border-radius: 24px; overflow: hidden; position: relative; background: var(--glass-bg); border: 1px solid var(--glass-border); transition: 0.3s; display: flex; flex-direction: column;}
+        .hz-card:hover { transform: translateY(-10px); border-color: var(--hz-primary); box-shadow: var(--glass-shadow-hover); }
+        .card-img-wrap { position: relative; height: 220px; overflow: hidden; }
+        .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: 0.5s; }
+        .hz-card:hover .card-img-wrap img { opacity: 1; transform: scale(1.05); }
+        
+        .badge-status { position: absolute; top: 15px; right: 15px; background: #2ecc71; color: white; padding: 6px 12px; border-radius: 8px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; z-index: 5;}
+        .badge-limited { background: #e67e22; }
+        .badge-full { background: #e74c3c; }
+
+        .card-body { padding: 25px; flex-grow: 1;}
+        .card-title { font-size: 1.2rem; font-weight: 700; margin: 0 0 10px; }
+        .card-info { color: var(--hz-text-muted); font-size: 0.9rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .card-info i { color: var(--hz-primary); min-width: 15px;}
+
+        .btn-booth { display: block; text-align: center; background: transparent; border: 1px solid var(--hz-primary); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; transition: 0.3s; margin-top: auto;}
+        .btn-booth:hover { background: var(--hz-primary); }
+
+        /* --- PARTNER SECTION --- */
+        .partner-section { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; background: rgba(0,0,0,0.3); padding: 100px 8%; border-radius: 40px; margin-top: 50px; border: 1px solid rgba(255,255,255,0.05); }
+        .partner-form-box { background: var(--glass-bg); padding: 50px; border-radius: 30px; border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); }
+        .b2b-form { display: flex; flex-direction: column; gap: 20px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .b2b-form input, .b2b-form select, .b2b-form textarea { padding: 18px; border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; background: rgba(0,0,0,0.4); color: white; font-family: var(--font-sans); outline: none; transition: 0.3s; }
+        .submit-btn-full { background: var(--hz-primary); color: white; padding: 20px; border-radius: 15px; border: none; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+
+        @media (max-width: 1024px) { .grid, .value-grid { grid-template-columns: repeat(2, 1fr); } .partner-section { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 3rem; } .grid, .value-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html" class="premium-logo">
+                <img src="https://res.cloudinary.com/dozcviag7/image/upload/v1774248121/NiksGlobal_Capital-01_dzbqx3.png" alt="NIKSGLOBAL CAPITAL">
+            </a>
+        </div>
+        <nav>
+            <a href="developer.html">Developer Portal</a>
+            <a href="about.html">Our Track Record</a> 
+            <a href="#events">Upcoming Exhibitions</a>
+            <a href="#apply" class="btn-create">Partner With Us</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="hero-tag animate-on-scroll">Global Sales Accelerator</span>
+        <h1 class="animate-on-scroll" style="transition-delay: 0.1s;">Move your inventory to the global NRI market.</h1>
+        <p class="animate-on-scroll" style="transition-delay: 0.2s;">Stop competing for the same local leads. We place your Tier-1 projects directly in front of vetted HNWIs in London, Munich, Dubai, and the USA through our high-conversion International Property Shows.</p>
+        <div class="hero-btns animate-on-scroll" style="transition-delay: 0.3s;">
+            <a href="#apply" class="btn-primary">Become an Exhibition Partner</a>
+            <a href="#events" class="btn-secondary">View 2026 Roadmap</a>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="value-grid">
+            <div class="value-item animate-on-scroll">
+                <i class="fa-solid fa-users-viewfinder"></i>
+                <h4>Pre-Qualified HNWIs</h4>
+                <p>Our database consists of 10,000+ active NRI investors looking for safe Grade-A assets.</p>
+            </div>
+            <div class="value-item animate-on-scroll" style="transition-delay: 0.1s;">
+                <i class="fa-solid fa-handshake-angle"></i>
+                <h4>Zero Middlemen</h4>
+                <p>Sit face-to-face with investors. We provide the platform; you control the negotiation and closing.</p>
+            </div>
+            <div class="value-item animate-on-scroll" style="transition-delay: 0.2s;">
+                <i class="fa-solid fa-earth-americas"></i>
+                <h4>Global Logistics</h4>
+                <p>From 5-star venue booking to localized international marketing—we handle the heavy lifting.</p>
+            </div>
+            <div class="value-item animate-on-scroll" style="transition-delay: 0.3s;">
+                <i class="fa-solid fa-chart-line"></i>
+                <h4>Massive Liquidity</h4>
+                <p>Tap into the highest-remitting diaspora. Secure faster sales cycles and larger bookings.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="events" class="section">
+        <div class="section-header animate-on-scroll">
+            <h2>2026 Full Roadmap</h2>
+            <p>Select your target region to request developer placement.</p>
+        </div>
+        <div class="grid">
+            <div class="hz-card animate-on-scroll">
+                <div class="card-img-wrap">
+                    <span class="badge-status">5 Slots Left</span>
+                    <img src="https://res.cloudinary.com/dozcviag7/image/upload/v1773765891/Munich_yp3rnk.jpg" alt="Munich">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Munich NRI Showcase</h3>
+                    <div class="card-info"><i class="fa-solid fa-calendar"></i> April 25-26, 2026</div>
+                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> NH Collection, Munich</div>
+                    <a href="#apply" class="btn-booth" onclick="prefillRegion('Munich Showcase')">Book Slot</a>
+                </div>
+            </div>
+
+            <div class="hz-card animate-on-scroll">
+                <div class="card-img-wrap">
+                    <span class="badge-status">3 Slots Left</span>
+                    <img src="https://images.unsplash.com/photo-1587330979470-3595ac045ab0" alt="Frankfurt">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Frankfurt Real Estate Expo</h3>
+                    <div class="card-info"><i class="fa-solid fa-calendar"></i> April 26, 2026</div>
+                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> NH Collection, Frankfurt</div>
+                    <a href="#apply" class="btn-booth" onclick="prefillRegion('Frankfurt Expo')">Book Slot</a>
+                </div>
+            </div>
+
+            <div class="hz-card animate-on-scroll">
+                <div class="card-img-wrap">
+                    <span class="badge-status badge-limited">Last 2 Slots</span>
+                    <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9" alt="USA">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">USA Spring Exhibitions</h3>
+                    <div class="card-info"><i class="fa-solid fa-calendar"></i> May 09-17, 2026</div>
+                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> Multiple Cities, USA</div>
+                    <a href="#apply" class="btn-booth" onclick="prefillRegion('USA Spring')">Book Slot</a>
+                </div>
+            </div>
+
+            <div class="hz-card animate-on-scroll">
+                <div class="card-img-wrap">
+                    <span class="badge-status">Available</span>
+                    <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf" alt="Tokyo">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Tokyo Investment Summit</h3>
+                    <div class="card-info"><i class="fa-solid fa-calendar"></i> May 23-24, 2026</div>
+                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> New Otani, Tokyo</div>
+                    <a href="#apply" class="btn-booth" onclick="prefillRegion('Tokyo Summit')">Book Slot</a>
+                </div>
+            </div>
+
+            <div class="hz-card animate-on-scroll">
+                <div class="card-img-wrap">
+                    <span class="badge-status badge-limited">Closing Soon</span>
+                    <img src="https://images.unsplash.com/photo-1580418827493-f2b22c0a76cb" alt="Saudi Arabia">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Saudi Arabia Expo</h3>
+                    <div class="card-info"><i class="fa-solid fa-calendar"></i> June 06-07, 2026</div>
+                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> Premium Venue, Riyadh</div>
+                    <a href="#apply" class="btn-booth" onclick="prefillRegion('Saudi Expo')">Book Slot</a>
+                </div>
+            </div>
+
+            <div class="hz-card animate-on-scroll">
+                <div class="card-img-wrap">
+                    <span class="badge-status">Available</span>
+                    <img src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99" alt="Africa">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Africa Investor Summit</h3>
+                    <div class="card-info"><i class="fa-solid fa-calendar"></i> August, 2026</div>
+                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> Nairobi / Lagos</div>
+                    <a href="#apply" class="btn-booth" onclick="prefillRegion('Africa Summit')">Book Slot</a>
+                </div>
+            </div>
+
+            <div class="hz-card animate-on-scroll">
+                <div class="card-img-wrap">
+                    <span class="badge-status">Opening Soon</span>
+                    <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856" alt="USA">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">USA Fall Exhibitions</h3>
+                    <div class="card-info"><i class="fa-solid fa-calendar"></i> September, 2026</div>
+                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> East Coast Cities, USA</div>
+                    <a href="#apply" class="btn-booth" onclick="prefillRegion('USA Fall')">Pre-Book Slot</a>
+                </div>
+            </div>
+
+            <div class="hz-card animate-on-scroll">
+                <div class="card-img-wrap">
+                    <span class="badge-status">Available</span>
+                    <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a" alt="Europe">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Europe NRI Showcase</h3>
+                    <div class="card-info"><i class="fa-solid fa-calendar"></i> October, 2026</div>
+                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> Berlin / Paris / Zurich</div>
+                    <a href="#apply" class="btn-booth" onclick="prefillRegion('Europe Fall')">Book Slot</a>
+                </div>
+            </div>
+
+            <div class="hz-card animate-on-scroll">
+                <div class="card-img-wrap">
+                    <span class="badge-status badge-limited">Elite Slots Only</span>
+                    <img src="https://images.unsplash.com/photo-1513635269975-59693e0cd1ce" alt="London">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">London Investment Expo</h3>
+                    <div class="card-info"><i class="fa-solid fa-calendar"></i> November, 2026</div>
+                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> Mayfair, London</div>
+                    <a href="#apply" class="btn-booth" onclick="prefillRegion('London Expo')">Book Slot</a>
+                </div>
+            </div>
+
+            <div class="hz-card animate-on-scroll">
+                <div class="card-img-wrap">
+                    <span class="badge-status badge-limited">Last 1 Slot</span>
+                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c" alt="Dubai">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Dubai Real Estate Summit</h3>
+                    <div class="card-info"><i class="fa-solid fa-calendar"></i> December, 2026</div>
+                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> Business Bay, Dubai</div>
+                    <a href="#apply" class="btn-booth" onclick="prefillRegion('Dubai Summit')">Book Slot</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="apply" class="section">
+        <div class="partner-section">
+            <div class="partner-text animate-on-scroll">
+                <h2>Scale your sales globally.</h2>
+                <p>We are the international marketing arm for India's elite developers. Join our portfolio and let our team manage your global exhibition presence from end-to-end.</p>
+                <div style="margin-top: 40px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                        <i class="fa-solid fa-circle-check" style="color: #2ecc71; font-size: 1.5rem;"></i>
+                        <span>Guaranteed face-to-face HNWI meetings.</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                        <i class="fa-solid fa-circle-check" style="color: #2ecc71; font-size: 1.5rem;"></i>
+                        <span>Professional on-ground logistics support.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="partner-form-box animate-on-scroll">
+                <form class="b2b-form" onsubmit="submitDeveloperLead(event)">
+                    <div class="form-row">
+                        <input type="text" id="devCompany" placeholder="Developer Name" required>
+                        <input type="text" id="devContact" placeholder="Contact Person" required>
+                    </div>
+                    <input type="email" id="devEmail" placeholder="Corporate Email ID" required>
+                    <input type="tel" id="devPhone" placeholder="WhatsApp Number" required>
+                    <select id="devTargetRegion" required>
+                        <option value="">Target Exhibition</option>
+                        <option value="Europe Tour">Europe & UK</option>
+                        <option value="USA Tour">USA Market</option>
+                        <option value="Middle East">Middle East / GCC</option>
+                        <option value="Asia Pacific">Asia Pacific</option>
+                    </select>
+                    <textarea id="devMessage" placeholder="flagship projects you wish to feature..." required></textarea>
+                    <button type="submit" class="submit-btn-full">Request Partnership</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-wrap">
+            <div class="footer-widget brand-widget">
+                <a href="index.html" class="premium-logo" style="margin-bottom: 20px;">
+                    <img src="https://res.cloudinary.com/dozcviag7/image/upload/v1774248121/NiksGlobal_Capital-01_dzbqx3.png" alt="NIKSGLOBAL">
+                </a>
+                <p>NIKSGLOBAL CAPITAL LLC - Scaling Indian Real Estate Globally.</p>
+            </div>
+            
+            <div class="footer-widget">
+                <h3>Quick Links</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="investor.html" style="color: #a1a1a6; text-decoration: none;">Investor Portal</a></li>
+                    <li><a href="about.html" style="color: #a1a1a6; text-decoration: none;">Track Record</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-widget">
+                <h3>HQ</h3>
+                <p>Wyoming, USA</p>
+                <p>+91 91525 65195</p>
+            </div>
+
+            <div class="footer-widget">
+                <h3>Support</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="faq.html" style="color: #a1a1a6; text-decoration: none;">B2B FAQs</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <div id="inquiryModal" class="modal-overlay">
+        <div class="modal-content">
+            <i class="fa-solid fa-circle-check" style="font-size: 4rem; color: #2ecc71;"></i>
+            <h2 style="margin: 20px 0 10px; color: white;">Submission Successful</h2>
+            <p style="color: #a1a1a6; margin-bottom: 30px;">Our B2B acquisitions team will review your project portfolio and contact you within 24 hours.</p>
+            <button class="submit-btn-full" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function prefillRegion(name) { document.getElementById('devTargetRegion').value = name; }
+
+        function submitDeveloperLead(e) {
+            e.preventDefault();
+            const modal = document.getElementById('inquiryModal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('inquiryModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

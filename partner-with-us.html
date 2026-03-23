@@ -58,8 +58,35 @@
             position: fixed; width: 100%; top: 0; z-index: 1000; box-sizing: border-box;
             border-bottom: 1px solid var(--glass-border); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
-        .logo img { height: 50px; transition: transform 0.3s ease; }
-        .logo img:hover { transform: scale(1.05); }
+        
+        /* --- PREMIUM TRUE GLASS LOGO WITH GLOW --- */
+        .premium-logo {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15); 
+            padding: 8px 20px; 
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(10, 132, 255, 0.15), 0 10px 30px rgba(0, 0, 0, 0.4);
+            text-decoration: none;
+        }
+        .premium-logo img {
+            height: 40px; 
+            display: block;
+            background: transparent !important; 
+            padding: 0 !important;
+        }
+        .premium-logo:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.1); 
+            border-color: var(--hz-primary); 
+            box-shadow: 0 0 25px rgba(10, 132, 255, 0.6), 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+
         nav { display: flex; gap: 30px; align-items: center; }
         nav a { color: var(--hz-text-main); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.3s; }
         nav a:hover { color: var(--hz-primary); }
@@ -131,9 +158,8 @@
         .modal-desc { font-size: 1rem; opacity: 0.7; margin-bottom: 30px; line-height: 1.6; }
 
         /* --- PREMIUM FOOTER --- */
-        footer { background: rgba(10, 10, 12, 0.95); backdrop-filter: blur(20px); color: #a1a1a6; padding: 80px 5% 30px; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 2; }
+        footer { margin-top: 80px; background: rgba(10, 10, 12, 0.95); backdrop-filter: blur(20px); color: #a1a1a6; padding: 80px 5% 30px; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 2; }
         .footer-wrap { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
-        .footer-logo { height: 45px; margin-bottom: 20px; background: rgba(255,255,255,0.9); padding: 8px 12px; border-radius: 8px; }
         .brand-widget p { line-height: 1.7; margin-bottom: 25px; font-size: 0.95rem;}
         .social-links { display: flex; gap: 15px; }
         .social-links a { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; justify-content: center; align-items: center; color: #fff; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); text-decoration: none;}
@@ -181,12 +207,14 @@
 
     <header>
         <div class="logo">
-            <a href="index.html"><img src="logo.png" alt="The Indian Property Show" style="background: rgba(255,255,255,0.9); padding: 5px; border-radius: 8px;"></a>
+            <a href="index.html" class="premium-logo">
+                <img src="https://res.cloudinary.com/dozcviag7/image/upload/v1774248121/NiksGlobal_Capital-01_dzbqx3.png" alt="NIKSGLOBAL CAPITAL">
+            </a>
         </div>
         <nav>
-            <a href="index.html">Home</a>
+            <a href="investor.html">Home</a>
             <a href="about.html">About Us</a>
-            <a href="index.html#events">Global Exhibitions</a>
+            <a href="investor.html#events">Global Exhibitions</a>
             <a href="search.html">Properties</a>
         </nav>
     </header>
@@ -266,12 +294,14 @@
     <footer id="contact">
         <div class="footer-wrap">
             <div class="footer-widget brand-widget">
-                <img src="logo.png" alt="NIKSGLOBAL Logo" class="footer-logo">
+                <a href="index.html" class="premium-logo" style="margin-bottom: 20px;">
+                    <img src="https://res.cloudinary.com/dozcviag7/image/upload/v1774248121/NiksGlobal_Capital-01_dzbqx3.png" alt="NIKSGLOBAL CAPITAL">
+                </a>
                 <p>NIKSGLOBAL CAPITAL LLC is a premier cross-border real estate advisory, dedicated to connecting the Indian diaspora with exclusive, high-yield luxury assets across India.</p>
                 <div class="social-links">
                     <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-x"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
                     <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
                 </div>
             </div>
@@ -279,10 +309,10 @@
             <div class="footer-widget">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="index.html">Home</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="investor.html">Home</a></li>
                     <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="about.html">About Us</a></li>
                     <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="search.html">Property Portfolio</a></li>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="index.html#events">Global Exhibitions</a></li>
+                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="investor.html#events">Global Exhibitions</a></li>
                 </ul>
             </div>
 
