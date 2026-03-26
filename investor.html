@@ -21,6 +21,7 @@
             --glass-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.7);
             --dark-fallback: #0f172a; 
             --font-sans: 'Inter', sans-serif;
+            --easing: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         body, html {
@@ -145,6 +146,13 @@
         .section-header h2 { font-size: 2.5rem; margin: 0 0 10px; color: var(--hz-text-main); font-weight: 700; letter-spacing: -0.5px; }
         .section-header p { color: var(--hz-text-muted); margin: 0; font-size: 1.1rem; }
 
+        /* --- SECTION HEADER FLEX (For Trophy Assets) --- */
+        .section-header-flex { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; text-align: left;}
+        .section-header-flex h2 { font-size: 2.5rem; margin: 0 0 10px; color: var(--hz-text-main); font-weight: 700; letter-spacing: -0.5px; }
+        .section-header-flex p { color: var(--hz-text-muted); margin: 0; font-size: 1.1rem; }
+        .view-all { color: var(--hz-primary); text-decoration: none; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 6px; transition: 0.3s; }
+        .view-all:hover { gap: 10px; color: #fff; }
+
         /* --- GLASS FEATURES GRID --- */
         .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 60px; }
         .feature-box {
@@ -157,6 +165,39 @@
         .feature-box:hover .feature-icon { background: var(--hz-primary); color: #fff; transform: scale(1.1); }
         .feature-box h3 { margin: 0 0 12px; font-size: 1.2rem; font-weight: 600; color: #fff; }
         .feature-box p { color: var(--hz-text-muted); font-size: 0.9rem; line-height: 1.6; }
+
+        /* --- TROPHY ASSETS CAROUSEL --- */
+        .carousel-wrapper { position: relative; margin: 0 -5%; padding: 0 5%; } 
+        .property-carousel { display: flex; gap: 30px; overflow-x: auto; padding-bottom: 30px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .property-carousel::-webkit-scrollbar { display: none; }
+        
+        .property-card { min-width: 350px; max-width: 350px; flex-shrink: 0; scroll-snap-align: start; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; overflow: hidden; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+        .property-card:hover { transform: translateY(-8px); border-color: var(--glass-border-hover); box-shadow: var(--glass-shadow-hover); background: rgba(30, 30, 35, 0.8); }
+        .card-img-prop { position: relative; height: 220px; overflow: hidden; } 
+        .card-img-prop img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); opacity: 0.9;}
+        .property-card:hover .card-img-prop img { transform: scale(1.08); opacity: 1;}
+        .badge-exclusive { position: absolute; top: 15px; left: 15px; background: linear-gradient(135deg, #f1c40f, #f39c12); color: #000; padding: 6px 12px; border-radius: 8px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .card-price { position: absolute; bottom: 15px; left: 15px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); padding: 8px 15px; border-radius: 10px; font-size: 1.2rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.1); z-index: 2; color: var(--hz-primary); }
+        .prop-card-body { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
+        .prop-card-title { font-size: 1.2rem; margin: 0 0 10px; font-weight: 700; line-height: 1.3; }
+        .prop-card-location { color: var(--hz-text-muted); font-size: 0.9rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .prop-card-location i { color: var(--hz-primary); }
+        .card-metrics { display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; margin-top: auto; }
+        .metric { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #ccc; font-weight: 500;}
+        .metric i { color: var(--hz-primary); }
+
+        /* --- PRIME CORRIDORS MASONRY GRID --- */
+        .locations-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .locations-grid .large { grid-column: span 2; grid-row: span 2; }
+        .location-card { position: relative; border-radius: 20px; overflow: hidden; height: 250px; display: block; text-decoration: none; border: 1px solid var(--glass-border); transition: 0.4s; }
+        .locations-grid .large { height: 520px; }
+        .location-card:hover { border-color: var(--hz-primary); transform: scale(1.02); z-index: 10; box-shadow: var(--glass-shadow-hover); }
+        .location-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; opacity: 0.7; }
+        .location-card:hover img { transform: scale(1.1); opacity: 1; }
+        .location-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%); padding: 30px; display: flex; flex-direction: column; justify-content: flex-end; }
+        .loc-title { color: #fff; font-size: 1.5rem; font-weight: 700; margin: 0 0 5px; }
+        .large .loc-title { font-size: 2.2rem; }
+        .loc-subtitle { color: var(--hz-primary); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
 
         /* --- 3-COLUMN GLASS DIRECTORY GRID --- */
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; }
@@ -246,7 +287,13 @@
         .float-wa i { color: #25D366; font-size: 1.2rem; }
         .float-call i { color: var(--hz-primary); font-size: 1.1rem; }
 
-        @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } .footer-wrap { grid-template-columns: 1fr 1fr; } .features-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 1024px) { 
+            .grid { grid-template-columns: repeat(2, 1fr); } 
+            .footer-wrap { grid-template-columns: 1fr 1fr; } 
+            .features-grid { grid-template-columns: 1fr; } 
+            .locations-grid { grid-template-columns: repeat(2, 1fr); }
+            .locations-grid .large { grid-column: span 1; grid-row: span 1; height: 250px;}
+        }
         @media (max-width: 768px) {
             header { flex-direction: column; padding: 15px; gap: 15px; } 
             nav { flex-wrap: wrap; justify-content: center; }
@@ -254,6 +301,8 @@
             .hero h1 { font-size: 2.8rem; } .grid { grid-template-columns: 1fr; }
             .footer-wrap { grid-template-columns: 1fr; }
             .floating-contact-bar { bottom: 20px; width: 85%; justify-content: space-around; padding: 15px; }
+            .locations-grid { grid-template-columns: 1fr; }
+            .section-header-flex { flex-direction: column; align-items: flex-start; gap: 10px; }
         }
     </style>
 </head>
@@ -276,7 +325,7 @@
 
     <section class="hero">
         <h1 class="animate-on-scroll">Discover India's Finest Real Estate</h1>
-        <p class="animate-on-scroll" style="transition-delay: 0.1s;">The ultimate property showcase connecting NRIs with India's most prestigious developers.</p>
+        <p class="animate-on-scroll" style="transition-delay: 0.1s;">The ultimate property showcase with India's most prestigious developers.</p>
         
         <div class="search-bar animate-on-scroll" style="transition-delay: 0.2s;">
             <div class="search-input-group">
@@ -327,6 +376,58 @@
                 <h3>Secure & Transparent</h3>
                 <p>With over two decades of expertise, we provide a credible platform that ensures transparent transactions and secure investments.</p>
             </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header-flex animate-on-scroll">
+            <div>
+                <h2>Trophy Assets</h2>
+                <p>Ultra-luxury listings selected for maximum capital appreciation.</p>
+            </div>
+            <a href="search.html?type=penthouse" class="view-all">View Complete Portfolio <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="carousel-wrapper animate-on-scroll" style="transition-delay: 0.1s;">
+            <div class="property-carousel" id="featuredCarousel"></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header animate-on-scroll">
+            <h2>Prime Investment Corridors</h2>
+            <p>Explore high-growth micro-markets favored by global investors.</p>
+        </div>
+        
+        <div class="locations-grid animate-on-scroll">
+            <a href="search.html?location=mumbai" class="location-card large">
+                <img src="https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7?auto=format&fit=crop&w=1000" alt="Mumbai">
+                <div class="location-overlay">
+                    <h3 class="loc-title">Mumbai (MMR)</h3>
+                    <div class="loc-subtitle">124 Premium Listings <i class="fa-solid fa-chevron-right"></i></div>
+                </div>
+            </a>
+            <a href="search.html?location=delhi" class="location-card">
+                <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=800" alt="Gurugram">
+                <div class="location-overlay">
+                    <h3 class="loc-title">Delhi NCR</h3>
+                    <div class="loc-subtitle">86 Listings <i class="fa-solid fa-chevron-right"></i></div>
+                </div>
+            </a>
+            <a href="search.html?location=goa" class="location-card">
+                <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800" alt="Goa">
+                <div class="location-overlay">
+                    <h3 class="loc-title">Goa Estates</h3>
+                    <div class="loc-subtitle">42 Listings <i class="fa-solid fa-chevron-right"></i></div>
+                </div>
+            </a>
+            <a href="search.html?location=bangalore" class="location-card large">
+                <img src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=1000" alt="Bangalore">
+                <div class="location-overlay">
+                    <h3 class="loc-title">Bangalore</h3>
+                    <div class="loc-subtitle">95 Premium Listings <i class="fa-solid fa-chevron-right"></i></div>
+                </div>
+            </a>
         </div>
     </section>
 
@@ -573,6 +674,56 @@
     </div>
 
     <script>
+        // SHARED DATABASE (Same as search.html)
+        const propertyData = [
+            {
+                id: "p1", title: "Lodha Malabar Penthouse", locationDisplay: "Malabar Hill, Mumbai",
+                priceDisplay: "₹120 Cr*", image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800",
+                featured: true, metrics: { beds: "5 BHK", baths: "6", sqft: "8,500 sq.ft" }, link: "project-detail.html"
+            },
+            {
+                id: "p2", title: "DLF The Camellias", locationDisplay: "DLF Phase 5, Gurugram",
+                priceDisplay: "₹45.0 Cr*", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800",
+                featured: true, metrics: { beds: "4 BHK", baths: "5", sqft: "7,400 sq.ft" }, link: "project-detail.html"
+            },
+            {
+                id: "p5", title: "Rustomjee Crown", locationDisplay: "Prabhadevi, Mumbai",
+                priceDisplay: "₹65.0 Cr*", image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800",
+                featured: true, metrics: { beds: "4 BHK", baths: "4", sqft: "3,100 sq.ft" }, link: "project-detail.html"
+            },
+            {
+                id: "p6", title: "Isprava Assagao Estate", locationDisplay: "Assagao, Goa",
+                priceDisplay: "₹18.0 Cr*", image: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=800",
+                featured: true, metrics: { beds: "4 BHK", baths: "4", sqft: "4,200 sq.ft" }, link: "project-detail.html"
+            }
+        ];
+
+        // RENDER CAROUSEL
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.getElementById('featuredCarousel');
+            const featuredProps = propertyData.filter(p => p.featured);
+            
+            featuredProps.forEach(prop => {
+                carousel.innerHTML += `
+                    <a href="${prop.link}" class="property-card">
+                        <div class="card-img-prop">
+                            <span class="badge-exclusive"><i class="fa-solid fa-gem"></i> Exclusive</span>
+                            <span class="card-price">${prop.priceDisplay}</span>
+                            <img src="${prop.image}" alt="${prop.title}">
+                        </div>
+                        <div class="prop-card-body">
+                            <h3 class="prop-card-title">${prop.title}</h3>
+                            <div class="prop-card-location"><i class="fa-solid fa-location-dot"></i> ${prop.locationDisplay}</div>
+                            <div class="card-metrics">
+                                <div class="metric"><i class="fa-solid fa-bed"></i> ${prop.metrics.beds}</div>
+                                <div class="metric"><i class="fa-solid fa-vector-square"></i> ${prop.metrics.sqft}</div>
+                            </div>
+                        </div>
+                    </a>
+                `;
+            });
+        });
+
         // Redirect Logic: From Home to Search
         function goToSearch() {
             const loc = document.getElementById('homeLocation').value;

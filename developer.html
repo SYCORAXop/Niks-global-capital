@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- DEVELOPER THEME VARIABLES (DEEP ROYAL BLUE) --- */
+        /* --- DEVELOPER THEME VARIABLES --- */
         :root {
             --hz-primary: #0055ff; 
             --hz-primary-hover: #0044cc;
@@ -82,19 +82,21 @@
         .section-header { margin-bottom: 60px; text-align: center; }
         .section-header h2 { font-size: 3rem; margin: 0 0 15px; font-weight: 700; letter-spacing: -1px; }
 
-        /* --- EVENT GRID --- */
+        /* --- DYNAMIC EVENT GRID --- */
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; }
-        .hz-card { border-radius: 24px; overflow: hidden; position: relative; background: var(--glass-bg); border: 1px solid var(--glass-border); transition: 0.3s; display: flex; flex-direction: column;}
-        .hz-card:hover { transform: translateY(-10px); border-color: var(--hz-primary); box-shadow: var(--glass-shadow-hover); }
+        .hz-card { border-radius: 24px; overflow: hidden; position: relative; background: var(--glass-bg); border: 1px solid var(--glass-border); transition: 0.3s; display: flex; flex-direction: column; opacity: 0; transform: translateY(30px); animation: fadeUpIn 0.6s ease forwards; }
+        @keyframes fadeUpIn { to { opacity: 1; transform: translateY(0); } }
+        .hz-card:hover { transform: translateY(-10px) !important; border-color: var(--hz-primary); box-shadow: var(--glass-shadow-hover); }
         .card-img-wrap { position: relative; height: 220px; overflow: hidden; }
         .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: 0.5s; }
         .hz-card:hover .card-img-wrap img { opacity: 1; transform: scale(1.05); }
         
-        .badge-status { position: absolute; top: 15px; right: 15px; background: #2ecc71; color: white; padding: 6px 12px; border-radius: 8px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; z-index: 5;}
-        .badge-limited { background: #e67e22; }
-        .badge-full { background: #e74c3c; }
+        .badge-status { position: absolute; top: 15px; right: 15px; padding: 6px 12px; border-radius: 8px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; z-index: 5;}
+        .badge-green { background: #2ecc71; color: white; }
+        .badge-orange { background: #e67e22; color: white; }
+        .badge-red { background: #e74c3c; color: white; }
 
-        .card-body { padding: 25px; flex-grow: 1;}
+        .card-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
         .card-title { font-size: 1.2rem; font-weight: 700; margin: 0 0 10px; }
         .card-info { color: var(--hz-text-muted); font-size: 0.9rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
         .card-info i { color: var(--hz-primary); min-width: 15px;}
@@ -108,10 +110,23 @@
         .b2b-form { display: flex; flex-direction: column; gap: 20px; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .b2b-form input, .b2b-form select, .b2b-form textarea { padding: 18px; border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; background: rgba(0,0,0,0.4); color: white; font-family: var(--font-sans); outline: none; transition: 0.3s; }
-        .submit-btn-full { background: var(--hz-primary); color: white; padding: 20px; border-radius: 15px; border: none; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+        .b2b-form input:focus, .b2b-form select:focus, .b2b-form textarea:focus { border-color: var(--hz-primary); }
+        .submit-btn { background: var(--hz-primary); color: white; padding: 20px; border-radius: 15px; border: none; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;}
+        .submit-btn:hover { background: var(--hz-primary-hover); transform: translateY(-2px); }
+        .submit-btn:disabled { cursor: not-allowed; transform: none; }
+
+        footer { margin-top: 100px; padding: 80px 5% 40px; background: #050505; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-wrap { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; max-width: 1300px; margin: 0 auto; }
 
         @media (max-width: 1024px) { .grid, .value-grid { grid-template-columns: repeat(2, 1fr); } .partner-section { grid-template-columns: 1fr; } }
-        @media (max-width: 768px) { .hero h1 { font-size: 3rem; } .grid, .value-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { 
+            header { flex-direction: column; gap: 15px; padding: 15px; }
+            .hero { padding-top: 160px; height: auto;}
+            .hero h1 { font-size: 3rem; } .grid, .value-grid, .footer-wrap { grid-template-columns: 1fr; } 
+            .form-row { grid-template-columns: 1fr; }
+            .partner-section { padding: 50px 5%; border-radius: 20px;}
+            .partner-form-box { padding: 30px; }
+        }
     </style>
 </head>
 <body>
@@ -123,7 +138,7 @@
             </a>
         </div>
         <nav>
-            <a href="developer.html">Developer Portal</a>
+            <a href="investor.html">Investor Portal</a>
             <a href="about.html">Our Track Record</a> 
             <a href="#events">Upcoming Exhibitions</a>
             <a href="#apply" class="btn-create">Partner With Us</a>
@@ -170,137 +185,10 @@
             <h2>2026 Full Roadmap</h2>
             <p>Select your target region to request developer placement.</p>
         </div>
-        <div class="grid">
-            <div class="hz-card animate-on-scroll">
-                <div class="card-img-wrap">
-                    <span class="badge-status">5 Slots Left</span>
-                    <img src="https://res.cloudinary.com/dozcviag7/image/upload/v1773765891/Munich_yp3rnk.jpg" alt="Munich">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Munich NRI Showcase</h3>
-                    <div class="card-info"><i class="fa-solid fa-calendar"></i> April 25-26, 2026</div>
-                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> NH Collection, Munich</div>
-                    <a href="#apply" class="btn-booth" onclick="prefillRegion('Munich Showcase')">Book Slot</a>
-                </div>
+        
+        <div class="grid" id="exhibitionGrid">
             </div>
 
-            <div class="hz-card animate-on-scroll">
-                <div class="card-img-wrap">
-                    <span class="badge-status">3 Slots Left</span>
-                    <img src="https://images.unsplash.com/photo-1587330979470-3595ac045ab0" alt="Frankfurt">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Frankfurt Real Estate Expo</h3>
-                    <div class="card-info"><i class="fa-solid fa-calendar"></i> April 26, 2026</div>
-                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> NH Collection, Frankfurt</div>
-                    <a href="#apply" class="btn-booth" onclick="prefillRegion('Frankfurt Expo')">Book Slot</a>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll">
-                <div class="card-img-wrap">
-                    <span class="badge-status badge-limited">Last 2 Slots</span>
-                    <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9" alt="USA">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">USA Spring Exhibitions</h3>
-                    <div class="card-info"><i class="fa-solid fa-calendar"></i> May 09-17, 2026</div>
-                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> Multiple Cities, USA</div>
-                    <a href="#apply" class="btn-booth" onclick="prefillRegion('USA Spring')">Book Slot</a>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll">
-                <div class="card-img-wrap">
-                    <span class="badge-status">Available</span>
-                    <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf" alt="Tokyo">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Tokyo Investment Summit</h3>
-                    <div class="card-info"><i class="fa-solid fa-calendar"></i> May 23-24, 2026</div>
-                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> New Otani, Tokyo</div>
-                    <a href="#apply" class="btn-booth" onclick="prefillRegion('Tokyo Summit')">Book Slot</a>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll">
-                <div class="card-img-wrap">
-                    <span class="badge-status badge-limited">Closing Soon</span>
-                    <img src="https://images.unsplash.com/photo-1580418827493-f2b22c0a76cb" alt="Saudi Arabia">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Saudi Arabia Expo</h3>
-                    <div class="card-info"><i class="fa-solid fa-calendar"></i> June 06-07, 2026</div>
-                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> Premium Venue, Riyadh</div>
-                    <a href="#apply" class="btn-booth" onclick="prefillRegion('Saudi Expo')">Book Slot</a>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll">
-                <div class="card-img-wrap">
-                    <span class="badge-status">Available</span>
-                    <img src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99" alt="Africa">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Africa Investor Summit</h3>
-                    <div class="card-info"><i class="fa-solid fa-calendar"></i> August, 2026</div>
-                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> Nairobi / Lagos</div>
-                    <a href="#apply" class="btn-booth" onclick="prefillRegion('Africa Summit')">Book Slot</a>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll">
-                <div class="card-img-wrap">
-                    <span class="badge-status">Opening Soon</span>
-                    <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856" alt="USA">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">USA Fall Exhibitions</h3>
-                    <div class="card-info"><i class="fa-solid fa-calendar"></i> September, 2026</div>
-                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> East Coast Cities, USA</div>
-                    <a href="#apply" class="btn-booth" onclick="prefillRegion('USA Fall')">Pre-Book Slot</a>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll">
-                <div class="card-img-wrap">
-                    <span class="badge-status">Available</span>
-                    <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a" alt="Europe">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Europe NRI Showcase</h3>
-                    <div class="card-info"><i class="fa-solid fa-calendar"></i> October, 2026</div>
-                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> Berlin / Paris / Zurich</div>
-                    <a href="#apply" class="btn-booth" onclick="prefillRegion('Europe Fall')">Book Slot</a>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll">
-                <div class="card-img-wrap">
-                    <span class="badge-status badge-limited">Elite Slots Only</span>
-                    <img src="https://images.unsplash.com/photo-1513635269975-59693e0cd1ce" alt="London">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">London Investment Expo</h3>
-                    <div class="card-info"><i class="fa-solid fa-calendar"></i> November, 2026</div>
-                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> Mayfair, London</div>
-                    <a href="#apply" class="btn-booth" onclick="prefillRegion('London Expo')">Book Slot</a>
-                </div>
-            </div>
-
-            <div class="hz-card animate-on-scroll">
-                <div class="card-img-wrap">
-                    <span class="badge-status badge-limited">Last 1 Slot</span>
-                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c" alt="Dubai">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Dubai Real Estate Summit</h3>
-                    <div class="card-info"><i class="fa-solid fa-calendar"></i> December, 2026</div>
-                    <div class="card-info"><i class="fa-solid fa-location-dot"></i> Business Bay, Dubai</div>
-                    <a href="#apply" class="btn-booth" onclick="prefillRegion('Dubai Summit')">Book Slot</a>
-                </div>
-            </div>
-        </div>
     </section>
 
     <section id="apply" class="section">
@@ -321,22 +209,44 @@
             </div>
 
             <div class="partner-form-box animate-on-scroll">
-                <form class="b2b-form" onsubmit="submitDeveloperLead(event)">
+                <form class="b2b-form" id="developerLeadForm">
+                    
+                    <input type="hidden" name="access_key" value="01e40cdd-6022-4a92-ac0b-d38a0307b3d3">
+                    <input type="hidden" name="subject" value="New B2B Partnership & Project Deck">
+                    <input type="hidden" name="from_name" value="NIKSGLOBAL Developer Portal">
+
                     <div class="form-row">
-                        <input type="text" id="devCompany" placeholder="Developer Name" required>
-                        <input type="text" id="devContact" placeholder="Contact Person" required>
+                        <input type="text" name="company" placeholder="Developer / Company Name" required>
+                        <input type="text" name="contact" placeholder="Contact Person Name" required>
                     </div>
-                    <input type="email" id="devEmail" placeholder="Corporate Email ID" required>
-                    <input type="tel" id="devPhone" placeholder="WhatsApp Number" required>
-                    <select id="devTargetRegion" required>
-                        <option value="">Target Exhibition</option>
-                        <option value="Europe Tour">Europe & UK</option>
-                        <option value="USA Tour">USA Market</option>
-                        <option value="Middle East">Middle East / GCC</option>
-                        <option value="Asia Pacific">Asia Pacific</option>
+                    <div class="form-row">
+                        <input type="email" name="email" placeholder="Corporate Email" required>
+                        <input type="tel" name="phone" placeholder="Mobile Number" required>
+                    </div>
+                    <input type="text" name="designation" placeholder="Your Designation (e.g., VP of Sales)" required>
+                    
+                    <select name="region" id="devTargetRegion" required>
+                        <option value="">Primary Region of Development</option>
+                        <option value="mumbai">Mumbai & MMR</option>
+                        <option value="delhi">Delhi NCR</option>
+                        <option value="pune">Pune</option>
+                        <option value="bangalore">Bangalore</option>
+                        <option value="hyderabad">Hyderabad</option>
+                        <option value="other">Other Pan-India</option>
                     </select>
-                    <textarea id="devMessage" placeholder="flagship projects you wish to feature..." required></textarea>
-                    <button type="submit" class="submit-btn-full">Request Partnership</button>
+                    
+                    <textarea name="message" placeholder="Briefly describe the project(s) you wish to showcase globally..." required></textarea>
+                    
+                    <div style="position: relative; margin-bottom: 10px;">
+                        <input type="file" name="attachment" id="fileUpload" accept=".pdf,.ppt,.pptx,.zip" style="opacity: 0; position: absolute; z-index: -1; width: 0.1px; height: 0.1px;" required>
+                        <label for="fileUpload" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 18px; border: 1px dashed rgba(255,255,255,0.3); border-radius: 15px; background: rgba(0,0,0,0.2); color: var(--hz-primary); font-weight: 600; cursor: pointer; transition: 0.3s;">
+                            <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.2rem;"></i> <span id="fileName">Upload Project Pitch Deck (Max 5MB)</span>
+                        </label>
+                    </div>
+
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                    <button type="submit" id="submitBtn" class="submit-btn">Submit Partnership Request</button>
                 </form>
             </div>
         </div>
@@ -354,60 +264,249 @@
             <div class="footer-widget">
                 <h3>Quick Links</h3>
                 <ul style="list-style: none; padding: 0;">
-                    <li><a href="investor.html" style="color: #a1a1a6; text-decoration: none;">Investor Portal</a></li>
-                    <li><a href="about.html" style="color: #a1a1a6; text-decoration: none;">Track Record</a></li>
+                    <li style="margin-bottom: 10px;"><a href="investor.html" style="color: #a1a1a6; text-decoration: none;">Investor Portal</a></li>
+                    <li style="margin-bottom: 10px;"><a href="about.html" style="color: #a1a1a6; text-decoration: none;">Track Record</a></li>
                 </ul>
             </div>
 
             <div class="footer-widget">
                 <h3>HQ</h3>
-                <p>Wyoming, USA</p>
-                <p>+91 91525 65195</p>
+                <p style="color: #a1a1a6;">30 N GOULD ST Ste R<br>Sheridan, WY 82801, USA</p>
+                <p style="color: #a1a1a6;">+91 91525 65195</p>
             </div>
 
             <div class="footer-widget">
                 <h3>Support</h3>
                 <ul style="list-style: none; padding: 0;">
-                    <li><a href="faq.html" style="color: #a1a1a6; text-decoration: none;">B2B FAQs</a></li>
+                    <li style="margin-bottom: 10px;"><a href="faq.html" style="color: #a1a1a6; text-decoration: none;">B2B FAQs</a></li>
+                    <li style="margin-bottom: 10px;"><a href="privacy-policy.html" style="color: #a1a1a6; text-decoration: none;">Privacy Policy</a></li>
                 </ul>
             </div>
         </div>
     </footer>
 
-    <div id="inquiryModal" class="modal-overlay">
-        <div class="modal-content">
-            <i class="fa-solid fa-circle-check" style="font-size: 4rem; color: #2ecc71;"></i>
-            <h2 style="margin: 20px 0 10px; color: white;">Submission Successful</h2>
-            <p style="color: #a1a1a6; margin-bottom: 30px;">Our B2B acquisitions team will review your project portfolio and contact you within 24 hours.</p>
-            <button class="submit-btn-full" onclick="closeModal()">Close</button>
-        </div>
-    </div>
-
     <script>
-        function prefillRegion(name) { document.getElementById('devTargetRegion').value = name; }
+        // 1. The JSON Data Array 
+        const exhibitionData = [
+            {
+                id: "munich-2026",
+                title: "Munich NRI Showcase",
+                image: "https://res.cloudinary.com/dozcviag7/image/upload/v1773765891/Munich_yp3rnk.jpg",
+                statusText: "5 Slots Left",
+                statusColor: "badge-green",
+                date: "April 25-26, 2026",
+                venue: "NH Collection, Munich",
+                formValue: "Munich Showcase"
+            },
+            {
+                id: "frankfurt-2026",
+                title: "Frankfurt Real Estate Expo",
+                image: "https://images.unsplash.com/photo-1587330979470-3595ac045ab0",
+                statusText: "3 Slots Left",
+                statusColor: "badge-green",
+                date: "April 26, 2026",
+                venue: "NH Collection, Frankfurt",
+                formValue: "Frankfurt Expo"
+            },
+            {
+                id: "usa-spring-2026",
+                title: "USA Spring Exhibitions",
+                image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9",
+                statusText: "Last 2 Slots",
+                statusColor: "badge-orange",
+                date: "May 09-17, 2026",
+                venue: "Multiple Cities, USA",
+                formValue: "USA Spring Tour"
+            },
+            {
+                id: "tokyo-2026",
+                title: "Tokyo Investment Summit",
+                image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf",
+                statusText: "Available",
+                statusColor: "badge-green",
+                date: "May 23-24, 2026",
+                venue: "New Otani, Tokyo",
+                formValue: "Tokyo Summit"
+            },
+            {
+                id: "saudi-2026",
+                title: "Saudi Arabia Expo",
+                image: "https://images.unsplash.com/photo-1580418827493-f2b22c0a76cb",
+                statusText: "Closing Soon",
+                statusColor: "badge-orange",
+                date: "June 06-07, 2026",
+                venue: "Premium Venue, Riyadh",
+                formValue: "Saudi Expo"
+            },
+            {
+                id: "africa-2026",
+                title: "Africa Investor Summit",
+                image: "https://images.unsplash.com/photo-1580060839134-75a5edca2e99",
+                statusText: "Available",
+                statusColor: "badge-green",
+                date: "August, 2026",
+                venue: "Nairobi / Lagos",
+                formValue: "Africa Summit"
+            },
+            {
+                id: "usa-fall-2026",
+                title: "USA Fall Exhibitions",
+                image: "https://images.unsplash.com/photo-1534430480872-3498386e7856",
+                statusText: "Opening Soon",
+                statusColor: "badge-green",
+                date: "September, 2026",
+                venue: "East Coast Cities, USA",
+                formValue: "USA Fall Tour"
+            },
+            {
+                id: "europe-fall-2026",
+                title: "Europe NRI Showcase",
+                image: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a",
+                statusText: "Available",
+                statusColor: "badge-green",
+                date: "October, 2026",
+                venue: "Berlin / Paris / Zurich",
+                formValue: "Europe Fall Tour"
+            },
+            {
+                id: "london-2026",
+                title: "London Investment Expo",
+                image: "https://images.unsplash.com/photo-1513635269975-59693e0cd1ce",
+                statusText: "Elite Slots Only",
+                statusColor: "badge-red",
+                date: "November, 2026",
+                venue: "Mayfair, London",
+                formValue: "London Expo"
+            },
+            {
+                id: "dubai-2026",
+                title: "Dubai Real Estate Summit",
+                image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c",
+                statusText: "Last 1 Slot",
+                statusColor: "badge-red",
+                date: "December, 2026",
+                venue: "Business Bay, Dubai",
+                formValue: "Dubai Summit"
+            }
+        ];
 
-        function submitDeveloperLead(e) {
-            e.preventDefault();
-            const modal = document.getElementById('inquiryModal');
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+        // 2. The Render Engine
+        document.addEventListener('DOMContentLoaded', () => {
+            const gridContainer = document.getElementById('exhibitionGrid');
+
+            exhibitionData.forEach((event, index) => {
+                const delay = (index % 3) * 0.1;
+                const cardHTML = `
+                    <div class="hz-card" style="animation-delay: ${delay}s;">
+                        <div class="card-img-wrap">
+                            <span class="badge-status ${event.statusColor}">${event.statusText}</span>
+                            <img src="${event.image}" alt="${event.title}">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">${event.title}</h3>
+                            <div class="card-info"><i class="fa-solid fa-calendar"></i> ${event.date}</div>
+                            <div class="card-info"><i class="fa-solid fa-location-dot"></i> ${event.venue}</div>
+                            <a href="#apply" class="btn-booth" onclick="prefillRegion('${event.formValue}')">Book Slot</a>
+                        </div>
+                    </div>
+                `;
+                gridContainer.innerHTML += cardHTML;
+            });
+        });
+
+        function prefillRegion(name) { 
+             document.getElementById('devTargetRegion').value = name; 
         }
 
-        function closeModal() {
-            document.getElementById('inquiryModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
+        // --- NEW BULLETPROOF AJAX & REDIRECT ENGINE ---
 
-        const observer = new IntersectionObserver((entries) => {
+        document.addEventListener('DOMContentLoaded', () => {
+            const fileInput = document.getElementById('fileUpload');
+            const fileNameDisplay = document.getElementById('fileName');
+            const fileLabel = document.querySelector('label[for="fileUpload"]');
+            const form = document.getElementById('developerLeadForm');
+            const submitBtn = document.getElementById('submitBtn');
+
+            // 1. File Upload Handler with Strict Size Limit
+            if(fileInput) {
+                fileInput.addEventListener('change', function(e) {
+                    if (e.target.files.length > 0) {
+                        const file = e.target.files[0];
+                        
+                        // Strict 5MB Check
+                        const fileSizeMB = file.size / 1024 / 1024;
+                        if (fileSizeMB > 5) {
+                            alert(`File too large (${fileSizeMB.toFixed(1)}MB). Please upload a smaller file under 5MB.`);
+                            this.value = ""; // Reset input
+                            fileNameDisplay.textContent = 'Upload Project Pitch Deck (Max 5MB)';
+                            fileLabel.style.borderColor = 'rgba(255,255,255,0.3)';
+                            fileLabel.style.background = 'rgba(0,0,0,0.2)';
+                            return;
+                        }
+
+                        fileNameDisplay.textContent = file.name;
+                        fileLabel.style.borderColor = 'var(--hz-primary)';
+                        fileLabel.style.background = 'rgba(0, 85, 255, 0.1)';
+                    }
+                });
+            }
+
+            // 2. Submission Engine
+            if(form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault(); // Stop native submission to prevent blank screens
+                    
+                    // UI Feedback
+                    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploading securely...';
+                    submitBtn.style.opacity = '0.7';
+                    submitBtn.style.pointerEvents = 'none';
+
+                    // Package data and file
+                    const formData = new FormData(form);
+
+                    // Send to Web3Forms
+                    fetch('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(async (response) => {
+                        let json = await response.json();
+                        if (response.status == 200) {
+                            // Absolute guaranteed redirect to your success page
+                            window.location.href = "success.html";
+                        } else {
+                            console.log(response);
+                            alert("Submission failed: " + json.message);
+                            submitBtn.innerHTML = 'Submit Partnership Request';
+                            submitBtn.style.opacity = '1';
+                            submitBtn.style.pointerEvents = 'auto';
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        alert("A network error occurred. Please check your connection and try again.");
+                        submitBtn.innerHTML = 'Submit Partnership Request';
+                        submitBtn.style.opacity = '1';
+                        submitBtn.style.pointerEvents = 'auto';
+                    });
+                });
+            }
+        });
+
+        // --- SCROLL ANIMATIONS ---
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, observerOptions);
 
-        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>

@@ -2,492 +2,444 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results | NIKSGLOBAL CAPITAL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Asset Directory | NIKSGLOBAL CAPITAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- HIGH-CONTRAST DARK GLASS VARIABLES --- */
         :root {
-            --hz-primary: #0a84ff; 
-            --hz-primary-hover: #0066d6;
+            --hz-primary: #00d2ff; 
+            --hz-primary-hover: #0088cc;
             --hz-text-main: #ffffff; 
             --hz-text-muted: #a1a1a6; 
-            --glass-bg: rgba(30, 30, 35, 0.6); 
-            --glass-bg-hover: rgba(45, 45, 50, 0.8);
+            --glass-bg: rgba(15, 20, 30, 0.75); 
+            --glass-bg-hover: rgba(20, 25, 40, 0.95);
             --glass-border: rgba(255, 255, 255, 0.15); 
-            --glass-border-hover: rgba(255, 255, 255, 0.4);
+            --glass-border-hover: rgba(0, 210, 255, 0.5);
             --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            --glass-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.7);
-            --dark-fallback: #0f172a; 
+            --glass-shadow-hover: 0 20px 40px rgba(0, 210, 255, 0.2);
+            --font-sans: 'Inter', sans-serif;
+            --easing: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        body, html {
-            margin: 0; padding: 0; font-family: 'Poppins', sans-serif;
-            color: var(--hz-text-main); scroll-behavior: smooth; overflow-x: hidden;
-            background-color: var(--dark-fallback);
-        }
+        body, html { margin: 0; padding: 0; font-family: var(--font-sans); background: #020203; color: var(--hz-text-main); scroll-behavior: smooth; overflow-x: hidden; }
 
+        /* Ambient Corporate Background */
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1920&q=80') center/cover;
-            z-index: -2;
+            background: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80') center/cover;
+            z-index: -2; opacity: 0.3;
         }
         body::after {
             content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(10, 15, 25, 0.85); 
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            z-index: -1;
+            background: linear-gradient(135deg, rgba(5, 10, 20, 0.96), rgba(0, 15, 35, 0.9)); 
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: -1;
         }
 
-        /* --- CUSTOM SCROLLBAR --- */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
-        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--hz-primary); }
-
-        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
-        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
-
-        /* --- HEADER --- */
+        /* --- STANDARDIZED HEADER --- */
         header {
-            background-color: rgba(20, 20, 25, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            background-color: rgba(10, 15, 25, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border);
             padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
             position: fixed; width: 100%; top: 0; z-index: 1000; box-sizing: border-box;
-            border-bottom: 1px solid var(--glass-border); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
-
-        /* --- PREMIUM TRUE GLASS LOGO WITH GLOW --- */
         .premium-logo {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15); 
-            padding: 8px 20px; 
-            border-radius: 12px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(10, 132, 255, 0.15), 0 10px 30px rgba(0, 0, 0, 0.4);
-            text-decoration: none;
+            background: rgba(15, 20, 30, 0.8); border: 1px solid rgba(255, 255, 255, 0.2); 
+            padding: 8px 20px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease; box-shadow: 0 0 20px rgba(0, 210, 255, 0.2), 0 10px 40px rgba(0, 0, 0, 0.7); text-decoration: none;
         }
-        .premium-logo img {
-            height: 40px; 
-            display: block;
-            background: transparent !important; 
-            padding: 0 !important;
-        }
-        .premium-logo:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.1); 
-            border-color: var(--hz-primary); 
-            box-shadow: 0 0 25px rgba(10, 132, 255, 0.6), 0 15px 40px rgba(0, 0, 0, 0.6);
-        }
-
-        nav { display: flex; gap: 30px; align-items: center; }
+        .premium-logo img { height: 35px; display: block; filter: drop-shadow(0 0 4px rgba(255,255,255,0.2)); }
+        
+        nav { display: flex; gap: 25px; align-items: center; }
         nav a { color: var(--hz-text-main); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.3s; }
         nav a:hover { color: var(--hz-primary); }
-        .btn-create {
-            background-color: var(--hz-primary); color: #ffffff !important;
-            padding: 10px 24px; border-radius: 50px; font-weight: 600;
-            display: flex; align-items: center; gap: 8px; transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        .btn-create:hover { background-color: var(--hz-primary-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(10, 132, 255, 0.4); border-color: #fff;}
+        .btn-header { background: var(--hz-primary); color: #fff !important; padding: 10px 24px; border-radius: 50px; font-weight: 700; border: 1px solid rgba(255,255,255,0.2); transition: 0.3s; }
+        .btn-header:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4); border-color: #fff;}
 
-        /* --- COMPACT SEARCH BAR --- */
-        .top-search-area { margin-top: 100px; padding: 0 5%; max-width: 1300px; margin-left: auto; margin-right: auto; }
-        .search-bar {
-            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            padding: 15px 25px; border-radius: 16px; display: flex; gap: 15px; width: 100%;
-            box-shadow: var(--glass-shadow); align-items: center; border: 1px solid var(--glass-border); 
-            transition: all 0.3s ease; box-sizing: border-box;
-        }
-        .search-bar:hover { border-color: var(--glass-border-hover); }
+        /* --- PAGE LAYOUT --- */
+        .page-wrapper { max-width: 1400px; margin: 100px auto 50px; padding: 0 5%; }
         
-        .search-input {
-            flex: 1; padding: 12px 18px; border: 1px solid rgba(255,255,255,0.2); border-radius: 10px;
-            font-family: 'Poppins', sans-serif; font-size: 0.9rem; color: #ffffff;
-            background-color: rgba(0,0,0,0.3); transition: all 0.3s ease; cursor: pointer;
-        }
-        .search-input option { background-color: #1e1e23; color: #fff; }
-        .search-input:focus { outline: none; background-color: rgba(0,0,0,0.5); border-color: var(--hz-primary); box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.25); }
-        
-        .search-btn {
-            background: var(--hz-primary); color: #ffffff; border: 1px solid rgba(255,255,255,0.2); padding: 12px 30px; border-radius: 50px;
-            font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: 'Poppins';
-        }
-        .search-btn:hover { background: var(--hz-primary-hover); box-shadow: 0 5px 15px rgba(10, 132, 255, 0.4); border-color: #fff;}
+        .directory-header { margin-bottom: 30px; }
+        .directory-header h1 { font-size: 2.5rem; margin: 0 0 10px; font-weight: 700; letter-spacing: -1px; }
+        .directory-header p { color: var(--hz-text-muted); font-size: 1.1rem; margin: 0; }
 
-        /* --- RESULTS HEADER --- */
-        .results-header {
-            max-width: 1300px; margin: 40px auto 30px; padding: 0 5%;
-            display: flex; justify-content: space-between; align-items: flex-end;
+        /* --- HORIZONTAL STICKY FILTER BAR --- */
+        .filter-dashboard {
+            background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px;
+            padding: 15px 25px; display: flex; gap: 15px; box-shadow: var(--glass-shadow);
+            position: sticky; top: 90px; z-index: 900; backdrop-filter: blur(25px); align-items: center; flex-wrap: wrap; margin-bottom: 40px;
         }
-        .results-header h1 { font-size: 2rem; margin: 0 0 5px; font-weight: 600; }
-        .results-header p { color: var(--hz-text-muted); margin: 0; font-size: 1rem; }
-        .sort-by { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--hz-text-muted); }
-        .sort-by select { background: transparent; border: none; color: var(--hz-primary); font-weight: 600; font-family: 'Poppins'; cursor: pointer; outline: none; font-size: 0.9rem;}
-        .sort-by select option { background: #1e1e23; color: #fff; }
 
-        /* --- PROPERTY GRID --- */
-        .main-content { padding: 0 5% 80px; max-width: 1300px; margin: 0 auto; position: relative; z-index: 2; min-height: 400px;}
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .filter-group { flex: 1; min-width: 180px; display: flex; flex-direction: column; gap: 6px; }
+        .filter-group label { font-size: 0.75rem; color: var(--hz-text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; padding-left: 5px;}
         
-        .no-results { display: none; width: 100%; grid-column: 1 / -1; text-align: center; padding: 50px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; }
-        .no-results i { font-size: 3rem; color: var(--hz-text-muted); margin-bottom: 20px; }
-        
-        .prop-card { 
-            border-radius: 20px; overflow: hidden; position: relative; display: flex; flex-direction: column;
-            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow);
-            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        select {
+            width: 100%; padding: 12px 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(0,0,0,0.5); color: #fff; font-family: var(--font-sans); font-size: 0.95rem;
+            outline: none; transition: 0.3s; cursor: pointer; appearance: none;
         }
-        .prop-card:hover { transform: translateY(-8px); border-color: var(--hz-primary); box-shadow: var(--glass-shadow-hover); background: rgba(30, 30, 35, 0.8); }
+        select option { background: #0f1423; }
+        select:focus { border-color: var(--hz-primary); box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.2); }
+        
+        .results-count-badge { background: rgba(255,255,255,0.05); padding: 12px 20px; border-radius: 12px; font-weight: 600; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.1); white-space: nowrap; margin-top: 22px;}
 
-        .card-img-wrap { position: relative; height: 240px; overflow: hidden; background-color: #111; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; opacity: 0.9; }
-        .prop-card:hover .card-img-wrap img { transform: scale(1.05); opacity: 1; }
+        /* --- RESULTS GRID --- */
+        .properties-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
         
-        .badge { position: absolute; top: 15px; left: 15px; padding: 6px 12px; border-radius: 8px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; z-index: 2; letter-spacing: 1px; color: #fff; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3);}
-        .badge-status { left: auto; right: 15px; background: rgba(0,0,0,0.8); } 
-        .badge-featured { background: rgba(243, 156, 18, 0.9); }
-        
-        .price-tag { position: absolute; bottom: 15px; left: 15px; font-size: 1.4rem; font-weight: 700; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); z-index: 2; }
-
-        .card-body { padding: 25px; flex-grow: 1; position: relative; z-index: 2; }
-        .card-title { font-size: 1.15rem; font-weight: 700; margin: 0 0 10px; color: var(--hz-text-main); line-height: 1.4; transition: color 0.3s;}
-        .prop-card:hover .card-title { color: var(--hz-primary); }
-        
-        .card-address { font-size: 0.85rem; color: var(--hz-text-muted); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; margin-bottom: 5px;}
-        .card-address i { color: var(--hz-primary); margin-top: 3px; }
-        
-        .card-footer { border-top: 1px solid rgba(255,255,255,0.1); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); }
-        .footer-item { font-size: 0.85rem; color: var(--hz-text-muted); display: flex; align-items: center; gap: 8px; font-weight: 600; }
-        .footer-item i { color: var(--hz-primary); font-size: 1rem; }
-        
-        .btn-inquire { 
-            background: rgba(255,255,255,0.1); border: 1px solid var(--hz-primary); color: var(--hz-primary); 
-            padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; 
-            cursor: pointer; transition: all 0.3s ease; 
+        /* Dynamic Card Styling */
+        .property-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; overflow: hidden;
+            transition: all 0.4s var(--easing); text-decoration: none; color: inherit; display: flex; flex-direction: column;
+            animation: fadeUp 0.6s ease forwards; opacity: 0; transform: translateY(20px);
         }
-        .btn-inquire:hover { background: var(--hz-primary); color: #fff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(10,132,255,0.3); border-color: var(--hz-primary);}
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        
+        .property-card:hover { transform: translateY(-8px) !important; border-color: var(--glass-border-hover); box-shadow: var(--glass-shadow-hover); }
+        
+        .card-img { position: relative; height: 260px; overflow: hidden; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s var(--easing); }
+        .property-card:hover .card-img img { transform: scale(1.08); }
+        
+        .badge-featured { position: absolute; top: 15px; left: 15px; background: linear-gradient(135deg, #f1c40f, #f39c12); color: #000; padding: 6px 12px; border-radius: 8px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .card-price { position: absolute; bottom: 15px; left: 15px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); padding: 8px 15px; border-radius: 10px; font-size: 1.3rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.1); z-index: 2; color: var(--hz-primary); }
 
-        /* --- PREMIUM PROFESSIONAL FOOTER --- */
-        footer { margin-top: 80px; background: rgba(10, 10, 12, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); color: #a1a1a6; padding: 80px 5% 30px; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 2; }
+        .card-body { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-title { font-size: 1.4rem; margin: 0 0 10px; font-weight: 700; line-height: 1.3; }
+        .card-location { color: var(--hz-text-muted); font-size: 0.95rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .card-location i { color: var(--hz-primary); }
+
+        .card-metrics { display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: auto; }
+        .metric { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #ccc; font-weight: 500;}
+        .metric i { color: var(--hz-primary); opacity: 0.8;}
+
+        /* Empty State */
+        .no-results { text-align: center; padding: 80px 20px; background: var(--glass-bg); border-radius: 20px; border: 1px dashed rgba(255,255,255,0.2); grid-column: 1 / -1; }
+        .no-results i { font-size: 4rem; color: rgba(255,255,255,0.2); margin-bottom: 20px; }
+
+        /* --- FOOTER --- */
+        footer { margin-top: 80px; background: rgba(10, 15, 25, 0.95); border-top: 1px solid rgba(255,255,255,0.1); padding: 80px 5% 40px; font-size: 0.9rem; color: #a1a1a6; }
         .footer-wrap { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
-        .brand-widget p { line-height: 1.7; margin-bottom: 25px; font-size: 0.95rem;}
-        .social-links { display: flex; gap: 15px; }
-        .social-links a { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; justify-content: center; align-items: center; color: #fff; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); text-decoration: none;}
-        .social-links a:hover { background: var(--hz-primary); border-color: var(--hz-primary); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(10, 132, 255, 0.4); }
-        .footer-widget h3 { color: #ffffff; font-size: 1.1rem; margin-bottom: 25px; font-weight: 600; letter-spacing: 0.5px; }
+        .footer-widget h3 { color: #ffffff; font-size: 1.1rem; margin-bottom: 25px; font-weight: 600; }
         .footer-widget ul { list-style: none; padding: 0; margin: 0; }
-        .footer-widget li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 12px; transition: transform 0.3s; line-height: 1.5;}
-        .footer-widget li i { margin-top: 4px; font-size: 0.9rem; }
-        .footer-widget ul:not(.contact-info) li:hover { transform: translateX(5px); }
-        .footer-widget a { color: #a1a1a6; text-decoration: none; transition: color 0.3s; }
+        .footer-widget li { margin-bottom: 15px; }
+        .footer-widget a { color: #a1a1a6; text-decoration: none; transition: 0.3s; }
         .footer-widget a:hover { color: var(--hz-primary); }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 60px; padding-top: 25px; text-align: center; color: #666; }
-        .legal-disclaimer { font-size: 0.8rem; opacity: 0.6; margin-top: 8px; display: block; }
 
-        @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } .footer-wrap { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 768px) {
-            header { flex-direction: column; padding: 15px; gap: 15px; } nav { flex-wrap: wrap; justify-content: center; }
-            .top-search-area { margin-top: 160px; } .search-bar { flex-direction: column; } .search-input { width: 100%; } .search-btn { width: 100%; }
-            .results-header { flex-direction: column; align-items: flex-start; gap: 15px; } .grid { grid-template-columns: 1fr; } .footer-wrap { grid-template-columns: 1fr; }
+        @media (max-width: 1024px) { 
+            .properties-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); } 
+            .footer-wrap { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) { 
+            header { flex-direction: column; gap: 15px; padding: 15px; } 
+            nav { flex-wrap: wrap; justify-content: center; gap: 15px;}
+            .page-wrapper { margin-top: 150px; } 
+            .filter-dashboard { position: relative; top: 0; flex-direction: column; padding: 20px; gap: 15px;}
+            .filter-group { width: 100%; }
+            .results-count-badge { margin-top: 0; width: 100%; text-align: center; box-sizing: border-box;}
+            .footer-wrap { grid-template-columns: 1fr; } 
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">
-            <a href="index.html" class="premium-logo">
-                <img src="https://res.cloudinary.com/dozcviag7/image/upload/v1774248121/NiksGlobal_Capital-01_dzbqx3.png" alt="NIKSGLOBAL CAPITAL">
-            </a>
-        </div>
+        <a href="index.html" class="premium-logo">
+            <img src="https://res.cloudinary.com/dozcviag7/image/upload/v1774248121/NiksGlobal_Capital-01_dzbqx3.png" alt="NIKSGLOBAL CAPITAL">
+        </a>
         <nav>
-            <a href="investor.html">Home</a>
-            <a href="investor.html#events">Global Exhibitions</a>
-            <a href="investor.html#events" class="btn-create">Request VIP Pass</a>
+            <a href="investor.html">Investor Hub</a>
+            <a href="developer.html">Developers</a>
+            <a href="about.html">About Us</a>
+            <a href="search.html" class="btn-header">Browse Assets</a>
         </nav>
     </header>
 
-    <div class="top-search-area">
-        <div class="search-bar animate-on-scroll is-visible">
-            <select class="search-input" id="filterLocation">
-                <option value="">All Cities</option>
-                <option value="mumbai">Mumbai</option>
-                <option value="delhi">Delhi NCR</option>
-                <option value="hyderabad">Hyderabad</option>
-                <option value="bangalore">Bangalore</option>
-                <option value="pune">Pune</option>
-            </select>
-            <select class="search-input" id="filterType">
-                <option value="">All Property Types</option>
-                <option value="apartment">Residential Apartment</option>
-                <option value="villa">Villa / Independent House</option>
-                <option value="commercial">Commercial Space</option>
-            </select>
-            <button class="search-btn" id="searchBtn"><i class="fa-solid fa-magnifying-glass" style="margin-right: 8px;"></i> Search</button>
+    <div class="page-wrapper">
+        
+        <div class="directory-header">
+            <h1>Global Asset Directory</h1>
+            <p>Curated Tier-1 Indian real estate opportunities for the diaspora.</p>
         </div>
+
+        <div class="filter-dashboard">
+            <div class="filter-group">
+                <label>Market Location</label>
+                <select id="filterLocation" onchange="renderProperties()">
+                    <option value="all">All Locations</option>
+                    <option value="mumbai">Mumbai (MMR)</option>
+                    <option value="delhi">Delhi NCR / Gurugram</option>
+                    <option value="bangalore">Bangalore</option>
+                    <option value="pune">Pune</option>
+                    <option value="goa">Goa</option>
+                    <option value="hyderabad">Hyderabad</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Asset Class</label>
+                <select id="filterType" onchange="renderProperties()">
+                    <option value="all">All Types</option>
+                    <option value="luxury-apartment">Luxury Apartment</option>
+                    <option value="villa">Villas & Estates</option>
+                    <option value="penthouse">Penthouses</option>
+                    <option value="commercial">Commercial Space</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Budget</label>
+                <select id="filterBudget" onchange="renderProperties()">
+                    <option value="all">Any Budget</option>
+                    <option value="0-5">Under ₹5 Cr</option>
+                    <option value="5-15">₹5 Cr - ₹15 Cr</option>
+                    <option value="15-50">₹15 Cr - ₹50 Cr</option>
+                    <option value="50+">₹50 Cr & Above</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Sort By</label>
+                <select id="sortFilter" onchange="renderProperties()">
+                    <option value="featured">Featured First</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="price-low">Price: Low to High</option>
+                </select>
+            </div>
+
+            <div class="results-count-badge" id="resultsCount">Loading...</div>
+        </div>
+
+        <div class="properties-grid" id="propertiesGrid">
+            </div>
     </div>
 
-    <div class="results-header animate-on-scroll is-visible">
-        <div>
-            <h1 id="resultsTitle">All Properties</h1>
-            <p id="resultsCount">Showing 6 exclusive properties from top-tier developers.</p>
-        </div>
-        <div class="sort-by">
-            <span>Sort by:</span>
-            <select id="sortFilter">
-                <option value="featured">Featured First</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="price-low">Price: Low to High</option>
-            </select>
-        </div>
-    </div>
-
-    <section class="main-content">
-        <div class="grid" id="propertyGrid">
-            
-            <div class="no-results" id="noResultsMsg">
-                <i class="fa-solid fa-house-circle-xmark"></i>
-                <h2>No Properties Found</h2>
-                <p style="color: var(--hz-text-muted);">Try adjusting your search filters to see more results.</p>
-            </div>
-
-            <div class="prop-card animate-on-scroll is-visible" data-location="mumbai" data-type="apartment" data-price="7.5" data-featured="true">
-                <div class="card-img-wrap">
-                    <span class="badge badge-featured">Featured</span>
-                    <span class="badge badge-status">Pre-Launch</span>
-                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80" alt="Property">
-                    <div class="price-tag">₹ 7.5 Cr*</div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Lodha World Towers - Sky Mansions</h3>
-                    <div class="card-address"><i class="fa-solid fa-location-dot"></i> <span>Lower Parel, South Mumbai</span></div>
-                </div>
-                <div class="card-footer">
-                    <div class="footer-item"><i class="fa-regular fa-building"></i> LODHA Group</div>
-                    <button class="btn-inquire" onclick="location.href='project-detail.html?id=lodha-world'">Inquire</button>
-                </div>
-            </div>
-
-            <div class="prop-card animate-on-scroll is-visible" data-location="delhi" data-type="apartment" data-price="3.2" data-featured="false">
-                <div class="card-img-wrap">
-                    <span class="badge badge-status">Ready to Move</span>
-                    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=600&q=80" alt="Property">
-                    <div class="price-tag">₹ 3.2 Cr*</div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Godrej Aristocrat - Park Facing</h3>
-                    <div class="card-address"><i class="fa-solid fa-location-dot"></i> <span>Sector 49, Gurugram, Delhi NCR</span></div>
-                </div>
-                <div class="card-footer">
-                    <div class="footer-item"><i class="fa-regular fa-building"></i> Godrej Properties</div>
-                    <button class="btn-inquire" onclick="location.href='project-detail.html?id=godrej-aristocrat'">Inquire</button>
-                </div>
-            </div>
-
-            <div class="prop-card animate-on-scroll is-visible" data-location="pune" data-type="villa" data-price="5.1" data-featured="true">
-                <div class="card-img-wrap">
-                    <span class="badge badge-featured" style="background: #27ae60;">New Release</span>
-                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" alt="Property">
-                    <div class="price-tag">₹ 5.1 Cr*</div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Kalpataru Jade - Signature Villas</h3>
-                    <div class="card-address"><i class="fa-solid fa-location-dot"></i> <span>Baner, Pune</span></div>
-                </div>
-                <div class="card-footer">
-                    <div class="footer-item"><i class="fa-regular fa-building"></i> Kalpataru</div>
-                    <button class="btn-inquire" onclick="location.href='project-detail.html?id=kalpataru-jade'">Inquire</button>
-                </div>
-            </div>
-
-            <div class="prop-card animate-on-scroll is-visible" data-location="mumbai" data-type="commercial" data-price="2.5" data-featured="false">
-                <div class="card-img-wrap">
-                    <span class="badge badge-status">Under Construction</span>
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80" alt="Property">
-                    <div class="price-tag">₹ 2.5 Cr*</div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Lodha Excelus - Corporate Towers</h3>
-                    <div class="card-address"><i class="fa-solid fa-location-dot"></i> <span>Mahalaxmi, Mumbai</span></div>
-                </div>
-                <div class="card-footer">
-                    <div class="footer-item"><i class="fa-regular fa-building"></i> LODHA Group</div>
-                    <button class="btn-inquire" onclick="location.href='project-detail.html?id=lodha-excelus'">Inquire</button>
-                </div>
-            </div>
-
-            <div class="prop-card animate-on-scroll is-visible" data-location="bangalore" data-type="villa" data-price="8.9" data-featured="true">
-                <div class="card-img-wrap">
-                    <span class="badge badge-featured">Featured</span>
-                    <span class="badge badge-status">Pre-Launch</span>
-                    <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=600&q=80" alt="Property">
-                    <div class="price-tag">₹ 8.9 Cr*</div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Rubrick Oasis - Ultra Luxury Villas</h3>
-                    <div class="card-address"><i class="fa-solid fa-location-dot"></i> <span>Whitefield, Bangalore</span></div>
-                </div>
-                <div class="card-footer">
-                    <div class="footer-item"><i class="fa-regular fa-building"></i> Rubrick Constructions</div>
-                    <button class="btn-inquire" onclick="location.href='project-detail.html?id=rubrick-oasis'">Inquire</button>
-                </div>
-            </div>
-
-            <div class="prop-card animate-on-scroll is-visible" data-location="hyderabad" data-type="apartment" data-price="4.1" data-featured="false">
-                <div class="card-img-wrap">
-                    <span class="badge badge-status">Ready to Move</span>
-                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80" alt="Property">
-                    <div class="price-tag">₹ 4.1 Cr*</div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Tulip by Rubrick Constructions</h3>
-                    <div class="card-address"><i class="fa-solid fa-location-dot"></i> <span>Jubilee Hills, Hyderabad</span></div>
-                </div>
-                <div class="card-footer">
-                    <div class="footer-item"><i class="fa-regular fa-building"></i> Rubrick Constructions</div>
-                    <button class="btn-inquire" onclick="location.href='project-detail.html?id=tulip-hyderabad'">Inquire</button>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <footer id="contact">
+    <footer>
         <div class="footer-wrap">
             <div class="footer-widget brand-widget">
                 <a href="index.html" class="premium-logo" style="margin-bottom: 20px;">
-                    <img src="https://res.cloudinary.com/dozcviag7/image/upload/v1774248121/NiksGlobal_Capital-01_dzbqx3.png" alt="NIKSGLOBAL CAPITAL">
+                    <img src="https://res.cloudinary.com/dozcviag7/image/upload/v1774248121/NiksGlobal_Capital-01_dzbqx3.png" alt="NIKSGLOBAL">
                 </a>
-                <p>NIKSGLOBAL CAPITAL LLC is a premier cross-border real estate advisory, dedicated to connecting the Indian diaspora with exclusive, high-yield luxury assets across India.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-x"></i></a>
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                </div>
+                <p>NIKSGLOBAL CAPITAL LLC is a premier cross-border real estate advisory for the Indian diaspora.</p>
             </div>
-            
             <div class="footer-widget">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="investor.html">Home</a></li>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="about.html">About Us</a></li>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="search.html">Property Portfolio</a></li>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="investor.html#events">Global Exhibitions</a></li>
+                    <li><a href="investor.html">Investor Hub</a></li>
+                    <li><a href="developer.html">Developer Portal</a></li>
+                    <li><a href="about.html">About Us</a></li>
                 </ul>
             </div>
-
             <div class="footer-widget">
-                <h3>Global Headquarters</h3>
-                <ul class="contact-info">
-                    <li>
-                        <i class="fa-solid fa-location-dot" style="color: var(--hz-primary);"></i> 
-                        <span>30 N GOULD ST Ste R<br>Sheridan, WY 82801, USA</span>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-phone" style="color: var(--hz-primary);"></i> 
-                        <span>+91 91525 65195</span>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-envelope" style="color: var(--hz-primary);"></i> 
-                        <span>contact@niksglobalcapital.com</span>
-                    </li>
-                </ul>
+                <h3>Global HQ</h3>
+                <p style="color: #a1a1a6;">30 N GOULD ST Ste R<br>Sheridan, WY 82801, USA</p>
+                <p style="color: #a1a1a6;">+91 91525 65195</p>
             </div>
-
             <div class="footer-widget">
-                <h3>Support & Legal</h3>
+                <h3>Legal</h3>
                 <ul>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="privacy-policy.html">Privacy Policy</a></li>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="terms-of-service.html">Terms of Service</a></li>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="partner-with-us.html">For Developers</a></li>
-                    <li><i class="fa-solid fa-angle-right" style="color: var(--hz-primary);"></i> <a href="faq.html">Help & FAQs</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
                 </ul>
             </div>
         </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2026 NIKSGLOBAL CAPITAL LLC. All Rights Reserved. 
-               <span class="legal-disclaimer">Disclaimer: The Indian Property Show is an independent advisory and marketing platform. Property details and pricing are subject to developer terms and market fluctuations.</span>
-            </p>
+        <div style="text-align: center; margin-top: 60px; opacity: 0.5; font-size: 0.8rem;">
+            &copy; 2026 NIKSGLOBAL CAPITAL LLC. All Rights Reserved.
         </div>
     </footer>
 
     <script>
-        // 1. THE MAIN FILTERING ENGINE
-        function runSearchFilters() {
-            const locFilter = document.getElementById('filterLocation').value.toLowerCase();
-            const typeFilter = document.getElementById('filterType').value.toLowerCase();
-            const sortFilter = document.getElementById('sortFilter').value;
-
-            const cards = Array.from(document.querySelectorAll('.prop-card'));
-            let visibleCount = 0;
-
-            cards.forEach(card => {
-                const loc = card.getAttribute('data-location').toLowerCase();
-                const type = card.getAttribute('data-type').toLowerCase();
-                
-                const locMatch = (locFilter === "" || loc === locFilter);
-                const typeMatch = (typeFilter === "" || type === typeFilter);
-
-                if (locMatch && typeMatch) {
-                    card.style.display = 'flex';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            const titleElem = document.getElementById('resultsTitle');
-            const countElem = document.getElementById('resultsCount');
-            const locationText = document.getElementById('filterLocation').options[document.getElementById('filterLocation').selectedIndex].text;
-            const typeText = document.getElementById('filterType').options[document.getElementById('filterType').selectedIndex].text;
-            
-            if (locFilter === "" && typeFilter === "") {
-                titleElem.innerText = "All Properties";
-            } else {
-                titleElem.innerText = `${typeText}s in ${locationText}`;
+        // 1. The Central Property Database
+        const propertyData = [
+            {
+                id: "p1",
+                title: "Lodha Malabar Penthouse",
+                locationId: "mumbai",
+                locationDisplay: "Malabar Hill, Mumbai",
+                typeId: "penthouse",
+                priceRaw: 1200000000, 
+                priceDisplay: "₹120 Cr", 
+                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800",
+                featured: true,
+                metrics: { beds: "5 BHK", baths: "6", sqft: "8,500 sq.ft" },
+                link: "project-detail.html"
+            },
+            {
+                id: "p2",
+                title: "DLF The Camellias",
+                locationId: "delhi",
+                locationDisplay: "DLF Phase 5, Gurugram",
+                typeId: "luxury-apartment",
+                priceRaw: 450000000, 
+                priceDisplay: "₹45.0 Cr",
+                image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800",
+                featured: true,
+                metrics: { beds: "4 BHK", baths: "5", sqft: "7,400 sq.ft" },
+                link: "project-detail.html"
+            },
+            {
+                id: "p3",
+                title: "Prestige Golfshire Estates",
+                locationId: "bangalore",
+                locationDisplay: "Nandi Hills, Bangalore",
+                typeId: "villa",
+                priceRaw: 150000000, 
+                priceDisplay: "₹15.0 Cr",
+                image: "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800",
+                featured: false,
+                metrics: { beds: "4 BHK", baths: "5", sqft: "5,800 sq.ft" },
+                link: "project-detail.html"
+            },
+            {
+                id: "p4",
+                title: "Godrej Woodsville",
+                locationId: "pune",
+                locationDisplay: "Hinjewadi, Pune",
+                typeId: "luxury-apartment",
+                priceRaw: 25000000, 
+                priceDisplay: "₹2.5 Cr",
+                image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800",
+                featured: false,
+                metrics: { beds: "3 BHK", baths: "3", sqft: "1,850 sq.ft" },
+                link: "project-detail.html"
+            },
+            {
+                id: "p5",
+                title: "Rustomjee Crown",
+                locationId: "mumbai",
+                locationDisplay: "Prabhadevi, Mumbai",
+                typeId: "luxury-apartment",
+                priceRaw: 650000000, 
+                priceDisplay: "₹65.0 Cr",
+                image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800",
+                featured: true,
+                metrics: { beds: "4 BHK", baths: "4", sqft: "3,100 sq.ft" },
+                link: "project-detail.html"
+            },
+            {
+                id: "p6",
+                title: "Isprava Assagao Villa",
+                locationId: "goa",
+                locationDisplay: "Assagao, Goa",
+                typeId: "villa",
+                priceRaw: 180000000, 
+                priceDisplay: "₹18.0 Cr",
+                image: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=800",
+                featured: false,
+                metrics: { beds: "4 BHK", baths: "4", sqft: "4,200 sq.ft" },
+                link: "project-detail.html"
+            },
+            {
+                id: "p7",
+                title: "Aurobindo Kohinoor",
+                locationId: "hyderabad",
+                locationDisplay: "HITEC City, Hyderabad",
+                typeId: "commercial",
+                priceRaw: 80000000, 
+                priceDisplay: "₹8.0 Cr",
+                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800",
+                featured: false,
+                metrics: { beds: "Office", baths: "2", sqft: "10,000 sq.ft" },
+                link: "project-detail.html"
             }
+        ];
 
-            countElem.innerText = `Showing ${visibleCount} exclusive properties from top-tier developers.`;
-            document.getElementById('noResultsMsg').style.display = (visibleCount === 0) ? 'block' : 'none';
+        // 2. Extract URL params if referred from Home Page
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const loc = params.get('location');
+            const type = params.get('type');
 
-            const grid = document.getElementById('propertyGrid');
-            const visibleCards = cards.filter(card => card.style.display !== 'none');
-            
-            visibleCards.sort((a, b) => {
-                const priceA = parseFloat(a.getAttribute('data-price'));
-                const priceB = parseFloat(b.getAttribute('data-price'));
-                if (sortFilter === 'price-high') return priceB - priceA;
-                if (sortFilter === 'price-low') return priceA - priceB;
-                return (b.getAttribute('data-featured') === 'true') - (a.getAttribute('data-featured') === 'true');
-            });
-
-            visibleCards.forEach(card => grid.appendChild(card));
+            if (loc) document.getElementById('filterLocation').value = loc;
+            if (type) document.getElementById('filterType').value = type;
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const locParam = urlParams.get('location');
-            const typeParam = urlParams.get('type');
+        // 3. Render Engine
+        function renderProperties() {
+            const grid = document.getElementById('propertiesGrid');
+            const countDisplay = document.getElementById('resultsCount');
+            
+            const locFilter = document.getElementById('filterLocation').value;
+            const typeFilter = document.getElementById('filterType').value;
+            const budgetFilter = document.getElementById('filterBudget').value;
+            const sortMethod = document.getElementById('sortFilter').value;
 
-            if (locParam !== null) document.getElementById('filterLocation').value = locParam;
-            if (typeParam !== null) document.getElementById('filterType').value = typeParam;
+            // Filter logic
+            let filteredData = propertyData.filter(property => {
+                const matchesLoc = (locFilter === 'all' || property.locationId === locFilter);
+                const matchesType = (typeFilter === 'all' || property.typeId === typeFilter);
+                
+                let matchesBudget = true;
+                const crValue = property.priceRaw / 10000000; // Convert raw to Crores
+                
+                if (budgetFilter === '0-5') matchesBudget = crValue <= 5;
+                else if (budgetFilter === '5-15') matchesBudget = crValue > 5 && crValue <= 15;
+                else if (budgetFilter === '15-50') matchesBudget = crValue > 15 && crValue <= 50;
+                else if (budgetFilter === '50+') matchesBudget = crValue > 50;
 
-            runSearchFilters();
+                return matchesLoc && matchesType && matchesBudget;
+            });
+
+            // Sort logic
+            if (sortMethod === 'price-high') {
+                filteredData.sort((a, b) => b.priceRaw - a.priceRaw);
+            } else if (sortMethod === 'price-low') {
+                filteredData.sort((a, b) => a.priceRaw - b.priceRaw);
+            } else if (sortMethod === 'featured') {
+                filteredData.sort((a, b) => {
+                    if (a.featured === b.featured) return b.priceRaw - a.priceRaw;
+                    return a.featured ? -1 : 1;
+                });
+            }
+
+            // Draw to DOM
+            grid.innerHTML = ''; 
+
+            if (filteredData.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fa-solid fa-house-circle-xmark"></i>
+                        <h2>No matching assets found.</h2>
+                        <p style="color: var(--hz-text-muted);">Try adjusting your filters to broaden your search.</p>
+                    </div>
+                `;
+                countDisplay.innerHTML = `<i class="fa-solid fa-layer-group"></i> 0 Assets`;
+                return;
+            }
+
+            filteredData.forEach((prop, index) => {
+                const delay = (index * 0.05).toFixed(2);
+                const featuredTag = prop.featured ? `<span class="badge-featured"><i class="fa-solid fa-star"></i> Featured</span>` : '';
+                
+                const cardHTML = `
+                    <a href="${prop.link}" class="property-card" style="animation-delay: ${delay}s;">
+                        <div class="card-img">
+                            ${featuredTag}
+                            <span class="card-price">${prop.priceDisplay}</span>
+                            <img src="${prop.image}" alt="${prop.title}" loading="lazy">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">${prop.title}</h3>
+                            <div class="card-location"><i class="fa-solid fa-location-dot"></i> ${prop.locationDisplay}</div>
+                            <div class="card-metrics">
+                                <div class="metric"><i class="fa-solid fa-bed"></i> ${prop.metrics.beds}</div>
+                                <div class="metric"><i class="fa-solid fa-bath"></i> ${prop.metrics.baths}</div>
+                                <div class="metric"><i class="fa-solid fa-vector-square"></i> ${prop.metrics.sqft}</div>
+                            </div>
+                        </div>
+                    </a>
+                `;
+                grid.innerHTML += cardHTML;
+            });
+
+            countDisplay.innerHTML = `<i class="fa-solid fa-layer-group"></i> ${filteredData.length} Asset${filteredData.length > 1 ? 's' : ''} Found`;
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            getUrlParams();
+            renderProperties();
         });
-
-        document.getElementById('filterLocation').addEventListener('change', runSearchFilters);
-        document.getElementById('filterType').addEventListener('change', runSearchFilters);
-        document.getElementById('sortFilter').addEventListener('change', runSearchFilters);
-        document.getElementById('searchBtn').addEventListener('click', runSearchFilters);
     </script>
 </body>
 </html>
